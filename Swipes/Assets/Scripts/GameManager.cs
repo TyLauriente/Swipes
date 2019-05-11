@@ -23,6 +23,20 @@ public class GameManager : MonoBehaviour
     public SpriteRenderer SR_background2;
     public SpriteRenderer SR_swipe;
 
+    // References to Win and Lose sound effects and Game song
+    public AudioSource AS_gameSound;
+    public AudioSource AS_winSound;
+    public AudioSource AS_loseSound;
+
+    // Android native audio plugin variables
+    int winSoundId;
+    int loseSoundId;
+    int winStreamId;
+    int loseStreamId;
+
+
+    // Can Play Audio
+    bool canPlay = true;
 
     // Used to switch between backgrounds
     SpriteRenderer SR_background;
@@ -35,11 +49,8 @@ public class GameManager : MonoBehaviour
     Vector2 startPosition, deltaPosition;
 
     // Varialbes to keep track of background speed
-    const float verticalStartSpeed = 7.0f;
-    const float horizontalStartSpeed = verticalStartSpeed * 0.4f;
-    const float speedIncreaseRate = 0.25f;
-    float verticalSpeedMultiplier = verticalStartSpeed;
-    float horizontalSpeedMultiplier = horizontalStartSpeed;
+    const float verticalSpeed = 7.0f;
+    const float horizontalSpeed = verticalSpeed * 0.5f;
 
     // Used to convert touch position to local space
     float width;
@@ -66,22 +77,21 @@ public class GameManager : MonoBehaviour
         width = (float)Screen.width * 0.5f;
         height = (float)Screen.height * 0.5f;
 
-        GenerateRandomDirection();
-
-
         SR_background = SR_background1;
         SR_background2.transform.position = new Vector3(0.0f, 0.0f, -1.0f);
+
+        AndroidNativeAudio.makePool();
+        winSoundId = AndroidNativeAudio.load("Sounds/Win Sound.wav");
+        loseSoundId = AndroidNativeAudio.load("Sounds/Lose Sound.wav");
     }
 
     // GameLoop ----------------------------------------------------------------------------------------------------
     void Update()
     {
-        verticalSpeedMultiplier += verticalSpeedMultiplier* Time.deltaTime;
-        horizontalSpeedMultiplier += horizontalSpeedMultiplier * Time.deltaTime;
-
         OnMousePress();
 
         OnMouseRelease();
+        
     }
 
 
@@ -104,7 +114,7 @@ public class GameManager : MonoBehaviour
         {
             SR_swipe.transform.Rotate(new Vector3(0.0f, 0.0f, 90.0f));
         }
-        else
+        else // Right
         {
             SR_swipe.transform.Rotate(new Vector3(0.0f, 0.0f, 270.0f));
         }
@@ -118,8 +128,8 @@ public class GameManager : MonoBehaviour
         {
             Vector2 pos = Input.mousePosition;
 
-            pos.x = ((pos.x - width) / width) * horizontalSpeedMultiplier;
-            pos.y = ((pos.y - height) / height) * verticalSpeedMultiplier;
+            pos.x = ((pos.x - width) / width) * horizontalSpeed;
+            pos.y = ((pos.y - height) / height) * verticalSpeed;
 
             if (!isDragging)
             {
@@ -139,6 +149,8 @@ public class GameManager : MonoBehaviour
             }
 
             isDragging = true;
+
+            CheckCorrectSwipe();
         }
         SR_swipe.transform.position = new Vector3(SR_background.transform.position.x,
             SR_background.transform.position.y, SR_swipe.transform.position.z);
@@ -151,6 +163,9 @@ public class GameManager : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             isDragging = false;
+            CheckCorrectSwipe();
+            canPlay = true;
+
             SR_swipe.transform.rotation = Quaternion.identity;
             SR_swipe.transform.position = new Vector3(0.0f, 0.0f, SR_swipe.transform.position.z);
             SR_background.transform.position = new Vector3(0.0f, 0.0f, SR_background.transform.position.z);
@@ -169,15 +184,60 @@ public class GameManager : MonoBehaviour
                 SR_background = SR_background1;
                 SR_background1.transform.position = new Vector3(0.0f, 0.0f, -2.0f);
             }
-
-
-            verticalSpeedMultiplier = verticalStartSpeed;
-            horizontalSpeedMultiplier = horizontalStartSpeed;
         }
     }
 
 
+    private void CheckCorrectSwipe()
+    {
+        if (canPlay)
+        {
+            bool win = false;
+            if (direction == Direction.Up)
+            {
+                if (SR_background.transform.position.y > 0.2f)
+                {
+                    win = true;
+                }
+            }
+            else if (direction == Direction.Down)
+            {
+                if (SR_background.transform.position.y < -0.2f)
+                {
+                    win = true;
+                }
+            }
+            else if (direction == Direction.Left)
+            {
+                if (SR_background.transform.position.x < -0.2f)
+                {
+                    win = true;
+                }
+            }
+            else // Right
+            {
+                if (SR_background.transform.position.x > 0.2f)
+                {
+                    win = true;
+                }
+            }
 
+            if (isDragging && win)
+            {
+                AS_winSound.PlayOneShot(AS_winSound.clip);
+                //winStreamId = AndroidNativeAudio.play(winSoundId);
+                AndroidNativeAudio.setVolume(winStreamId, 1.0f);
+                canPlay = false;
+            }
+            else if (!isDragging)
+            {
+                AS_loseSound.PlayOneShot(AS_loseSound.clip);
+                //loseStreamId = AndroidNativeAudio.play(loseSoundId);
+                AndroidNativeAudio.setVolume(loseStreamId, 1.0f);
+                canPlay = false;
+            }
+        }
+    }
 
 
 
