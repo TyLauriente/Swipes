@@ -7,8 +7,6 @@ ScriptsOnlyBuild:
     UnityEngine.UI.dll:
     - UnityEngine.EventSystems.EventSystem
     - UnityEngine.EventSystems.StandaloneInputModule
-    - UnityEngine.UI.CanvasScaler
-    - UnityEngine.UI.GraphicRaycaster
   sceneClasses:
     Assets/Scenes/Swipes Prototype Scene.unity:
     - Class: 1
@@ -32,15 +30,11 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 9322}
+      Script: {instanceID: 9330}
     - Class: 114
-      Script: {instanceID: 9328}
+      Script: {instanceID: 9380}
     - Class: 114
-      Script: {instanceID: 9334}
-    - Class: 114
-      Script: {instanceID: 9378}
-    - Class: 114
-      Script: {instanceID: 10320}
+      Script: {instanceID: 10338}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -48,10 +42,6 @@ ScriptsOnlyBuild:
     - Class: 212
       Script: {instanceID: 0}
     - Class: 213
-      Script: {instanceID: 0}
-    - Class: 223
-      Script: {instanceID: 0}
-    - Class: 224
       Script: {instanceID: 0}
   scriptHashData:
   - hash:
@@ -536,6 +526,12 @@ ScriptsOnlyBuild:
     className: ControlTrack
   - hash:
       serializedVersion: 2
+      Hash: 9ed9f14b134283faf8f64a03e95fb72e
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ANAExample
+  - hash:
+      serializedVersion: 2
       Hash: b3ab2106268377ffe25dd18ac23dca28
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
@@ -564,6 +560,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TextContainer
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: ChristopherCreates.AndroidNativeAudio
+    className: ANAMusicBackgroundPause
   - hash:
       serializedVersion: 2
       Hash: 3f8d7b92a6be3c715e55d5cfa7cc8384
@@ -680,6 +682,12 @@ ScriptsOnlyBuild:
     className: TMP_ColorGradient
   - hash:
       serializedVersion: 2
+      Hash: 9ed9f14b134283faf8f64a03e95fb72e
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ANAMusicExample
+  - hash:
+      serializedVersion: 2
       Hash: 8649814970b42d345b89944b862453cc
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
@@ -696,24 +704,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
-  - hash:
-      serializedVersion: 2
-      Hash: 9ed9f14b134283faf8f64a03e95fb72e
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: ANAExample
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: ChristopherCreates.AndroidNativeAudio
-    className: ANAMusicBackgroundPause
-  - hash:
-      serializedVersion: 2
-      Hash: 9ed9f14b134283faf8f64a03e95fb72e
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: ANAMusicExample
   platform: 13
   scenePathNames:
   - Assets/Scenes/Swipes Prototype Scene.unity

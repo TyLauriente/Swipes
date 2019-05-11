@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 /*
  * 
@@ -80,9 +80,9 @@ public class GameManager : MonoBehaviour
         SR_background = SR_background1;
         SR_background2.transform.position = new Vector3(0.0f, 0.0f, -1.0f);
 
-        AndroidNativeAudio.makePool();
-        winSoundId = AndroidNativeAudio.load("Sounds/Win Sound.wav");
-        loseSoundId = AndroidNativeAudio.load("Sounds/Lose Sound.wav");
+        AndroidNativeAudio.makePool(2);
+        winSoundId = AndroidNativeAudio.load("WinSound.wav");
+        loseSoundId = AndroidNativeAudio.load("LoseSound.wav");
     }
 
     // GameLoop ----------------------------------------------------------------------------------------------------
@@ -164,7 +164,7 @@ public class GameManager : MonoBehaviour
         {
             isDragging = false;
             CheckCorrectSwipe();
-            canPlay = true;
+            Invoke("EnableCanPlay", 0.1f);
 
             SR_swipe.transform.rotation = Quaternion.identity;
             SR_swipe.transform.position = new Vector3(0.0f, 0.0f, SR_swipe.transform.position.z);
@@ -224,19 +224,28 @@ public class GameManager : MonoBehaviour
 
             if (isDragging && win)
             {
-                AS_winSound.PlayOneShot(AS_winSound.clip);
-                //winStreamId = AndroidNativeAudio.play(winSoundId);
-                AndroidNativeAudio.setVolume(winStreamId, 1.0f);
+                //AS_winSound.PlayOneShot(AS_winSound.clip);
+                winStreamId = AndroidNativeAudio.play(winSoundId);
                 canPlay = false;
             }
             else if (!isDragging)
             {
-                AS_loseSound.PlayOneShot(AS_loseSound.clip);
-                //loseStreamId = AndroidNativeAudio.play(loseSoundId);
-                AndroidNativeAudio.setVolume(loseStreamId, 1.0f);
+                //AS_loseSound.PlayOneShot(AS_loseSound.clip);
+                loseStreamId = AndroidNativeAudio.play(loseSoundId);
                 canPlay = false;
             }
         }
+    }
+    private void EnableCanPlay()
+    {
+        canPlay = true;
+    }
+
+    private void OnApplicationQuit()
+    {
+        AndroidNativeAudio.unload(winSoundId);
+        AndroidNativeAudio.unload(loseSoundId);
+        AndroidNativeAudio.releasePool();
     }
 
 
