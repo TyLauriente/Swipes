@@ -1,7 +1,19 @@
-﻿#pragma warning disable 0649
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+/*
+ * 
+ * This Class is the LevelManager
+ * 
+ * It controls the different levels the game has
+ * and allows access to these levels.
+ * 
+ * 
+ * Authored by Ty Lauriente
+ * 05/15/2019
+ * 
+ * */
 
 public class LevelManager : MonoBehaviour
 {

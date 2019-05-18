@@ -1,9 +1,22 @@
-﻿#pragma warning disable 0649
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+/*
+ * 
+ * This Class is the Level
+ * 
+ * It is the structure for the level consisting of
+ * a list of times and Swipes (Directions for now)
+ * 
+ * 
+ * 
+ * Authored by Ty Lauriente
+ * 05/15/2019
+ * 
+ * */
 
 public class Level
 {

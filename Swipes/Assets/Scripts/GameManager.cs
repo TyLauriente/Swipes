@@ -1,5 +1,4 @@
-﻿#pragma warning disable 0649
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -38,6 +37,7 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField]
     private GameplayManager m_gameplayManager;
+
     private float m_screenWidth;
     private float m_screenHeight;
     private GameStates m_gameState;

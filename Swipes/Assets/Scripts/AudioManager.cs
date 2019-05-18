@@ -1,10 +1,23 @@
-﻿#pragma warning disable 0649
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * 
+ * This Class is the AudioManager
+ * 
+ * It keeps track of all audio and has 
+ * a function to access time passed from music
+ * 
+ * 
+ * Authored by Ty Lauriente
+ * 05/15/2019
+ * 
+ * */
+
 public class AudioManager : MonoBehaviour
 {
+    // Normal audio variables
     [SerializeField]
     private AudioSource m_currentSong;
 
@@ -14,7 +27,7 @@ public class AudioManager : MonoBehaviour
     //[SerializeField]
     //private AudioSource m_loseSound;
 
-
+    // Android Native Audio variables
     private int m_winSoundId;
     private int m_winStreamId;
 
@@ -22,7 +35,7 @@ public class AudioManager : MonoBehaviour
     private int m_loseStreamId;
 
 
-    // Start is called before the first frame update
+    // Initialize Android Native audio with sound effects
     void Start()
     {
         AndroidNativeAudio.makePool(2);
