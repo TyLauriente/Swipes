@@ -1,4 +1,5 @@
-﻿using System;
+﻿#pragma warning disable 0649
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,9 +7,9 @@ using System.Threading.Tasks;
 
 public class Level
 {
-    private string m_levelName;
-    private List<float> m_swipeTimes;
-    private List<Swipes> m_swipes;
+    string m_levelName;
+    List<float> m_swipeTimes;
+    List<Swipes> m_swipes;
 
     public Level()
     {

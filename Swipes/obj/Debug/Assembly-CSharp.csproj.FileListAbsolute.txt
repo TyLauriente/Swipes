@@ -541,13 +541,9 @@ C:\Users\tlaur\Desktop\Swipes Working Folder\swipes\Swipes\Temp\bin\Debug\Unity.
 C:\Users\tlaur\Desktop\Swipes Working Folder\swipes\Swipes\Temp\bin\Debug\Unity.Analytics.Editor.dll
 C:\Users\tlaur\Desktop\Swipes Working Folder\swipes\Swipes\Temp\bin\Debug\Unity.Analytics.StandardEvents.dll
 C:\Users\tlaur\Desktop\Swipes Working Folder\swipes\Swipes\Temp\bin\Debug\Unity.Analytics.Tracker.dll
-C:\Users\tlaur\Desktop\Swipes Working Folder\swipes\Swipes\Temp\bin\Debug\Unity.CollabProxy.Editor.dll
 C:\Users\tlaur\Desktop\Swipes Working Folder\swipes\Swipes\Temp\bin\Debug\Unity.Locator.dll
-C:\Users\tlaur\Desktop\Swipes Working Folder\swipes\Swipes\Temp\bin\Debug\Unity.PackageManagerUI.Editor.dll
 C:\Users\tlaur\Desktop\Swipes Working Folder\swipes\Swipes\Temp\bin\Debug\Unity.TextMeshPro.dll
-C:\Users\tlaur\Desktop\Swipes Working Folder\swipes\Swipes\Temp\bin\Debug\Unity.TextMeshPro.Editor.dll
 C:\Users\tlaur\Desktop\Swipes Working Folder\swipes\Swipes\Temp\bin\Debug\Unity.Timeline.dll
-C:\Users\tlaur\Desktop\Swipes Working Folder\swipes\Swipes\Temp\bin\Debug\Unity.Timeline.Editor.dll
 C:\Users\tlaur\Desktop\Swipes Working Folder\swipes\Swipes\Temp\bin\Debug\UnityEditor.dll
 C:\Users\tlaur\Desktop\Swipes Working Folder\swipes\Swipes\Temp\bin\Debug\UnityEngine.AccessibilityModule.dll
 C:\Users\tlaur\Desktop\Swipes Working Folder\swipes\Swipes\Temp\bin\Debug\UnityEngine.AIModule.dll
@@ -627,3 +623,4 @@ C:\Users\tlaur\Desktop\Swipes Working Folder\swipes\Swipes\Temp\bin\Debug\nunit.
 C:\Users\tlaur\Desktop\Swipes Working Folder\swipes\Swipes\obj\Debug\Assembly-CSharp.csproj.CopyComplete
 C:\Users\tlaur\Desktop\Swipes Working Folder\swipes\Swipes\obj\Debug\Assembly-CSharp.dll
 C:\Users\tlaur\Desktop\Swipes Working Folder\swipes\Swipes\obj\Debug\Assembly-CSharp.pdb
+C:\Users\tlaur\Desktop\Swipes Working Folder\swipes\Swipes\obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache

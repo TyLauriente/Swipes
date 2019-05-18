@@ -1,14 +1,10 @@
-﻿using System.Collections;
+﻿#pragma warning disable 0649
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-
-    [SerializeField]
-    private GameManager m_gameManager;
-
     private List<Level> m_levels;
 
 

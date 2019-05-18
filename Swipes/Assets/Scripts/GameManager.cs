@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿#pragma warning disable 0649
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -39,9 +40,9 @@ public class GameManager : MonoBehaviour
     private GameplayManager m_gameplayManager;
     [SerializeField]
     private LevelManager m_levelManager;
-    private static float m_screenWidth;
-    private static float m_screenHeight;
-    private static GameStates m_gameState;
+    private float m_screenWidth;
+    private float m_screenHeight;
+    private GameStates m_gameState;
 
     // Start is called before the first frame update
 

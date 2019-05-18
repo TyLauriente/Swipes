@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿#pragma warning disable 0649
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 /*
@@ -16,10 +17,6 @@ using UnityEngine;
 
 public class SwipeManager : MonoBehaviour
 {
-    [SerializeField]
-    private GameManager m_gameManager;
-    [SerializeField]
-    private LevelManager m_levelmanager;
     [SerializeField]
     private SpriteRenderer m_SR_currentSwipe;
     [SerializeField]

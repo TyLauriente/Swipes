@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿#pragma warning disable 0649
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,8 +25,6 @@ public class GameplayManager : MonoBehaviour
     private SwipeManager m_swipeManager;
     [SerializeField]
     private InputManager m_inputManager;
-    [SerializeField]
-    private LevelManager m_levelManager;
     [SerializeField]
     private AudioManager m_audioManager;
 
