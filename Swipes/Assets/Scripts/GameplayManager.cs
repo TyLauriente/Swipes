@@ -19,7 +19,7 @@ using UnityEngine.UI;
 public class GameplayManager : MonoBehaviour
 {
     [SerializeField]
-    private GameManager m_gameManager;
+    public GameManager m_gameManager;
     [SerializeField]
     private SwipeManager m_swipeManager;
     [SerializeField]
