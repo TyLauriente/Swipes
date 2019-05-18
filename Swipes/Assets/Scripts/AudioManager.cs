@@ -8,11 +8,11 @@ public class AudioManager : MonoBehaviour
     [SerializeField]
     private AudioSource m_currentSong;
 
-    [SerializeField]
-    private AudioSource m_winSound;
+    //[SerializeField]
+    //private AudioSource m_winSound;
 
-    [SerializeField]
-    private AudioSource m_loseSound;
+    //[SerializeField]
+    //private AudioSource m_loseSound;
 
 
     private int m_winSoundId;
@@ -34,10 +34,6 @@ public class AudioManager : MonoBehaviour
 
     public void PlayWinSound()
     {
-        if(m_winStreamId != -1)
-        {
-            AndroidNativeAudio.stop(m_winStreamId);
-        }
         m_winStreamId = AndroidNativeAudio.play(m_winSoundId);
 
         //m_winSound.PlayOneShot(m_winSound.clip);
@@ -46,10 +42,6 @@ public class AudioManager : MonoBehaviour
 
     public void PlayLoseSound()
     {
-        if (m_loseStreamId != -1)
-        {
-            AndroidNativeAudio.stop(m_loseStreamId);
-        }
         m_loseStreamId = AndroidNativeAudio.play(m_loseSoundId);
         //m_loseSound.PlayOneShot(m_loseSound.clip);
     }

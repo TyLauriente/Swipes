@@ -23,7 +23,7 @@ public class LevelManager : MonoBehaviour
 
     public Level GetLevel(int index)
     {
-        if (index >= 0 && index < m_levels.Count)
+        if (m_levels != null && index >= 0 && index < m_levels.Count)
         {
             return m_levels[index];
         }

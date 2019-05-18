@@ -38,8 +38,6 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField]
     private GameplayManager m_gameplayManager;
-    [SerializeField]
-    private LevelManager m_levelManager;
     private float m_screenWidth;
     private float m_screenHeight;
     private GameStates m_gameState;
@@ -75,7 +73,7 @@ public class GameManager : MonoBehaviour
 
         if (state == GameStates.Gameplay)
         {
-            m_gameplayManager.SetupGameplay(m_levelManager.GetLevel(0));
+            m_gameplayManager.SetupGameplay();
         }
     }
 }

@@ -20,7 +20,9 @@ using UnityEngine.UI;
 public class GameplayManager : MonoBehaviour
 {
     [SerializeField]
-    public GameManager m_gameManager;
+    private GameManager m_gameManager;
+    [SerializeField]
+    private LevelManager m_levelManager;
     [SerializeField]
     private SwipeManager m_swipeManager;
     [SerializeField]
@@ -145,9 +147,9 @@ public class GameplayManager : MonoBehaviour
         }
     }
 
-    public void SetupGameplay(Level level)
+    public void SetupGameplay()
     {
-        m_currentLevel = level;
+        m_currentLevel = m_levelManager.GetLevel(0);
         m_currentSwipe = 0;
         m_swipeManager.SetCurrentSwipeType(m_currentLevel.GetSwipe(m_currentSwipe));
         m_swipeManager.SetNextSwipeType(m_currentLevel.GetSwipe(m_currentSwipe + 1));
