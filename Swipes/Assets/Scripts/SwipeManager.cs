@@ -20,7 +20,67 @@ public class SwipeManager : MonoBehaviour
     [SerializeField]
     private SpriteRenderer m_SR_currentSwipe;
     [SerializeField]
+    private SpriteRenderer m_SR_currentSwipeIndicator;
+    [SerializeField]
     private SpriteRenderer m_SR_nextSwipe;
+    [SerializeField]
+    private AudioManager m_audioManager;
+    [SerializeField]
+    private GameplayManager m_gameplayManager;
+
+
+    // Distance to offset the small arrow
+    private const float offset = 1.425f;
+
+    // Used to offset the small arrow
+    private Swipes m_swipeType;
+    private float m_start;
+    private float m_end;
+    private float m_percentage;
+    private float m_divider;
+
+
+    private void Start()
+    {
+        m_start = 0.0f;
+        m_start = 0.0f;
+        m_percentage = 0.0f;
+        m_divider = 0.0f;
+    }
+
+    void Update()
+    {
+        if ((m_end - m_start) != 0.0f)
+        {
+            m_percentage = (m_audioManager.GetTimePassed() - m_start) * m_divider;
+            if(m_percentage > 1.0f)
+            {
+                m_percentage = 1.0f;
+            }
+        }
+
+        Vector3 newIndicatiorPos = m_SR_currentSwipe.transform.position;
+        newIndicatiorPos.z = m_SR_currentSwipeIndicator.transform.position.z;
+
+        if(m_swipeType == Swipes.Up)
+        {
+            newIndicatiorPos.y += -offset + (m_percentage * offset * 2.0f);
+        }
+        else if (m_swipeType == Swipes.Down)
+        {
+            newIndicatiorPos.y += offset - (m_percentage * offset * 2.0f);
+        }
+        else if (m_swipeType == Swipes.Left)
+        {
+            newIndicatiorPos.x += offset - (m_percentage * offset * 2.0f);
+        }
+        else if (m_swipeType == Swipes.Right)
+        {
+            newIndicatiorPos.x += -offset + (m_percentage * offset * 2.0f);
+        }
+
+        m_SR_currentSwipeIndicator.transform.position = newIndicatiorPos;
+    }
 
     public void SetCurrentSwipeLocation(Vector2 location)
     {
@@ -31,8 +91,10 @@ public class SwipeManager : MonoBehaviour
 
     public void SetCurrentSwipeType(Swipes swipe)
     {
+        m_swipeType = swipe;
         m_SR_currentSwipe.transform.position = new Vector3(0.0f, 0.0f, m_SR_currentSwipe.transform.position.z);
         m_SR_currentSwipe.transform.rotation = Quaternion.identity;
+
 
         if(swipe == Swipes.Up)
         {
@@ -50,6 +112,12 @@ public class SwipeManager : MonoBehaviour
         {
             m_SR_currentSwipe.transform.Rotate(new Vector3(0.0f, 0.0f, 270.0f));
         }
+
+        m_SR_currentSwipeIndicator.transform.rotation = m_SR_currentSwipe.transform.rotation;
+
+        m_start = m_audioManager.GetTimePassed();
+        m_end = m_start + m_gameplayManager.GetTimeUntilNextSwipe();
+        m_divider = 1.0f / (m_end - m_start);
     }
 
     public void SetNextSwipeType(Swipes swipe)

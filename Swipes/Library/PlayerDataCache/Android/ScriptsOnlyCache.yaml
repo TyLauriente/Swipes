@@ -6,11 +6,10 @@ ScriptsOnlyBuild:
     - GameplayManager
     - InputManager
     - LevelManager
-    - PrototypeGameManager
     - SwipeManager
+    UnityEditor.TestRunner.dll:
+    - UnityEditor.TestTools.TestRunner.TestListCacheData
     UnityEngine.UI.dll:
-    - UnityEngine.EventSystems.EventSystem
-    - UnityEngine.EventSystems.StandaloneInputModule
     - UnityEngine.UI.CanvasScaler
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.Text
@@ -69,41 +68,6 @@ ScriptsOnlyBuild:
     - Class: 223
       Script: {instanceID: 0}
     - Class: 224
-      Script: {instanceID: 0}
-    Assets/Scenes/Swipes Prototype Scene.unity:
-    - Class: 1
-      Script: {instanceID: 0}
-    - Class: 4
-      Script: {instanceID: 0}
-    - Class: 20
-      Script: {instanceID: 0}
-    - Class: 21
-      Script: {instanceID: 0}
-    - Class: 28
-      Script: {instanceID: 0}
-    - Class: 48
-      Script: {instanceID: 0}
-    - Class: 81
-      Script: {instanceID: 0}
-    - Class: 82
-      Script: {instanceID: 0}
-    - Class: 83
-      Script: {instanceID: 0}
-    - Class: 104
-      Script: {instanceID: 0}
-    - Class: 114
-      Script: {instanceID: 9330}
-    - Class: 114
-      Script: {instanceID: 9380}
-    - Class: 114
-      Script: {instanceID: 10350}
-    - Class: 115
-      Script: {instanceID: 0}
-    - Class: 157
-      Script: {instanceID: 0}
-    - Class: 212
-      Script: {instanceID: 0}
-    - Class: 213
       Script: {instanceID: 0}
   scriptHashData:
   - hash:
@@ -336,7 +300,7 @@ ScriptsOnlyBuild:
     className: VerticalLayoutGroup
   - hash:
       serializedVersion: 2
-      Hash: fba7b5cf3a4d9f961cfc70ed123d4e71
+      Hash: cceb1564ee668bf3e8ac1f257a976bd1
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: SwipeManager
@@ -720,7 +684,7 @@ ScriptsOnlyBuild:
     className: TimelineAsset
   - hash:
       serializedVersion: 2
-      Hash: ab2db955422cac02269ae5cf5ae465f1
+      Hash: 40002a65109d397c83638a135d5bd667
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameplayManager
@@ -798,12 +762,11 @@ ScriptsOnlyBuild:
     className: PlayableTrack
   - hash:
       serializedVersion: 2
-      Hash: c6809f584ec29b672e9ff39eb7533d4a
+      Hash: 0a17d12fe16c60342f6e5306f4bd26b6
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManager
   platform: 13
   scenePathNames:
   - Assets/Scenes/Gameplay.unity
-  - Assets/Scenes/Swipes Prototype Scene.unity
   playerPath: C:/Users/tlaur/Desktop/Swipes.apk

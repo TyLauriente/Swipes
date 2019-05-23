@@ -21,11 +21,11 @@ public class AudioManager : MonoBehaviour
     [SerializeField]
     private AudioSource m_currentSong;
 
-    //[SerializeField]
-    //private AudioSource m_winSound;
+    [SerializeField]
+    private AudioSource m_winSound;
 
-    //[SerializeField]
-    //private AudioSource m_loseSound;
+    [SerializeField]
+    private AudioSource m_loseSound;
 
     // Android Native Audio variables
     private int m_winSoundId;
@@ -34,10 +34,13 @@ public class AudioManager : MonoBehaviour
     private int m_loseSoundId;
     private int m_loseStreamId;
 
+    private bool m_isAndroid = false;
+
 
     // Initialize Android Native audio with sound effects
     void Start()
     {
+        m_isAndroid = (bool)(Application.platform == RuntimePlatform.Android);
         AndroidNativeAudio.makePool(2);
         m_winSoundId = AndroidNativeAudio.load("WinSound.wav");
         m_loseSoundId = AndroidNativeAudio.load("LoseSound.wav");
@@ -47,16 +50,26 @@ public class AudioManager : MonoBehaviour
 
     public void PlayWinSound()
     {
-        m_winStreamId = AndroidNativeAudio.play(m_winSoundId);
-
-        //m_winSound.PlayOneShot(m_winSound.clip);
-
+        if (m_isAndroid)
+        {
+            m_winStreamId = AndroidNativeAudio.play(m_winSoundId);
+        }
+        else
+        {
+            m_winSound.PlayOneShot(m_winSound.clip);
+        }
     }
 
     public void PlayLoseSound()
     {
-        m_loseStreamId = AndroidNativeAudio.play(m_loseSoundId);
-        //m_loseSound.PlayOneShot(m_loseSound.clip);
+        if (m_isAndroid)
+        {
+            m_loseStreamId = AndroidNativeAudio.play(m_loseSoundId);
+        }
+        else
+        {
+            m_loseSound.PlayOneShot(m_loseSound.clip);
+        }
     }
 
     public float GetTimePassed()

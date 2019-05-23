@@ -30,9 +30,9 @@ public class GameplayManager : MonoBehaviour
     private AudioManager m_audioManager;
 
     //TEMP----------------------
-    public Text timeText;
     public Text accuracyText;
     int numberOfWins = 0;
+    public Text fps;
     //TEMP----------------------
 
     private Level m_currentLevel;
@@ -41,7 +41,7 @@ public class GameplayManager : MonoBehaviour
 
     private const float verticalSpeed = 7.0f;
     private const float horizontalSpeed = verticalSpeed * 0.5f;
-    private const float allowedTimeDifference = 0.5f;
+    private const float allowedTimeDifference = 0.3f;
     private const float requiredSwipeDistance = 0.2f;
 
     private Vector2 m_startTouchPosition;
@@ -61,10 +61,11 @@ public class GameplayManager : MonoBehaviour
         if (m_gameManager.GetCurrentState() == GameStates.Gameplay)
         {
             // TEMP ___________________________________________________________________________________________________________
-            m_timeUntilNextSwipe = m_currentLevel.GetSwipeTime(m_currentSwipe) - m_audioManager.GetTimePassed();
-            timeText.text = m_timeUntilNextSwipe.ToString("0.0");
+            m_timeUntilNextSwipe = m_currentLevel.GetSwipeTime(m_currentSwipe + 1) - m_audioManager.GetTimePassed();
             accuracyText.text = "Accuracy\n" + ((float)numberOfWins / (float)m_currentSwipe * 100.0f).ToString("0.0") + "%";
             // TEMP ___________________________________________________________________________________________________________
+
+            fps.text = (1.0f / Time.deltaTime).ToString();
 
             UpdatePositions();
 
@@ -158,6 +159,7 @@ public class GameplayManager : MonoBehaviour
             }
 
             m_currentSwipe++;
+            m_timeUntilNextSwipe = m_currentLevel.GetSwipeTime(m_currentSwipe + 1) - m_audioManager.GetTimePassed();
             m_swipeManager.SetCurrentSwipeType(m_currentLevel.GetSwipe(m_currentSwipe));
             m_swipeManager.SetNextSwipeType(m_currentLevel.GetSwipe(m_currentSwipe + 1));
         }
@@ -167,7 +169,13 @@ public class GameplayManager : MonoBehaviour
     {
         m_currentLevel = m_levelManager.GetLevel(0);
         m_currentSwipe = 0;
+        m_timeUntilNextSwipe = m_currentLevel.GetSwipeTime(m_currentSwipe + 1) - m_audioManager.GetTimePassed();
         m_swipeManager.SetCurrentSwipeType(m_currentLevel.GetSwipe(m_currentSwipe));
         m_swipeManager.SetNextSwipeType(m_currentLevel.GetSwipe(m_currentSwipe + 1));
+    }
+
+    public float GetTimeUntilNextSwipe()
+    {
+        return m_timeUntilNextSwipe;
     }
 }
