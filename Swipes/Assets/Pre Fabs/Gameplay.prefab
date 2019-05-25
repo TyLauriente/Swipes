@@ -916,6 +916,7 @@ MonoBehaviour:
   audioNames: []
   m_clipList:
   - {fileID: 8300000, guid: 04fbacfe0117b6a4e9e9cfbb667bc82f, type: 3}
+  - {fileID: 8300000, guid: 2349fb1a7132e4442b2f014f8503fec2, type: 3}
   m_winSound: {fileID: 3766839492678494853}
   m_loseSound: {fileID: 3766839492440786921}
   m_currentSong: {fileID: 3766839492707977436}
@@ -1046,6 +1047,7 @@ MonoBehaviour:
   m_SR_nextSwipe: {fileID: 3766839492631282451}
   m_audioManager: {fileID: 3766839493126686032}
   m_gameplayManager: {fileID: 3766839493836977105}
+  m_gameManager: {fileID: 0}
 --- !u!1 &3766839493426809785
 GameObject:
   m_ObjectHideFlags: 0

@@ -80,6 +80,7 @@
     <Compile Include="Assets\Scripts\LevelManager.cs" />
     <Compile Include="Assets\Scripts\PrototypeGameManager.cs" />
     <Compile Include="Assets\Scripts\SwipeManager.cs" />
+    <Compile Include="Assets\Temporary Level Editor\TempLevelCreator.cs" />
     <None Include="Assets\Android Native Audio\Credits.txt" />
     <None Include="Assets\Android Native Audio\Changelog.txt" />
     <Reference Include="Unity.Timeline.Editor">
