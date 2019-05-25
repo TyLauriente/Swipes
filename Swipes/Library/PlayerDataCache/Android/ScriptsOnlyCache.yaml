@@ -37,25 +37,25 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 9326}
+      Script: {instanceID: 9328}
     - Class: 114
-      Script: {instanceID: 9338}
+      Script: {instanceID: 9340}
     - Class: 114
-      Script: {instanceID: 9384}
+      Script: {instanceID: 9386}
     - Class: 114
-      Script: {instanceID: 9400}
+      Script: {instanceID: 9402}
     - Class: 114
-      Script: {instanceID: 9668}
+      Script: {instanceID: 9670}
     - Class: 114
-      Script: {instanceID: 9840}
+      Script: {instanceID: 9842}
     - Class: 114
-      Script: {instanceID: 10008}
+      Script: {instanceID: 10010}
     - Class: 114
-      Script: {instanceID: 10186}
+      Script: {instanceID: 10188}
     - Class: 114
-      Script: {instanceID: 10600}
+      Script: {instanceID: 10604}
     - Class: 114
-      Script: {instanceID: 10618}
+      Script: {instanceID: 10622}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -693,6 +693,12 @@ ScriptsOnlyBuild:
     className: GameplayManager
   - hash:
       serializedVersion: 2
+      Hash: 53b8e538f2a8e3d1ac22755708a283a0
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: TempLevelCreator
+  - hash:
+      serializedVersion: 2
       Hash: ee0cef6caaac8ae485bfa82f000f0f7b
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
@@ -775,12 +781,6 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManager
-  - hash:
-      serializedVersion: 2
-      Hash: 53b8e538f2a8e3d1ac22755708a283a0
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: TempLevelCreator
   platform: 13
   scenePathNames:
   - Assets/Scenes/Gameplay.unity
