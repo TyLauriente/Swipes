@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 /*
  * 
@@ -18,14 +19,20 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
     // Normal audio variables
+
+    public List<string> audioNames;
+
     [SerializeField]
-    private AudioSource m_currentSong;
+    private List<AudioClip> m_clipList;
 
     [SerializeField]
     private AudioSource m_winSound;
 
     [SerializeField]
     private AudioSource m_loseSound;
+
+    [SerializeField]
+    private AudioSource m_currentSong;
 
     // Android Native Audio variables
     private int m_winSoundId;
@@ -37,15 +44,31 @@ public class AudioManager : MonoBehaviour
     private bool m_isAndroid = false;
 
 
+
     // Initialize Android Native audio with sound effects
     void Start()
     {
         m_isAndroid = (bool)(Application.platform == RuntimePlatform.Android);
+
+
         AndroidNativeAudio.makePool(2);
         m_winSoundId = AndroidNativeAudio.load("WinSound.wav");
         m_loseSoundId = AndroidNativeAudio.load("LoseSound.wav");
         m_winStreamId = -1;
         m_loseStreamId = -1;
+    }
+
+    public void PlaySong(int index)
+    {
+        if (m_currentSong.isPlaying)
+        {
+            m_currentSong.Stop();
+        }
+        if (index < m_clipList.Count)
+        {
+            m_currentSong.clip = m_clipList[index];
+            m_currentSong.Play();
+        }
     }
 
     public void PlayWinSound()

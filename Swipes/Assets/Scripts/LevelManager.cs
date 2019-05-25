@@ -20,6 +20,9 @@ public class LevelManager : MonoBehaviour
     private List<Level> m_levels;
 
 
+    private int last = 0, secondLast = 1, current;
+
+
     void Start()
     {
         m_levels = new List<Level>();
@@ -27,8 +30,16 @@ public class LevelManager : MonoBehaviour
 
         for(float time = 1.1f; time < 150.0f; time += 1.1f)
         {
-            level.AddSwipe(time, (Swipes)Random.Range(1, 5));
+            last = secondLast;
+            secondLast = current;
+            do
+            {
+                current = (int)Random.Range(0, 6);
+            } while (current == last || current == secondLast);
+            level.AddSwipe(time, (Swipes)Random.Range(1, 5), current);
+
         }
+        level.SetMusicIndex(0);
 
         m_levels.Add(level);
     }

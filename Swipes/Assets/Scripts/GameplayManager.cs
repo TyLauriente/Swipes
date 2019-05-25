@@ -28,11 +28,12 @@ public class GameplayManager : MonoBehaviour
     private InputManager m_inputManager;
     [SerializeField]
     private AudioManager m_audioManager;
+    [SerializeField]
+    private BackgroundManager m_backgroundManager;
 
     //TEMP----------------------
     public Text accuracyText;
     int numberOfWins = 0;
-    public Text fps;
     //TEMP----------------------
 
     private Level m_currentLevel;
@@ -52,7 +53,7 @@ public class GameplayManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        m_currentSwipe = 0;
     }
 
     // Update is called once per frame
@@ -60,12 +61,10 @@ public class GameplayManager : MonoBehaviour
     {
         if (m_gameManager.GetCurrentState() == GameStates.Gameplay)
         {
-            // TEMP ___________________________________________________________________________________________________________
             m_timeUntilNextSwipe = m_currentLevel.GetSwipeTime(m_currentSwipe + 1) - m_audioManager.GetTimePassed();
+            // TEMP ___________________________________________________________________________________________________________
             accuracyText.text = "Accuracy\n" + ((float)numberOfWins / (float)m_currentSwipe * 100.0f).ToString("0.0") + "%";
             // TEMP ___________________________________________________________________________________________________________
-
-            fps.text = (1.0f / Time.deltaTime).ToString();
 
             UpdatePositions();
 
@@ -84,6 +83,9 @@ public class GameplayManager : MonoBehaviour
         m_touchPos.y = ((m_touchPos.y - m_gameManager.GetScreenHeight()) / m_gameManager.GetScreenHeight()
             * verticalSpeed);
 
+        m_swipeManager.UpdateSwipeIndicatorPosition();
+
+        m_backgroundManager.SetBackgroundPosition(m_swipeManager.GetCurrentSwipePosition());
 
         if (m_inputManager.IsFirstTouch())
         {
@@ -106,7 +108,6 @@ public class GameplayManager : MonoBehaviour
             {
                 m_swipeManager.SetCurrentSwipeLocation(new Vector2(0.0f, m_touchPos.y));
             }
-
         }
     }
 
@@ -162,16 +163,23 @@ public class GameplayManager : MonoBehaviour
             m_timeUntilNextSwipe = m_currentLevel.GetSwipeTime(m_currentSwipe + 1) - m_audioManager.GetTimePassed();
             m_swipeManager.SetCurrentSwipeType(m_currentLevel.GetSwipe(m_currentSwipe));
             m_swipeManager.SetNextSwipeType(m_currentLevel.GetSwipe(m_currentSwipe + 1));
+            m_backgroundManager.SetNextBackground(m_currentLevel.GetBackgroundIndex(m_currentSwipe + 1));
         }
     }
 
     public void SetupGameplay()
     {
         m_currentLevel = m_levelManager.GetLevel(0);
+        m_audioManager.PlaySong(m_currentLevel.GetMusicIndex());
+
         m_currentSwipe = 0;
         m_timeUntilNextSwipe = m_currentLevel.GetSwipeTime(m_currentSwipe + 1) - m_audioManager.GetTimePassed();
+
         m_swipeManager.SetCurrentSwipeType(m_currentLevel.GetSwipe(m_currentSwipe));
         m_swipeManager.SetNextSwipeType(m_currentLevel.GetSwipe(m_currentSwipe + 1));
+
+        m_backgroundManager.SetNextBackground(m_currentLevel.GetBackgroundIndex(m_currentSwipe));
+        m_backgroundManager.SetNextBackground(m_currentLevel.GetBackgroundIndex(m_currentSwipe + 1));
     }
 
     public float GetTimeUntilNextSwipe()

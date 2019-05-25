@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 /*
  * 
  * This Class is the SwipeManager
@@ -27,7 +28,8 @@ public class SwipeManager : MonoBehaviour
     private AudioManager m_audioManager;
     [SerializeField]
     private GameplayManager m_gameplayManager;
-
+    [SerializeField]
+    private GameManager m_gameManager;
 
     // Distance to offset the small arrow
     private const float offset = 1.425f;
@@ -39,6 +41,8 @@ public class SwipeManager : MonoBehaviour
     private float m_percentage;
     private float m_divider;
 
+    Vector3 m_newIndicatiorPos;
+
 
     private void Start()
     {
@@ -48,38 +52,38 @@ public class SwipeManager : MonoBehaviour
         m_divider = 0.0f;
     }
 
-    void Update()
+    public void UpdateSwipeIndicatorPosition()
     {
         if ((m_end - m_start) != 0.0f)
         {
             m_percentage = (m_audioManager.GetTimePassed() - m_start) * m_divider;
-            if(m_percentage > 1.0f)
+            if (m_percentage > 1.0f)
             {
                 m_percentage = 1.0f;
             }
         }
 
-        Vector3 newIndicatiorPos = m_SR_currentSwipe.transform.position;
-        newIndicatiorPos.z = m_SR_currentSwipeIndicator.transform.position.z;
+        m_newIndicatiorPos = m_SR_currentSwipe.transform.position;
+        m_newIndicatiorPos.z = m_SR_currentSwipeIndicator.transform.position.z;
 
-        if(m_swipeType == Swipes.Up)
+        if (m_swipeType == Swipes.Up)
         {
-            newIndicatiorPos.y += -offset + (m_percentage * offset * 2.0f);
+            m_newIndicatiorPos.y += -offset + (m_percentage * offset * 2.0f);
         }
         else if (m_swipeType == Swipes.Down)
         {
-            newIndicatiorPos.y += offset - (m_percentage * offset * 2.0f);
+            m_newIndicatiorPos.y += offset - (m_percentage * offset * 2.0f);
         }
         else if (m_swipeType == Swipes.Left)
         {
-            newIndicatiorPos.x += offset - (m_percentage * offset * 2.0f);
+            m_newIndicatiorPos.x += offset - (m_percentage * offset * 2.0f);
         }
         else if (m_swipeType == Swipes.Right)
         {
-            newIndicatiorPos.x += -offset + (m_percentage * offset * 2.0f);
+            m_newIndicatiorPos.x += -offset + (m_percentage * offset * 2.0f);
         }
 
-        m_SR_currentSwipeIndicator.transform.position = newIndicatiorPos;
+        m_SR_currentSwipeIndicator.transform.position = m_newIndicatiorPos;
     }
 
     public void SetCurrentSwipeLocation(Vector2 location)
@@ -148,8 +152,8 @@ public class SwipeManager : MonoBehaviour
         }
     }
 
-    public Vector2 GetCurrentSwipePosition()
+    public Vector3 GetCurrentSwipePosition()
     {
-        return (Vector2)m_SR_currentSwipe.transform.position;
+        return m_SR_currentSwipe.transform.position;
     }
 }
