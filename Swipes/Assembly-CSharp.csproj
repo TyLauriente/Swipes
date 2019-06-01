@@ -86,9 +86,9 @@
     <Compile Include="Assets\Scripts\SwipeManager.cs" />
     <Compile Include="Assets\Scripts\TutorialManager.cs" />
     <Compile Include="Assets\Temporary Level Editor\TempLevelCreator.cs" />
-    <None Include="Assets\Resources\Levels\Level1.xml" />
     <None Include="Assets\Android Native Audio\Credits.txt" />
     <None Include="Assets\Android Native Audio\Changelog.txt" />
+    <None Include="Assets\Resources\Levels\Level1.xml" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/tlaur/Desktop/Swipes Working Folder/New/swipes/Swipes/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

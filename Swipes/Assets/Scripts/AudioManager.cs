@@ -48,6 +48,8 @@ public class AudioManager : MonoBehaviour
 
     private string m_userSongPath;
 
+    const float editorTimerOffset = 0.18f;
+
     // Initialize Android Native audio with sound effects
     void Start()
     {
@@ -89,7 +91,7 @@ public class AudioManager : MonoBehaviour
 
     private void Update()
     {
-        if (m_currentSong.time > 0.0f)
+        if (m_currentSong.isPlaying)
         {
             m_songTimer += Time.deltaTime;
         }
@@ -117,11 +119,11 @@ public class AudioManager : MonoBehaviour
             m_currentSong.Play();
             if (m_isAndroid)
             {
-                m_songTimer = m_currentSong.time;
+                m_songTimer = 0.0f;
             }
             else
             {
-                m_songTimer = 0.0f;
+                m_songTimer = editorTimerOffset;
             }
         }
     }

@@ -7,47 +7,26 @@ using UnityEngine;
 public class TempLevelCreator : MonoBehaviour
 {
     [SerializeField]
-    AudioSource song;
+    LevelManager m_levelManager;
 
     Level level;
-
-    private int last = 0, secondLast = 1, current = 5;
-
-    bool savedLevel = false;
-    float timer = 0.0f;
-
-    private const int LEVEL_NUMBER = 1;
 
     // Start is called before the first frame update
     void Start()
     {
-        level = new Level();
-        level.levelName = "Level2";
-        level.musicName = "East - Lydian Collective";
-
-        song.Play();
-        timer = 0.0f;
+        m_levelManager.LoadLevels();
+        level = m_levelManager.GetLevel(0);
+        for (int index = 0; index < level.swipes.Count; ++index)
+        {
+            level.swipeTimes[index] += 0.18f;
+        }
+        SaveLevel();
     }
 
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime;
-        if(Input.GetKeyDown(KeyCode.J))
-        {
-            last = secondLast;
-            secondLast = current;
-            do
-            {
-                current = (int)Random.Range(0, 6);
-            } while (current == last || current == secondLast);
-            level.AddSwipe(timer, (Swipes)Random.Range(1, 5), current);
-        }
-
-        if(!song.isPlaying ||Input.GetKeyDown(KeyCode.Space))
-        {
-            SaveLevel();
-        }
+        
     }
 
     private void SaveLevel()
@@ -60,7 +39,7 @@ public class TempLevelCreator : MonoBehaviour
             Directory.CreateDirectory(path);
         }
         
-        TextWriter textWriter = new StreamWriter(path + "Level5.xml");
+        TextWriter textWriter = new StreamWriter(path + "LevelNew.xml");
         
         xs.Serialize(textWriter, level);
     }

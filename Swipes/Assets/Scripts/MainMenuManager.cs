@@ -17,8 +17,6 @@ public class MainMenuManager : MonoBehaviour
     private Vector2 m_touchPos;
     private Vector2 m_startTouchPosition;
 
-    private bool resetInput = false;
-
     bool waitOver = false;
 
     // Update is called once per frame
