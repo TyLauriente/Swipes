@@ -45,6 +45,13 @@ public class InputManager : MonoBehaviour
         }
     }
 
+    public void Reset()
+    {
+        m_isFirstTouch = false;
+        m_isFirstRelease = false;
+        m_isDragging = false;
+    }
+
     public bool IsFirstTouch()
     {
         return m_isFirstTouch;
@@ -58,6 +65,5 @@ public class InputManager : MonoBehaviour
     public bool IsDragging()
     {
         return m_isDragging;
-        
     }
 }

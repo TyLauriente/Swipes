@@ -21,7 +21,8 @@ public enum GameStates
     Options,
     LevelSelect,
     LevelEditor,
-    Gameplay
+    Gameplay,
+    Tutorial
 }
 
 public enum Swipes
@@ -41,12 +42,35 @@ public class GameManager : MonoBehaviour
     private AudioManager m_audioManager;
     [SerializeField]
     private LevelManager m_levelManager;
+    [SerializeField]
+    private MainMenuManager m_mainMenuManager;
+    [SerializeField]
+    private LevelEditorManager m_levelEditorManager;
+    [SerializeField]
+    private LevelSelectManager m_levelSelectManager;
+
+    [SerializeField]
+    private GameObject m_gameplayObject;
+    [SerializeField]
+    private GameObject m_levelEditorObject;
+    [SerializeField]
+    private GameObject m_levelSelectObject;
+    [SerializeField]
+    private GameObject m_optionsObject;
+    [SerializeField]
+    private GameObject m_mainMenuObject;
+    [SerializeField]
+    private GameObject m_tutorialObject;
+    
+
 
     private float m_screenWidth;
     private float m_screenHeight;
     private GameStates m_gameState;
 
     private bool init = false;
+
+    private Level m_nextLevel;
 
     // Start is called before the first frame update
 
@@ -66,9 +90,14 @@ public class GameManager : MonoBehaviour
     {
         if(!init)
         {
-            ChangeState(GameStates.Gameplay);
+            ChangeState(GameStates.MainMenu);
             init = true;
         }
+    }
+
+    public void SetNextLevel(Level level)
+    {
+        m_nextLevel = level;
     }
 
     public float GetScreenWidth()
@@ -92,7 +121,63 @@ public class GameManager : MonoBehaviour
 
         if (state == GameStates.Gameplay)
         {
-            m_gameplayManager.SetupGameplay();
+            m_gameplayObject.SetActive(true);
+            m_gameplayManager.Wait();
+            m_levelEditorObject.SetActive(false);
+            m_levelSelectObject.SetActive(false);
+            m_optionsObject.SetActive(false);
+            m_mainMenuObject.SetActive(false);
+            m_tutorialObject.SetActive(false);
+            m_gameplayManager.SetupGameplay(m_nextLevel);
+        }
+        else if (state == GameStates.LevelEditor)
+        {
+            m_levelEditorObject.SetActive(true);
+            m_levelEditorManager.Wait();
+            m_gameplayObject.SetActive(false);
+            m_levelSelectObject.SetActive(false);
+            m_optionsObject.SetActive(false);
+            m_mainMenuObject.SetActive(false);
+            m_tutorialObject.SetActive(false);
+        }
+        else if (state == GameStates.LevelSelect)
+        {
+            m_levelSelectObject.SetActive(true);
+            m_levelManager.LoadLevels();
+            m_levelSelectManager.Reset();
+            m_gameplayObject.SetActive(false);
+            m_levelEditorObject.SetActive(false);
+            m_optionsObject.SetActive(false);
+            m_mainMenuObject.SetActive(false);
+            m_tutorialObject.SetActive(false);
+        }
+        else if (state == GameStates.Options)
+        {
+            m_optionsObject.SetActive(true);
+            m_gameplayObject.SetActive(false);
+            m_levelEditorObject.SetActive(false);
+            m_levelSelectObject.SetActive(false);
+            m_mainMenuObject.SetActive(false);
+            m_tutorialObject.SetActive(false);
+        }
+        else if(state == GameStates.MainMenu)
+        {
+            m_mainMenuObject.SetActive(true);
+            m_mainMenuManager.Wait();
+            m_gameplayObject.SetActive(false);
+            m_levelEditorObject.SetActive(false);
+            m_levelSelectObject.SetActive(false);
+            m_optionsObject.SetActive(false);
+            m_tutorialObject.SetActive(false);
+        }
+        else if(state == GameStates.Tutorial)
+        {
+            m_tutorialObject.SetActive(true);
+            m_gameplayObject.SetActive(false);
+            m_levelEditorObject.SetActive(false);
+            m_levelSelectObject.SetActive(false);
+            m_optionsObject.SetActive(false);
+            m_mainMenuObject.SetActive(false);
         }
     }
 }

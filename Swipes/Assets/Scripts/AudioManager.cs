@@ -46,8 +46,6 @@ public class AudioManager : MonoBehaviour
 
     private float m_songTimer;
 
-    const float timerOffset = 0.03f;
-
     private string m_userSongPath;
 
     // Initialize Android Native audio with sound effects
@@ -79,14 +77,11 @@ public class AudioManager : MonoBehaviour
             XmlSerializer xs = new XmlSerializer(typeof(AudioClip));
             foreach (var songPath in songPaths)
             {
-                using (TextReader reader = new StreamReader(songPath))
+                using (WWW audioFile = new WWW("file://" + songPath))
                 {
-                    AudioClip tempClip = (AudioClip)xs.Deserialize(reader);
-                    if (tempClip != null)
-                    {
-                        tempClip.name = Path.GetFileName(songPath);
-                        m_clipList.Add(tempClip);
-                    }
+                    AudioClip clip = audioFile.GetAudioClip();
+                    clip.name = Path.GetFileName(songPath);
+                    m_clipList.Add(clip);
                 }
             }
         }
@@ -94,7 +89,10 @@ public class AudioManager : MonoBehaviour
 
     private void Update()
     {
-        m_songTimer += Time.deltaTime;
+        if (m_currentSong.time > 0.0f)
+        {
+            m_songTimer += Time.deltaTime;
+        }
     }
 
     public void PlaySong(string songName)
@@ -117,10 +115,25 @@ public class AudioManager : MonoBehaviour
         {
             m_currentSong.clip = foundClip;
             m_currentSong.Play();
+            if (m_isAndroid)
+            {
+                m_songTimer = m_currentSong.time;
+            }
+            else
+            {
+                m_songTimer = 0.0f;
+            }
         }
-
-        m_songTimer = timerOffset;
     }
+
+    public void StopSong()
+    {
+        if (m_currentSong.isPlaying)
+        {
+            m_currentSong.Stop();
+        }
+    }
+
 
     public void PlayWinSound()
     {
@@ -149,5 +162,10 @@ public class AudioManager : MonoBehaviour
     public float GetTimePassed()
     {
         return m_songTimer;
+    }
+
+    public float GetTotatlTime()
+    {
+        return m_currentSong.clip.length;
     }
 }

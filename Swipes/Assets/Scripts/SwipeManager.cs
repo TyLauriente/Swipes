@@ -59,6 +59,10 @@ public class SwipeManager : MonoBehaviour
             {
                 m_percentage = 1.0f;
             }
+            else if(m_percentage < 0.0f)
+            {
+                m_percentage = 0.0f;
+            }
         }
 
         m_newIndicatiorPos = m_SR_currentSwipe.transform.position;

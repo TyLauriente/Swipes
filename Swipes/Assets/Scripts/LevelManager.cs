@@ -74,6 +74,30 @@ public class LevelManager : MonoBehaviour
         }
         return new Level();
     }
-    
-    
+
+    public Level GetUserLevel()
+    {
+        foreach (var level in m_levels)
+        {
+            if(!level.isPrimaryLevel)
+            {
+                return level;
+            }
+        }
+        return new Level();
+    }
+
+    public Level GetPrimaryLevel()
+    {
+        foreach (var level in m_levels)
+        {
+            if (level.isPrimaryLevel)
+            {
+                return level;
+            }
+        }
+        return new Level();
+    }
+
+
 }
