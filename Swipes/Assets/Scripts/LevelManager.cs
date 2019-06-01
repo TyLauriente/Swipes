@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Xml;
 using System.Xml.Serialization;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,61 +21,49 @@ using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
+    const int MAX_LEVELS = 10;
+
+
     private List<Level> m_levels;
 
-    private const int LEVEL_NUMBER = 2;
+    string m_primaryLevelPath;
+    string m_userLevelPath;
 
 
-    // Used For random generation of test map
-    private int last = 0, secondLast = 1, current;
-
-
-    void Start()
+    public void LoadLevels()
     {
         m_levels = new List<Level>();
+        m_primaryLevelPath = "Levels/";
+        m_userLevelPath = Application.persistentDataPath + "/Levels/";
 
+        // Load all primary levels
 
-        //Level level = new Level();
-        //
-        //for(float time = 1.1f; time < 150.0f; time += 1.1f)
-        //{
-        //    last = secondLast;
-        //    secondLast = current;
-        //    do
-        //    {
-        //        current = (int)Random.Range(0, 6);
-        //    } while (current == last || current == secondLast);
-        //    level.AddSwipe(time, (Swipes)Random.Range(1, 5), current);
-        //
-        //}
-        //level.SetMusicIndex(0);
-        //
-        //XmlSerializer xs = new XmlSerializer(typeof(Level));
-        //
-        //string path = Application.persistentDataPath + "/Levels/";
-        //if(!Directory.Exists(path))
-        //{
-        //    Directory.CreateDirectory(path);
-        //}
-        //
-        //TextWriter textWriter = new StreamWriter(path + "Level" + LEVEL_NUMBER + ".xml");
-        //
-        //xs.Serialize(textWriter, level);
-
-        Level level;
-        XmlSerializer xs = new XmlSerializer(typeof(Level));
-        
-        string path = Application.persistentDataPath + "/Levels/";
-        if(!Directory.Exists(path))
+        var xs = new XmlSerializer(typeof(Level));
+        for(int levelIndex = 0; levelIndex < MAX_LEVELS; ++levelIndex)
         {
-            Directory.CreateDirectory(path);
+            TextAsset levelAsText = (TextAsset)Resources.Load(m_primaryLevelPath + "Level" + levelIndex.ToString(), typeof(TextAsset));
+            if(levelAsText != null)
+            {
+                using (TextReader reader = new StringReader(levelAsText.text))
+                {
+                    m_levels.Add((Level)xs.Deserialize(reader));
+                }
+            }
         }
-        
-        TextReader textReader = new StreamReader(path + "Level" + LEVEL_NUMBER + ".xml");
-        
-        level = (Level)xs.Deserialize(textReader);
-        
-        m_levels.Add(level);
+
+        // Load all user made levels
+
+        string[] levelPaths = Directory.GetFiles(m_userLevelPath, "*xml");
+
+        foreach (var levelPath in levelPaths)
+        {
+            using (TextReader reader = new StreamReader(levelPath))
+            {
+                Level tempLevel = (Level)xs.Deserialize(reader);
+                tempLevel.isPrimaryLevel = false;
+                m_levels.Add(tempLevel);
+            }
+        }
     }
 
     public Level GetLevel(int index)

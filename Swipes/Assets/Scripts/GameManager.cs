@@ -39,6 +39,8 @@ public class GameManager : MonoBehaviour
     private GameplayManager m_gameplayManager;
     [SerializeField]
     private AudioManager m_audioManager;
+    [SerializeField]
+    private LevelManager m_levelManager;
 
     private float m_screenWidth;
     private float m_screenHeight;
@@ -56,6 +58,8 @@ public class GameManager : MonoBehaviour
 
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 100;
+        m_levelManager.LoadLevels();
+        m_audioManager.LoadUserSongs();
     }
 
     private void Update()

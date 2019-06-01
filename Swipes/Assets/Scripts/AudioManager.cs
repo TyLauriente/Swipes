@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using System.Xml.Serialization;
 
 /*
  * 
@@ -43,7 +44,11 @@ public class AudioManager : MonoBehaviour
 
     private bool m_isAndroid = false;
 
+    private float m_songTimer;
 
+    const float timerOffset = 0.03f;
+
+    private string m_userSongPath;
 
     // Initialize Android Native audio with sound effects
     void Start()
@@ -56,19 +61,65 @@ public class AudioManager : MonoBehaviour
         m_loseSoundId = AndroidNativeAudio.load("LoseSound.wav");
         m_winStreamId = -1;
         m_loseStreamId = -1;
+        m_songTimer = 0.0f;
     }
 
-    public void PlaySong(int index)
+    public void LoadUserSongs()
+    {
+        // Load user songs
+        m_userSongPath = Application.persistentDataPath + "/Music";
+
+        if (!Directory.Exists(m_userSongPath))
+        {
+            Directory.CreateDirectory(m_userSongPath);
+        }
+        else
+        {
+            string[] songPaths = Directory.GetFiles(m_userSongPath);
+            XmlSerializer xs = new XmlSerializer(typeof(AudioClip));
+            foreach (var songPath in songPaths)
+            {
+                using (TextReader reader = new StreamReader(songPath))
+                {
+                    AudioClip tempClip = (AudioClip)xs.Deserialize(reader);
+                    if (tempClip != null)
+                    {
+                        tempClip.name = Path.GetFileName(songPath);
+                        m_clipList.Add(tempClip);
+                    }
+                }
+            }
+        }
+    }
+
+    private void Update()
+    {
+        m_songTimer += Time.deltaTime;
+    }
+
+    public void PlaySong(string songName)
     {
         if (m_currentSong.isPlaying)
         {
             m_currentSong.Stop();
         }
-        if (index < m_clipList.Count)
+
+        AudioClip foundClip = null;
+        foreach (var clip in m_clipList)
         {
-            m_currentSong.clip = m_clipList[index];
+            if(clip.name == songName)
+            {
+                foundClip = clip;
+                break;
+            }
+        }
+        if (foundClip != null)
+        {
+            m_currentSong.clip = foundClip;
             m_currentSong.Play();
         }
+
+        m_songTimer = timerOffset;
     }
 
     public void PlayWinSound()
@@ -97,6 +148,6 @@ public class AudioManager : MonoBehaviour
 
     public float GetTimePassed()
     {
-        return m_currentSong.time;
+        return m_songTimer;
     }
 }

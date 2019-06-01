@@ -28,6 +28,10 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 48
       Script: {instanceID: 0}
+    - Class: 49
+      Script: {instanceID: 0}
+    - Class: 50
+      Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
     - Class: 82
@@ -303,7 +307,7 @@ ScriptsOnlyBuild:
     className: VerticalLayoutGroup
   - hash:
       serializedVersion: 2
-      Hash: 95525a18af58c8f899aa30b254566c51
+      Hash: cceb1564ee668bf3e8ac1f257a976bd1
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: SwipeManager
@@ -777,7 +781,7 @@ ScriptsOnlyBuild:
     className: PlayableTrack
   - hash:
       serializedVersion: 2
-      Hash: 1fdb395570da35e9ca7124bab62e1d6f
+      Hash: 5d42fdf9bf422a09aef961d44bf17750
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManager

@@ -28,8 +28,6 @@ public class SwipeManager : MonoBehaviour
     private AudioManager m_audioManager;
     [SerializeField]
     private GameplayManager m_gameplayManager;
-    [SerializeField]
-    private GameManager m_gameManager;
 
     // Distance to offset the small arrow
     private const float offset = 1.425f;
@@ -52,7 +50,7 @@ public class SwipeManager : MonoBehaviour
         m_divider = 0.0f;
     }
 
-    public void UpdateSwipeIndicatorPosition()
+    public void Update()
     {
         if ((m_end - m_start) != 0.0f)
         {

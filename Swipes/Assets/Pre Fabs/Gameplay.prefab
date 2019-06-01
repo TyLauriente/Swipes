@@ -294,7 +294,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 57f4b87ae9738714488319b401af7e5b, type: 3}
+  m_audioClip: {fileID: 8300000, guid: c4d50697ad7863848b973d2aab5a64be, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -751,7 +751,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 2349fb1a7132e4442b2f014f8503fec2, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.092
   m_Pitch: 1
@@ -930,6 +930,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3766839493238648508}
   - component: {fileID: 3766839493238648509}
+  - component: {fileID: 7086597027617702036}
   m_Layer: 0
   m_Name: CurrentSwipeIndicator
   m_TagString: Untagged
@@ -999,6 +1000,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!50 &7086597027617702036
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3766839493238647107}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &3766839493274496074
 GameObject:
   m_ObjectHideFlags: 0
@@ -1047,7 +1069,6 @@ MonoBehaviour:
   m_SR_nextSwipe: {fileID: 3766839492631282451}
   m_audioManager: {fileID: 3766839493126686032}
   m_gameplayManager: {fileID: 3766839493836977105}
-  m_gameManager: {fileID: 0}
 --- !u!1 &3766839493426809785
 GameObject:
   m_ObjectHideFlags: 0
@@ -1429,3 +1450,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_gameplayManager: {fileID: 3766839493836977105}
   m_audioManager: {fileID: 3766839493126686032}
+  m_levelManager: {fileID: 3766839492445300990}

@@ -14,22 +14,25 @@ public class TempLevelCreator : MonoBehaviour
     private int last = 0, secondLast = 1, current = 5;
 
     bool savedLevel = false;
+    float timer = 0.0f;
 
-    private const int LEVEL_NUMBER = 2;
+    private const int LEVEL_NUMBER = 1;
 
     // Start is called before the first frame update
     void Start()
     {
         level = new Level();
         level.levelName = "Level2";
-        level.musicIndex = 1;
+        level.musicName = "East - Lydian Collective";
 
         song.Play();
+        timer = 0.0f;
     }
 
     // Update is called once per frame
     void Update()
     {
+        timer += Time.deltaTime;
         if(Input.GetKeyDown(KeyCode.J))
         {
             last = secondLast;
@@ -38,7 +41,7 @@ public class TempLevelCreator : MonoBehaviour
             {
                 current = (int)Random.Range(0, 6);
             } while (current == last || current == secondLast);
-            level.AddSwipe(song.time, (Swipes)Random.Range(1, 5), current);
+            level.AddSwipe(timer, (Swipes)Random.Range(1, 5), current);
         }
 
         if(!song.isPlaying ||Input.GetKeyDown(KeyCode.Space))
@@ -57,7 +60,7 @@ public class TempLevelCreator : MonoBehaviour
             Directory.CreateDirectory(path);
         }
         
-        TextWriter textWriter = new StreamWriter(path + "Level" + LEVEL_NUMBER + ".xml");
+        TextWriter textWriter = new StreamWriter(path + "Level5.xml");
         
         xs.Serialize(textWriter, level);
     }

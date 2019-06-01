@@ -83,8 +83,6 @@ public class GameplayManager : MonoBehaviour
         m_touchPos.y = ((m_touchPos.y - m_gameManager.GetScreenHeight()) / m_gameManager.GetScreenHeight()
             * verticalSpeed);
 
-        m_swipeManager.UpdateSwipeIndicatorPosition();
-
         m_backgroundManager.SetBackgroundPosition(m_swipeManager.GetCurrentSwipePosition());
 
         if (m_inputManager.IsFirstTouch())
@@ -170,7 +168,6 @@ public class GameplayManager : MonoBehaviour
     public void SetupGameplay()
     {
         m_currentLevel = m_levelManager.GetLevel(0);
-        m_audioManager.PlaySong(m_currentLevel.GetMusicIndex());
 
         m_currentSwipe = 0;
         m_timeUntilNextSwipe = m_currentLevel.GetSwipeTime(m_currentSwipe + 1) - m_audioManager.GetTimePassed();
@@ -180,6 +177,8 @@ public class GameplayManager : MonoBehaviour
 
         m_backgroundManager.SetNextBackground(m_currentLevel.GetBackgroundIndex(m_currentSwipe));
         m_backgroundManager.SetNextBackground(m_currentLevel.GetBackgroundIndex(m_currentSwipe + 1));
+
+        m_audioManager.PlaySong(m_currentLevel.musicName);
     }
 
     public float GetTimeUntilNextSwipe()

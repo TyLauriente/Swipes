@@ -1,4 +1,7 @@
-﻿using System;
+﻿using System.Collections;
+using UnityEngine;
+using System.IO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,7 +27,8 @@ public class Level
     public List<float> swipeTimes;
     public List<Swipes> swipes;
     public List<int> backgroundIndexes;
-    public int musicIndex;
+    public string musicName;
+    public bool isPrimaryLevel;
     
 
     public Level()
@@ -32,6 +36,7 @@ public class Level
         swipeTimes = new List<float>();
         swipes = new List<Swipes>();
         backgroundIndexes = new List<int>();
+        isPrimaryLevel = true;
     }
 
     public void AddSwipe(float seconds, Swipes swipe, int backgroundIndex)
@@ -68,14 +73,5 @@ public class Level
         return -1;
     }
 
-    public void SetMusicIndex(int index)
-    {
-        musicIndex = index;
-    }
-
-    public int GetMusicIndex()
-    {
-        return musicIndex;
-    }
 }
 
