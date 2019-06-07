@@ -21,7 +21,7 @@ using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
-    const int MAX_LEVELS = 10;
+    const int MAX_PRIMARY_LEVELS = 10;
 
 
     private List<Level> m_levels;
@@ -29,6 +29,7 @@ public class LevelManager : MonoBehaviour
     string m_primaryLevelPath;
     string m_userLevelPath;
 
+    public List<Level> Levels { get => m_levels; }
 
     public void LoadLevels()
     {
@@ -39,14 +40,14 @@ public class LevelManager : MonoBehaviour
         // Load all primary levels
 
         var xs = new XmlSerializer(typeof(Level));
-        for(int levelIndex = 0; levelIndex < MAX_LEVELS; ++levelIndex)
+        for(int levelIndex = 0; levelIndex < MAX_PRIMARY_LEVELS; ++levelIndex)
         {
             TextAsset levelAsText = (TextAsset)Resources.Load(m_primaryLevelPath + "Level" + levelIndex.ToString(), typeof(TextAsset));
             if(levelAsText != null)
             {
                 using (TextReader reader = new StringReader(levelAsText.text))
                 {
-                    m_levels.Add((Level)xs.Deserialize(reader));
+                    Levels.Add((Level)xs.Deserialize(reader));
                 }
             }
         }
@@ -61,23 +62,27 @@ public class LevelManager : MonoBehaviour
             {
                 Level tempLevel = (Level)xs.Deserialize(reader);
                 tempLevel.isPrimaryLevel = false;
-                m_levels.Add(tempLevel);
+                Levels.Add(tempLevel);
             }
         }
     }
 
-    public Level GetLevel(int index)
+    public List<Level> GetUserLevels()
     {
-        if (m_levels != null && index >= 0 && index < m_levels.Count)
+        List<Level> userLevels = new List<Level>();
+        foreach (var level in Levels)
         {
-            return m_levels[index];
+            if (!level.isPrimaryLevel)
+            {
+                userLevels.Add(level);
+            }
         }
-        return new Level();
+        return userLevels;
     }
 
     public Level GetUserLevel()
     {
-        foreach (var level in m_levels)
+        foreach (var level in Levels)
         {
             if(!level.isPrimaryLevel)
             {
@@ -89,7 +94,7 @@ public class LevelManager : MonoBehaviour
 
     public Level GetPrimaryLevel()
     {
-        foreach (var level in m_levels)
+        foreach (var level in Levels)
         {
             if (level.isPrimaryLevel)
             {

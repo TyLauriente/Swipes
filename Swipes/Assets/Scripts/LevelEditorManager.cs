@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 enum LevelEditorState
 {
+    CreateOrLoad,
+    LoadLevel,
     SongSelection,
     TapToTheBeat,
     DetailedEditor
@@ -19,7 +21,11 @@ public class LevelEditorManager : MonoBehaviour
     [SerializeField]
     private AudioManager m_audioManager;
     [SerializeField]
+    private CreateOrLoad m_createOrLoad;
+    [SerializeField]
     private SongSelection m_songSelection;
+    [SerializeField]
+    private LoadLevel m_loadLevel;
     [SerializeField]
     private TapToTheBeat m_tapToTheBeat;
     [SerializeField]
@@ -33,11 +39,16 @@ public class LevelEditorManager : MonoBehaviour
 
     public void Init()
     {
-        m_currentState = LevelEditorState.SongSelection;
+        m_currentState = LevelEditorState.CreateOrLoad;
+
         m_songSelection.Init();
         m_tapToTheBeat.Init();
+        m_createOrLoad.Init();
+        m_loadLevel.Init();
         m_songSelection.LoadMusicNames(m_audioManager.GetAllSongNames());
-        m_songSelection.gameObject.SetActive(true);
+        m_createOrLoad.gameObject.SetActive(true);
+        m_songSelection.gameObject.SetActive(false);
+        m_loadLevel.gameObject.SetActive(false);
         m_tapToTheBeat.gameObject.SetActive(false);
         m_detailedEditor.gameObject.SetActive(false);
     }
@@ -47,14 +58,42 @@ public class LevelEditorManager : MonoBehaviour
     {
         if (m_gameManager.GetCurrentState() == GameStates.LevelEditor)
         {
-            if(Input.GetKey(KeyCode.Escape))
+            if(Input.GetKey(KeyCode.Escape) && m_currentState != LevelEditorState.DetailedEditor)
             {
                 m_audioManager.StopSong();
                 m_gameManager.ChangeState(GameStates.MainMenu);
             }
 
-
-            if(m_currentState == LevelEditorState.SongSelection) // Song Selection
+            if(m_currentState == LevelEditorState.CreateOrLoad) // Choose to create or load
+            {
+                if(m_createOrLoad.CreateLevel)
+                {
+                    m_currentState = LevelEditorState.SongSelection;
+                    m_createOrLoad.gameObject.SetActive(false);
+                    m_songSelection.gameObject.SetActive(true);
+                }
+                else if(m_createOrLoad.LoadLevel)
+                {
+                    m_currentState = LevelEditorState.LoadLevel;
+                    m_createOrLoad.gameObject.SetActive(false);
+                    m_loadLevel.gameObject.SetActive(true);
+                }
+            }
+            else if(m_currentState == LevelEditorState.LoadLevel)
+            {
+                if(m_loadLevel.LevelSelected)
+                {
+                    m_currentState = LevelEditorState.DetailedEditor;
+                    m_newLevel = m_loadLevel.GetOldLevel();
+                    m_selectedSongName = m_newLevel.musicName;
+                    m_audioManager.PlaySong(m_selectedSongName);
+                    m_audioManager.StopSong();
+                    m_loadLevel.gameObject.SetActive(false);
+                    m_detailedEditor.gameObject.SetActive(true);
+                    m_detailedEditor.Init(m_newLevel);
+                }
+            }
+            else if(m_currentState == LevelEditorState.SongSelection) // Song Selection
             {
                 if(m_songSelection.quit)
                 {
@@ -103,7 +142,6 @@ public class LevelEditorManager : MonoBehaviour
     private void SaveLevel(Level level)
     {
         level.isPrimaryLevel = false;
-        level.levelName = "Debugging Name :-)";
         level.musicName = m_selectedSongName;
 
 
@@ -115,17 +153,7 @@ public class LevelEditorManager : MonoBehaviour
             Directory.CreateDirectory(path);
         }
 
-        int levelIndex = 1;
-        bool found = false;
-        do
-        {
-            if(!File.Exists(path + "UserLevel" + levelIndex.ToString() + ".xml"))
-            {
-                path += "UserLevel" + levelIndex.ToString() + ".xml";
-                found = true;
-            }
-            levelIndex++;
-        } while (!found);
+        path += level.levelName + ".xml";
 
         using (TextWriter textWriter = new StreamWriter(path))
         {

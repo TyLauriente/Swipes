@@ -3,6 +3,7 @@ ScriptsOnlyBuild:
     Assembly-CSharp.dll:
     - AudioManager
     - BackgroundManager
+    - CreateOrLoad
     - DetailedEditor
     - GameManager
     - GameplayManager
@@ -10,6 +11,7 @@ ScriptsOnlyBuild:
     - LevelEditorManager
     - LevelManager
     - LevelSelectManager
+    - LoadLevel
     - MainMenuManager
     - OptionsManager
     - SongSelection
@@ -25,8 +27,10 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.CanvasScaler
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.Image
+    - UnityEngine.UI.InputField
     - UnityEngine.UI.Slider
     - UnityEngine.UI.Text
+    - UnityEngine.UI.Toggle
   sceneClasses:
     Assets/Scenes/Gameplay.unity:
     - Class: 1
@@ -64,11 +68,15 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9348}
     - Class: 114
+      Script: {instanceID: 9350}
+    - Class: 114
       Script: {instanceID: 9382}
     - Class: 114
       Script: {instanceID: 9384}
     - Class: 114
       Script: {instanceID: 9386}
+    - Class: 114
+      Script: {instanceID: 9388}
     - Class: 114
       Script: {instanceID: 9402}
     - Class: 114
@@ -80,25 +88,29 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9846}
     - Class: 114
-      Script: {instanceID: 10014}
+      Script: {instanceID: 9996}
     - Class: 114
-      Script: {instanceID: 10192}
+      Script: {instanceID: 10016}
     - Class: 114
-      Script: {instanceID: 10226}
+      Script: {instanceID: 10194}
     - Class: 114
-      Script: {instanceID: 10454}
+      Script: {instanceID: 10228}
     - Class: 114
-      Script: {instanceID: 10552}
+      Script: {instanceID: 10456}
     - Class: 114
-      Script: {instanceID: 10614}
+      Script: {instanceID: 10504}
     - Class: 114
-      Script: {instanceID: 10632}
+      Script: {instanceID: 10556}
     - Class: 114
-      Script: {instanceID: 13284}
+      Script: {instanceID: 10576}
     - Class: 114
-      Script: {instanceID: 32020}
+      Script: {instanceID: 10620}
     - Class: 114
-      Script: {instanceID: 94354}
+      Script: {instanceID: 10638}
+    - Class: 114
+      Script: {instanceID: 14718}
+    - Class: 114
+      Script: {instanceID: 18854}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -550,7 +562,7 @@ ScriptsOnlyBuild:
     className: VerticalLayoutGroup
   - hash:
       serializedVersion: 2
-      Hash: 546df2aece1ef3b0d6e1b9900add4887
+      Hash: 44d0ddf330857e63eb6f56ed86ccdb77
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: LevelEditorManager
@@ -668,6 +680,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: ChristopherCreates.AndroidNativeAudio
     className: ANAMusicBackgroundPause
+  - hash:
+      serializedVersion: 2
+      Hash: 128f270ef35e5a9c1686d37122aff358
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: DetailedEditor
   - hash:
       serializedVersion: 2
       Hash: 1f7fa03da7151a1e285c6625eb94adef
@@ -802,6 +820,12 @@ ScriptsOnlyBuild:
     className: TMP_StyleSheet
   - hash:
       serializedVersion: 2
+      Hash: 368410482344a563f269e15a7ff9e195
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: TapToTheBeat
+  - hash:
+      serializedVersion: 2
       Hash: 5372ed2ce39229b1ac910757999a8be2
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
@@ -824,6 +848,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ANAMusicExample
+  - hash:
+      serializedVersion: 2
+      Hash: 6769f2592e84044b8118096573261df7
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: SongSelection
   - hash:
       serializedVersion: 2
       Hash: 8649814970b42d345b89944b862453cc
@@ -856,22 +886,16 @@ ScriptsOnlyBuild:
     className: GameManager
   - hash:
       serializedVersion: 2
-      Hash: 6769f2592e84044b8118096573261df7
+      Hash: 5b93c7fbdfff73cb9c28778c28ae1f55
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: SongSelection
+    className: CreateOrLoad
   - hash:
       serializedVersion: 2
-      Hash: 368410482344a563f269e15a7ff9e195
+      Hash: 63c061c72001186c055c55079a725deb
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: TapToTheBeat
-  - hash:
-      serializedVersion: 2
-      Hash: 45643b7cfb9586f7a7c6f685f8a2a6f7
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: DetailedEditor
+    className: LoadLevel
   platform: 13
   scenePathNames:
   - Assets/Scenes/Gameplay.unity

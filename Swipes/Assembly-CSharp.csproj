@@ -73,6 +73,7 @@
     <Compile Include="Assets\Android Native Audio\Scripts\OnPreparedListener.cs" />
     <Compile Include="Assets\Scripts\AudioManager.cs" />
     <Compile Include="Assets\Scripts\BackgroundManager.cs" />
+    <Compile Include="Assets\Scripts\CreateOrLoad.cs" />
     <Compile Include="Assets\Scripts\DetailedEditor.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\GameplayManager.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="Assets\Scripts\LevelEditorManager.cs" />
     <Compile Include="Assets\Scripts\LevelManager.cs" />
     <Compile Include="Assets\Scripts\LevelSelectManager.cs" />
+    <Compile Include="Assets\Scripts\LoadLevel.cs" />
     <Compile Include="Assets\Scripts\MainMenuManager.cs" />
     <Compile Include="Assets\Scripts\OptionsManager.cs" />
     <Compile Include="Assets\Scripts\PrototypeGameManager.cs" />

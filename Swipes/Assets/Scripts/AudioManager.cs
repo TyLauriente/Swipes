@@ -150,7 +150,7 @@ public class AudioManager : MonoBehaviour
 
     public void SetSongTime(float time)
     {
-        if(time <= m_currentSong.clip.length)
+        if(time < m_currentSong.clip.length)
         {
             m_currentSong.time = time;
             m_songTimer = time;

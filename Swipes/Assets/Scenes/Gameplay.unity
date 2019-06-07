@@ -132,6 +132,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FullGame
       objectReference: {fileID: 0}
+    - target: {fileID: 4993839698633951910, guid: 37c2a87f7ce573e4bbad618e04f3b531,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4869637509555390065, guid: 37c2a87f7ce573e4bbad618e04f3b531,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -186,6 +191,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1395336955945446043, guid: 37c2a87f7ce573e4bbad618e04f3b531,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 2.300003
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37c2a87f7ce573e4bbad618e04f3b531, type: 3}

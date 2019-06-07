@@ -16,8 +16,6 @@ public class DetailedEditor : MonoBehaviour
     [SerializeField]
     private Text m_swipeNumberText;
     [SerializeField]
-    private Text m_playPauseText;
-    [SerializeField]
     private Slider m_musicSlider;
     [SerializeField]
     private Text m_musicTimeText;
@@ -35,6 +33,25 @@ public class DetailedEditor : MonoBehaviour
     private Button m_removeSwipeButton;
     [SerializeField]
     private Button m_saveButton;
+    [SerializeField]
+    private InputField m_levelNameInputField;
+    [SerializeField]
+    private Text m_swipeTimeText;
+    [SerializeField]
+    private Button m_swipeNumberIncrementButton;
+    [SerializeField]
+    private Button m_swipeNumberDecrementButton;
+    [SerializeField]
+    private Button m_swipeTimeIncrementButton;
+    [SerializeField]
+    private Button m_swipeTimeDecrementButton;
+    [SerializeField]
+    private Toggle m_insertNewSwipeToggle;
+
+    private float m_swipeTimeIncrementValue;
+
+    private int m_last = 0, m_secondLast = 1, m_current = 5;
+
 
     private int m_currentSwipe;
     private Level m_newLevel;
@@ -45,9 +62,12 @@ public class DetailedEditor : MonoBehaviour
 
     private bool m_canAffectMusic;
 
+    private bool m_insertNewSwipe;
     private bool m_save;
+    private bool m_quit;
 
     public bool Save { get => m_save; }
+    public bool Quit { get => m_quit; }
 
     void Start()
     {
@@ -59,11 +79,19 @@ public class DetailedEditor : MonoBehaviour
         m_playPauseButton.onClick.AddListener(PlayPauseToggle);
         m_saveButton.onClick.AddListener(SaveLevel);
         m_musicSlider.onValueChanged.AddListener(MusicSlider);
-
+        m_levelNameInputField.onEndEdit.AddListener(LevelNameOnInputEndEdit);
+        m_swipeNumberIncrementButton.onClick.AddListener(IncrementSwipe);
+        m_swipeNumberDecrementButton.onClick.AddListener(DecrementSwipe);
+        m_swipeTimeIncrementButton.onClick.AddListener(IncrementSwipeTime);
+        m_swipeTimeDecrementButton.onClick.AddListener(DecrementSwipeTime);
+        m_insertNewSwipeToggle.onValueChanged.AddListener(InsertNewSwipeToggle);
+        m_swipeTimeIncrementValue = 0.05f;
     }
 
     public void Init(Level level)
     {
+        m_save = false;
+        m_quit = false;
         m_finalTime = "";
         m_currentSwipe = 0;
         m_newLevel = level;
@@ -71,31 +99,88 @@ public class DetailedEditor : MonoBehaviour
         m_backgroundManager.SetNextBackground(m_newLevel.GetBackgroundIndex(m_currentSwipe));
         m_backgroundManager.SetNextBackground(m_newLevel.GetBackgroundIndex(m_currentSwipe + 1));
         m_swipeManager.SetCurrentSwipeType(m_newLevel.GetSwipe(m_currentSwipe), m_timeUntilNextSwipe);
+        m_levelNameInputField.text = m_newLevel.levelName;
+        m_insertNewSwipeToggle.isOn = false;
+        m_insertNewSwipe = m_insertNewSwipeToggle.isOn;
     }
 
     private void Up()
     {
-
+        SetSwipe(Swipes.Up);
     }
 
     private void Down()
     {
-
+        SetSwipe(Swipes.Down);
     }
 
     private void Left()
     {
-
+        SetSwipe(Swipes.Left);
     }
 
     private void Right()
     {
+        SetSwipe(Swipes.Right);
+    }
 
+    private void SetSwipe(Swipes swipe)
+    {
+        if (m_insertNewSwipe)
+        {
+            m_newLevel.swipes.Insert(m_currentSwipe, swipe);
+            m_newLevel.swipeTimes.Insert(m_currentSwipe, m_audioManager.GetTimePassed());
+            do
+            {
+                m_current = Random.Range(0, 6);
+            } while (m_current == m_last || m_current == m_secondLast);
+            m_newLevel.backgroundIndexes.Insert(m_currentSwipe, m_current);
+        }
+        else
+        {
+            m_newLevel.swipes[m_currentSwipe] = swipe;
+        }
+        if (m_currentSwipe - 1 > 0)
+        {
+            m_currentSwipe--;
+            m_audioManager.SetSongTime(m_newLevel.swipeTimes[m_currentSwipe - 1] + 0.01f);
+        }
+        else
+        {
+            m_currentSwipe = 0;
+            m_audioManager.SetSongTime(0.0f);
+        }
+        m_timeUntilNextSwipe = m_newLevel.GetSwipeTime(m_currentSwipe) - m_audioManager.GetTimePassed();
+        m_backgroundManager.SetNextBackground(m_newLevel.GetBackgroundIndex(m_currentSwipe));
+        m_backgroundManager.SetNextBackground(m_newLevel.GetBackgroundIndex(m_currentSwipe + 1));
+        m_swipeManager.SetCurrentSwipeType(m_newLevel.GetSwipe(m_currentSwipe), m_timeUntilNextSwipe);
     }
 
     private void Remove()
     {
+        if (m_currentSwipe < m_newLevel.swipes.Count)
+        {
+            m_newLevel.swipes.Remove(m_newLevel.swipes[m_currentSwipe]);
+            m_newLevel.swipeTimes.Remove(m_newLevel.swipeTimes[m_currentSwipe]);
+            m_newLevel.backgroundIndexes.Remove(m_newLevel.backgroundIndexes[m_currentSwipe]);
+            if(m_newLevel.swipes.Count == 0)
+            {
+                m_quit = true;
+            }
+            if(m_currentSwipe > 0)
+            {
+                m_currentSwipe--;
+            }
+            m_timeUntilNextSwipe = m_newLevel.GetSwipeTime(m_currentSwipe) - m_audioManager.GetTimePassed();
+            m_backgroundManager.SetNextBackground(m_newLevel.GetBackgroundIndex(m_currentSwipe));
+            m_backgroundManager.SetNextBackground(m_newLevel.GetBackgroundIndex(m_currentSwipe + 1));
+            m_swipeManager.SetCurrentSwipeType(m_newLevel.GetSwipe(m_currentSwipe), m_timeUntilNextSwipe);
+        }
+    }
 
+    private void InsertNewSwipeToggle(bool isOn)
+    {
+        m_insertNewSwipe = isOn;
     }
     private void PlayPauseToggle()
     {
@@ -110,7 +195,91 @@ public class DetailedEditor : MonoBehaviour
     }
     private void SaveLevel()
     {
-        m_save = true;
+        if (m_newLevel.levelName.Length > 3)
+        {
+            m_save = true;
+        }
+    }
+
+    private void IncrementSwipe()
+    {
+        if(m_currentSwipe + 1 < m_newLevel.swipes.Count)
+        {
+            m_currentSwipe++;
+            if (m_currentSwipe == 0)
+            {
+                m_audioManager.SetSongTime(0.0f);
+            }
+            else
+            {
+                m_audioManager.SetSongTime(m_newLevel.swipeTimes[m_currentSwipe - 1] + 0.01f);
+            }
+            m_timeUntilNextSwipe = m_newLevel.GetSwipeTime(m_currentSwipe) - m_audioManager.GetTimePassed();
+            m_backgroundManager.SetNextBackground(m_newLevel.GetBackgroundIndex(m_currentSwipe));
+            m_backgroundManager.SetNextBackground(m_newLevel.GetBackgroundIndex(m_currentSwipe + 1));
+            m_swipeManager.SetCurrentSwipeType(m_newLevel.GetSwipe(m_currentSwipe), m_timeUntilNextSwipe);
+        }
+    }
+
+    private void DecrementSwipe()
+    {
+        if (m_currentSwipe - 1 >= 0)
+        {
+            m_currentSwipe--;
+            if (m_currentSwipe == 0)
+            {
+                m_audioManager.SetSongTime(0.0f);
+            }
+            else
+            {
+                m_audioManager.SetSongTime(m_newLevel.swipeTimes[m_currentSwipe - 1] + 0.01f);
+            }
+            m_timeUntilNextSwipe = m_newLevel.GetSwipeTime(m_currentSwipe) - m_audioManager.GetTimePassed();
+            m_backgroundManager.SetNextBackground(m_newLevel.GetBackgroundIndex(m_currentSwipe));
+            m_backgroundManager.SetNextBackground(m_newLevel.GetBackgroundIndex(m_currentSwipe + 1));
+            m_swipeManager.SetCurrentSwipeType(m_newLevel.GetSwipe(m_currentSwipe), m_timeUntilNextSwipe);
+        }
+    }
+
+    private void IncrementSwipeTime()
+    {
+        if(m_newLevel.swipeTimes[m_currentSwipe] + m_swipeTimeIncrementValue < m_audioManager.GetTotatlTime())
+        {
+            if (m_currentSwipe == 0)
+            {
+                m_audioManager.SetSongTime(0.0f);
+            }
+            else
+            {
+                m_audioManager.SetSongTime(m_newLevel.swipeTimes[m_currentSwipe - 1] + 0.01f);
+            }
+            m_newLevel.swipeTimes[m_currentSwipe] += m_swipeTimeIncrementValue;
+            m_timeUntilNextSwipe = m_newLevel.GetSwipeTime(m_currentSwipe) - m_audioManager.GetTimePassed();
+            m_swipeManager.SetCurrentSwipeType(m_newLevel.GetSwipe(m_currentSwipe), m_timeUntilNextSwipe);
+        }
+    }
+
+    private void DecrementSwipeTime()
+    {
+        if (m_newLevel.swipeTimes[m_currentSwipe] - m_swipeTimeIncrementValue >= 0.0f)
+        {
+            if (m_currentSwipe == 0)
+            {
+                m_audioManager.SetSongTime(0.0f);
+            }
+            else
+            {
+                m_audioManager.SetSongTime(m_newLevel.swipeTimes[m_currentSwipe - 1] + 0.01f);
+            }
+            m_newLevel.swipeTimes[m_currentSwipe] -= m_swipeTimeIncrementValue;
+            m_timeUntilNextSwipe = m_newLevel.GetSwipeTime(m_currentSwipe) - m_audioManager.GetTimePassed();
+            m_swipeManager.SetCurrentSwipeType(m_newLevel.GetSwipe(m_currentSwipe), m_timeUntilNextSwipe);
+        }
+    }
+
+    private void LevelNameOnInputEndEdit(string levelName)
+    {
+        m_newLevel.levelName = levelName;
     }
 
     private void MusicSlider(float value)
@@ -138,17 +307,16 @@ public class DetailedEditor : MonoBehaviour
     {
         m_timeUntilNextSwipe = m_newLevel.GetSwipeTime(m_currentSwipe) - m_audioManager.GetTimePassed();
         m_swipeManager.UpdateSwipeIndicator();
-        
+
+        if (m_currentSwipe < m_newLevel.swipes.Count)
+        {
+            m_swipeTimeText.text = "Swipe Time: " + m_newLevel.swipeTimes[m_currentSwipe].ToString("0.00") + " s";
+        }
+
+
 
         m_swipeNumberText.text = "Swipe " + (m_currentSwipe + 1).ToString();
-        if (m_audioManager.IsSongPlaying())
-        {
-            m_playPauseText.text = "Status: Playing";
-        }
-        else
-        {
-            m_playPauseText.text = "Status: Paused";
-        }
+        
         UpdateTime();
         m_canAffectMusic = false;
         m_musicSlider.value = (m_audioManager.GetTimePassed() / m_audioManager.GetTotatlTime());
