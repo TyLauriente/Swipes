@@ -36,9 +36,12 @@ public class BackgroundManager : MonoBehaviour
 
     public void SetNextBackground(int nextBackground)
     {
-        m_sr_background1.transform.position = new Vector3(0.0f, 0.0f, m_sr_background1.transform.position.z);
+        if (nextBackground < m_sr_backgroundImages.Count && nextBackground > 0)
+        {
+            m_sr_background1.transform.position = new Vector3(0.0f, 0.0f, m_sr_background1.transform.position.z);
 
-        m_sr_background1.sprite = m_sr_background2.sprite;
-        m_sr_background2.sprite = m_sr_backgroundImages[nextBackground];
+            m_sr_background1.sprite = m_sr_background2.sprite;
+            m_sr_background2.sprite = m_sr_backgroundImages[nextBackground];
+        }
     }
 }

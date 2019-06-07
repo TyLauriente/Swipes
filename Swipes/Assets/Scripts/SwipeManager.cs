@@ -26,8 +26,6 @@ public class SwipeManager : MonoBehaviour
     private SpriteRenderer m_SR_nextSwipe;
     [SerializeField]
     private AudioManager m_audioManager;
-    [SerializeField]
-    private GameplayManager m_gameplayManager;
 
     // Distance to offset the small arrow
     private const float offset = 1.425f;
@@ -50,7 +48,7 @@ public class SwipeManager : MonoBehaviour
         m_divider = 0.0f;
     }
 
-    public void Update()
+    public void UpdateSwipeIndicator()
     {
         if ((m_end - m_start) != 0.0f)
         {
@@ -66,7 +64,7 @@ public class SwipeManager : MonoBehaviour
         }
 
         m_newIndicatiorPos = m_SR_currentSwipe.transform.position;
-        m_newIndicatiorPos.z = m_SR_currentSwipeIndicator.transform.position.z;
+        m_newIndicatiorPos.z = m_SR_currentSwipeIndicator.transform.localPosition.z;
 
         if (m_swipeType == Swipes.Up)
         {
@@ -85,7 +83,7 @@ public class SwipeManager : MonoBehaviour
             m_newIndicatiorPos.x += -offset + (m_percentage * offset * 2.0f);
         }
 
-        m_SR_currentSwipeIndicator.transform.position = m_newIndicatiorPos;
+        m_SR_currentSwipeIndicator.transform.localPosition = m_newIndicatiorPos;
     }
 
     public void SetCurrentSwipeLocation(Vector2 location)
@@ -95,7 +93,7 @@ public class SwipeManager : MonoBehaviour
         m_SR_nextSwipe.gameObject.SetActive(false);
     }
 
-    public void SetCurrentSwipeType(Swipes swipe)
+    public void SetCurrentSwipeType(Swipes swipe, float timeUntilNextSwipe)
     {
         m_swipeType = swipe;
         m_SR_currentSwipe.transform.position = new Vector3(0.0f, 0.0f, m_SR_currentSwipe.transform.position.z);
@@ -122,7 +120,7 @@ public class SwipeManager : MonoBehaviour
         m_SR_currentSwipeIndicator.transform.rotation = m_SR_currentSwipe.transform.rotation;
 
         m_start = m_audioManager.GetTimePassed();
-        m_end = m_start + m_gameplayManager.GetTimeUntilNextSwipe();
+        m_end = m_start + timeUntilNextSwipe;
         m_divider = 1.0f / (m_end - m_start);
     }
 

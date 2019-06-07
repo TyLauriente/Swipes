@@ -82,8 +82,20 @@ public class AudioManager : MonoBehaviour
                 using (WWW audioFile = new WWW("file://" + songPath))
                 {
                     AudioClip clip = audioFile.GetAudioClip();
-                    clip.name = Path.GetFileName(songPath);
-                    m_clipList.Add(clip);
+                    clip.name = Path.GetFileNameWithoutExtension(songPath);
+                    bool isLoaded = false;
+                    foreach (var c in m_clipList)
+                    {
+                        if(c.name == clip.name)
+                        {
+                            isLoaded = true;
+                        }
+                    }
+
+                    if (!isLoaded)
+                    {
+                        m_clipList.Add(clip);
+                    }
                 }
             }
         }
@@ -97,8 +109,9 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void PlaySong(string songName)
+    public bool PlaySong(string songName)
     {
+        //m_currentSong.time = m_currentSong.clip.length * percentage;
         if (m_currentSong.isPlaying)
         {
             m_currentSong.Stop();
@@ -125,14 +138,44 @@ public class AudioManager : MonoBehaviour
             {
                 m_songTimer = editorTimerOffset;
             }
+            return true;
         }
+        return false;
+    }
+
+    public bool IsSongPlaying()
+    {
+        return m_currentSong.isPlaying;
+    }
+
+    public void SetSongTime(float time)
+    {
+        if(time <= m_currentSong.clip.length)
+        {
+            m_currentSong.time = time;
+            m_songTimer = time;
+        }
+    }
+
+    public void PauseSong()
+    {
+        if (m_currentSong.isPlaying)
+        {
+            m_currentSong.Pause();
+        }
+    }
+    public void ResumeSong()
+    {
+        m_currentSong.Play();
     }
 
     public void StopSong()
     {
         if (m_currentSong.isPlaying)
         {
-            m_currentSong.Stop();
+            m_songTimer = 0.0f;
+            m_currentSong.Pause();
+            m_currentSong.time = 0.0f;
         }
     }
 
@@ -169,5 +212,18 @@ public class AudioManager : MonoBehaviour
     public float GetTotatlTime()
     {
         return m_currentSong.clip.length;
+    }
+
+    public List<string> GetAllSongNames()
+    {
+        List<string> songNames = new List<string>();
+
+        LoadUserSongs();
+
+        foreach (var clip in m_clipList)
+        {
+            songNames.Add(clip.name);
+        }
+        return songNames;
     }
 }

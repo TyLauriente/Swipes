@@ -3,6 +3,7 @@ ScriptsOnlyBuild:
     Assembly-CSharp.dll:
     - AudioManager
     - BackgroundManager
+    - DetailedEditor
     - GameManager
     - GameplayManager
     - InputManager
@@ -11,7 +12,9 @@ ScriptsOnlyBuild:
     - LevelSelectManager
     - MainMenuManager
     - OptionsManager
+    - SongSelection
     - SwipeManager
+    - TapToTheBeat
     - TutorialManager
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.TestListCacheData
@@ -22,6 +25,7 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.CanvasScaler
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.Image
+    - UnityEngine.UI.Slider
     - UnityEngine.UI.Text
   sceneClasses:
     Assets/Scenes/Gameplay.unity:
@@ -60,6 +64,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9348}
     - Class: 114
+      Script: {instanceID: 9382}
+    - Class: 114
       Script: {instanceID: 9384}
     - Class: 114
       Script: {instanceID: 9386}
@@ -87,6 +93,12 @@ ScriptsOnlyBuild:
       Script: {instanceID: 10614}
     - Class: 114
       Script: {instanceID: 10632}
+    - Class: 114
+      Script: {instanceID: 13284}
+    - Class: 114
+      Script: {instanceID: 32020}
+    - Class: 114
+      Script: {instanceID: 94354}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -334,7 +346,7 @@ ScriptsOnlyBuild:
     className: VerticalLayoutGroup
   - hash:
       serializedVersion: 2
-      Hash: cceb1564ee668bf3e8ac1f257a976bd1
+      Hash: 462f8c29f62e87a1bf4f1c8ccdad524b
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: SwipeManager
@@ -538,7 +550,7 @@ ScriptsOnlyBuild:
     className: VerticalLayoutGroup
   - hash:
       serializedVersion: 2
-      Hash: 903929ebc73efe7bf59b3ebb73d1856d
+      Hash: 546df2aece1ef3b0d6e1b9900add4887
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: LevelEditorManager
@@ -842,6 +854,24 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManager
+  - hash:
+      serializedVersion: 2
+      Hash: 6769f2592e84044b8118096573261df7
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: SongSelection
+  - hash:
+      serializedVersion: 2
+      Hash: 368410482344a563f269e15a7ff9e195
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: TapToTheBeat
+  - hash:
+      serializedVersion: 2
+      Hash: 45643b7cfb9586f7a7c6f685f8a2a6f7
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: DetailedEditor
   platform: 13
   scenePathNames:
   - Assets/Scenes/Gameplay.unity

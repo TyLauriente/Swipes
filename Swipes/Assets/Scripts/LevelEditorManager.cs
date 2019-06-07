@@ -5,6 +5,13 @@ using System.Xml.Serialization;
 using UnityEngine;
 using UnityEngine.UI;
 
+enum LevelEditorState
+{
+    SongSelection,
+    TapToTheBeat,
+    DetailedEditor
+}
+
 public class LevelEditorManager : MonoBehaviour
 {
     [SerializeField]
@@ -12,78 +19,94 @@ public class LevelEditorManager : MonoBehaviour
     [SerializeField]
     private AudioManager m_audioManager;
     [SerializeField]
-    private Button m_btn;
+    private SongSelection m_songSelection;
+    [SerializeField]
+    private TapToTheBeat m_tapToTheBeat;
+    [SerializeField]
+    private DetailedEditor m_detailedEditor;
 
-    private bool hasStarted = false;
+    private LevelEditorState m_currentState;
 
-    private int last = 0, secondLast = 1, current = 5;
-    Level level;
-    bool isOver = false;
-    bool waitOver = false;
+    private Level m_newLevel;
 
-    // Start is called before the first frame update
-    void Start()
+    private string m_selectedSongName;
+
+    public void Init()
     {
-        level = new Level();
-
-        level.levelName = "TestLevel";
-        level.musicName = "Thirty One - Lydian Collective";
-        level.isPrimaryLevel = false;
-        m_btn.onClick.AddListener(End);
+        m_currentState = LevelEditorState.SongSelection;
+        m_songSelection.Init();
+        m_tapToTheBeat.Init();
+        m_songSelection.LoadMusicNames(m_audioManager.GetAllSongNames());
+        m_songSelection.gameObject.SetActive(true);
+        m_tapToTheBeat.gameObject.SetActive(false);
+        m_detailedEditor.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (m_gameManager.GetCurrentState() == GameStates.LevelEditor && waitOver)
+        if (m_gameManager.GetCurrentState() == GameStates.LevelEditor)
         {
-            if (m_audioManager.GetTimePassed() >= m_audioManager.GetTotatlTime() || isOver)
+            if(Input.GetKey(KeyCode.Escape))
             {
-                SaveLevel();
+                m_audioManager.StopSong();
+                m_gameManager.ChangeState(GameStates.MainMenu);
             }
-            if (Input.anyKeyDown)
+
+
+            if(m_currentState == LevelEditorState.SongSelection) // Song Selection
             {
-                if (!hasStarted)
+                if(m_songSelection.quit)
                 {
-                    m_audioManager.PlaySong("Thirty One - Lydian Collective");
-                    hasStarted = true;
+                    m_gameManager.ChangeState(GameStates.MainMenu);
                 }
-                else
+                else if(m_songSelection.songSelected)
                 {
-                    do
+                    m_songSelection.gameObject.SetActive(false);
+                    m_selectedSongName = m_songSelection.GetSelectedSongName();
+                    m_currentState = LevelEditorState.TapToTheBeat;
+                    if(!m_audioManager.PlaySong(m_selectedSongName))
                     {
-                        current = (int)Random.Range(0, 6);
-                    } while (current == last || current == secondLast);
-                    level.AddSwipe(m_audioManager.GetTimePassed(), (Swipes)Random.Range(1, 5), current);
+                        m_gameManager.ChangeState(GameStates.MainMenu);
+                        print("Error in LevelEditorManager: Couldn't play selected song");
+                    }
+                    else
+                    {
+                        m_tapToTheBeat.gameObject.SetActive(true);
+                    }
+                }
+            }
+            else if(m_currentState == LevelEditorState.TapToTheBeat) // Tap To The Beat
+            {
+                if(m_tapToTheBeat.Skip || m_tapToTheBeat.SongOver)
+                {
+                    m_audioManager.StopSong();
+                    m_detailedEditor.gameObject.SetActive(true);
+                    m_newLevel = m_tapToTheBeat.GetNewLevel();
+                    m_detailedEditor.Init(m_newLevel);
+                    m_tapToTheBeat.gameObject.SetActive(false);
+                    m_currentState = LevelEditorState.DetailedEditor;
+                }
+            }
+            else if(m_currentState == LevelEditorState.DetailedEditor) // Detailed Selection
+            {
+                m_detailedEditor.UpdateDetailedEditor();
+                if(m_detailedEditor.Save)
+                {
+                    SaveLevel(m_detailedEditor.GetNewLevel());
+                    m_gameManager.ChangeState(GameStates.MainMenu);
                 }
             }
         }
     }
 
-    public void Wait()
+    private void SaveLevel(Level level)
     {
-        waitOver = false;
-        isOver = false;
-        hasStarted = false;
-        level = new Level();
-        level.levelName = "TestLevel";
-        level.musicName = "Thirty One - Lydian Collective";
         level.isPrimaryLevel = false;
-        Invoke("WaitOver", 0.15f);
-    }
+        level.levelName = "Debugging Name :-)";
+        level.musicName = m_selectedSongName;
 
-    private void WaitOver()
-    {
-        waitOver = true;
-    }
 
-    void End()
-    {
-        isOver = true;
-    }
-
-    private void SaveLevel()
-    {
         XmlSerializer xs = new XmlSerializer(typeof(Level));
 
         string path = Application.persistentDataPath + "/Levels/";

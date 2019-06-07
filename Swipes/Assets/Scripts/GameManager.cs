@@ -119,65 +119,46 @@ public class GameManager : MonoBehaviour
     {
         m_gameState = state;
 
+        SetAllObjectsUnactive();
+
         if (state == GameStates.Gameplay)
         {
             m_gameplayObject.SetActive(true);
-            m_gameplayManager.Wait();
-            m_levelEditorObject.SetActive(false);
-            m_levelSelectObject.SetActive(false);
-            m_optionsObject.SetActive(false);
-            m_mainMenuObject.SetActive(false);
-            m_tutorialObject.SetActive(false);
             m_gameplayManager.SetupGameplay(m_nextLevel);
         }
         else if (state == GameStates.LevelEditor)
         {
+            m_levelEditorManager.Init();
             m_levelEditorObject.SetActive(true);
-            m_levelEditorManager.Wait();
-            m_gameplayObject.SetActive(false);
-            m_levelSelectObject.SetActive(false);
-            m_optionsObject.SetActive(false);
-            m_mainMenuObject.SetActive(false);
-            m_tutorialObject.SetActive(false);
         }
         else if (state == GameStates.LevelSelect)
         {
             m_levelSelectObject.SetActive(true);
             m_levelManager.LoadLevels();
             m_levelSelectManager.Reset();
-            m_gameplayObject.SetActive(false);
-            m_levelEditorObject.SetActive(false);
-            m_optionsObject.SetActive(false);
-            m_mainMenuObject.SetActive(false);
-            m_tutorialObject.SetActive(false);
         }
         else if (state == GameStates.Options)
         {
             m_optionsObject.SetActive(true);
-            m_gameplayObject.SetActive(false);
-            m_levelEditorObject.SetActive(false);
-            m_levelSelectObject.SetActive(false);
-            m_mainMenuObject.SetActive(false);
-            m_tutorialObject.SetActive(false);
         }
         else if(state == GameStates.MainMenu)
         {
             m_mainMenuObject.SetActive(true);
             m_mainMenuManager.Wait();
-            m_gameplayObject.SetActive(false);
-            m_levelEditorObject.SetActive(false);
-            m_levelSelectObject.SetActive(false);
-            m_optionsObject.SetActive(false);
-            m_tutorialObject.SetActive(false);
         }
         else if(state == GameStates.Tutorial)
         {
             m_tutorialObject.SetActive(true);
-            m_gameplayObject.SetActive(false);
-            m_levelEditorObject.SetActive(false);
-            m_levelSelectObject.SetActive(false);
-            m_optionsObject.SetActive(false);
-            m_mainMenuObject.SetActive(false);
         }
+    }
+
+    private void SetAllObjectsUnactive()
+    {
+        m_gameplayObject.SetActive(false);
+        m_levelEditorObject.SetActive(false);
+        m_levelSelectObject.SetActive(false);
+        m_optionsObject.SetActive(false);
+        m_mainMenuObject.SetActive(false);
+        m_tutorialObject.SetActive(false);
     }
 }
