@@ -48,39 +48,47 @@ public class SwipeManager : MonoBehaviour
         m_divider = 0.0f;
     }
 
+    public float GetPercentage()
+    {
+        return m_percentage;
+    }
+
     public void UpdateSwipeIndicator()
     {
         if ((m_end - m_start) != 0.0f)
         {
             m_percentage = (m_audioManager.GetTimePassed() - m_start) * m_divider;
-            if (m_percentage > 1.0f)
-            {
-                m_percentage = 1.0f;
-            }
-            else if(m_percentage < 0.0f)
-            {
-                m_percentage = 0.0f;
-            }
         }
 
         m_newIndicatiorPos = m_SR_currentSwipe.transform.position;
         m_newIndicatiorPos.z = m_SR_currentSwipeIndicator.transform.localPosition.z;
 
+        float percent = m_percentage;
+
+        if (percent > 1.0f)
+        {
+            percent = 1.0f;
+        }
+        else if (percent < 0.0f)
+        {
+            percent = 0.0f;
+        }
+
         if (m_swipeType == Swipes.Up)
         {
-            m_newIndicatiorPos.y += -offset + (m_percentage * offset * 2.0f);
+            m_newIndicatiorPos.y += -offset + (percent * offset * 2.0f);
         }
         else if (m_swipeType == Swipes.Down)
         {
-            m_newIndicatiorPos.y += offset - (m_percentage * offset * 2.0f);
+            m_newIndicatiorPos.y += offset - (percent * offset * 2.0f);
         }
         else if (m_swipeType == Swipes.Left)
         {
-            m_newIndicatiorPos.x += offset - (m_percentage * offset * 2.0f);
+            m_newIndicatiorPos.x += offset - (percent * offset * 2.0f);
         }
         else if (m_swipeType == Swipes.Right)
         {
-            m_newIndicatiorPos.x += -offset + (m_percentage * offset * 2.0f);
+            m_newIndicatiorPos.x += -offset + (percent * offset * 2.0f);
         }
 
         m_SR_currentSwipeIndicator.transform.localPosition = m_newIndicatiorPos;

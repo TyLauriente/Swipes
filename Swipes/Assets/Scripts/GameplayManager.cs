@@ -188,13 +188,14 @@ public class GameplayManager : MonoBehaviour
             if (win)
             {
                 m_audioManager.PlayWinSound();
-                if(Mathf.Abs(m_timeUntilNextSwipe + ANDROID_MUSIC_DELAY) <= threePointTime)
+                float percent = m_swipeManager.GetPercentage();
+                if (percent > 0.95f  && percent < 1.15f)
                 {
                     m_points += 3;
                     m_threePointText.gameObject.SetActive(true);
                     Invoke("HideThreePointText", 0.5f);
                 }
-                else if(Mathf.Abs(m_timeUntilNextSwipe + ANDROID_MUSIC_DELAY) <= twoPointTime)
+                else if(percent > 0.90f && percent < 1.1f)
                 {
                     m_points += 2;
                     m_twoPointText.gameObject.SetActive(true);
