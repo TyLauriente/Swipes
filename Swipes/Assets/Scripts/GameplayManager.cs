@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Xml.Serialization;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -31,21 +33,31 @@ public class GameplayManager : MonoBehaviour
     [SerializeField]
     private BackgroundManager m_backgroundManager;
 
-    //TEMP----------------------
-    public Text accuracyText;
-    int numberOfWins = 0;
-    //TEMP----------------------
+    private const float onePointTime = 0.3f;
+    private const float twoPointTime = 0.1f;
+    private const float threePointTime = 0.05f;
 
-    private const float offset = 0.01f;
+
+    [SerializeField]
+    private GameObject m_onePointText;
+    [SerializeField]
+    private GameObject m_twoPointText;
+    [SerializeField]
+    private GameObject m_threePointText;
+
+    public Text accuracyText;
+
+    const float ANDROID_MUSIC_DELAY = 0.1f;
 
 
     private Level m_currentLevel;
     private int m_currentSwipe;
 
+    private int m_points;
+
 
     private const float verticalSpeed = 7.0f;
     private const float horizontalSpeed = verticalSpeed * 0.5f;
-    private const float allowedTimeDifference = 0.3f;
     private const float requiredSwipeDistance = 0.2f;
 
     private Vector2 m_startTouchPosition;
@@ -53,10 +65,16 @@ public class GameplayManager : MonoBehaviour
 
     private float m_timeUntilNextSwipe;
 
+    private float m_accuracy;
+    private float m_previousAccuracy;
+
+
     // Start is called before the first frame update
     void Start()
     {
         m_currentSwipe = 0;
+        m_accuracy = 0.0f;
+        m_previousAccuracy = -1;
     }
 
     // Update is called once per frame
@@ -64,15 +82,26 @@ public class GameplayManager : MonoBehaviour
     {
         if (m_gameManager.GetCurrentState() == GameStates.Gameplay)
         {
-            m_timeUntilNextSwipe = m_currentLevel.GetSwipeTime(m_currentSwipe) - m_audioManager.GetTimePassed();
+            UpdateTimeUntilNextSwipe();
+
+            if (m_currentSwipe != 0)
+            {
+                m_accuracy = (m_points / (m_currentSwipe * 3.0f)) * 100.0f;
+            }
+            else
+            {
+                m_accuracy = 100.0f;
+            }
+
             // TEMP ___________________________________________________________________________________________________________
-            accuracyText.text = "Accuracy\n" + ((float)numberOfWins / (float)m_currentSwipe * 100.0f).ToString("0.0") + "%";
+            accuracyText.text = "Accuracy\n" + m_accuracy.ToString("0.0") + "%";
             // TEMP ___________________________________________________________________________________________________________
 
             if(Input.GetKeyDown(KeyCode.Escape))
             {
                 m_gameManager.ChangeState(GameStates.MainMenu);
                 m_audioManager.StopSong();
+                m_previousAccuracy = -1;
             }
 
             UpdatePositions();
@@ -80,11 +109,6 @@ public class GameplayManager : MonoBehaviour
             CheckIsDragging();
 
             CheckWinOrLose();
-
-            if(m_audioManager.GetTimePassed() >= m_audioManager.GetTotatlTime())
-            {
-                m_gameManager.ChangeState(GameStates.MainMenu);
-            }
         }
     }
     private void UpdatePositions()
@@ -125,10 +149,10 @@ public class GameplayManager : MonoBehaviour
 
     private void CheckWinOrLose()
     {
-        if (m_inputManager.IsFirstRelease() || m_timeUntilNextSwipe < -allowedTimeDifference)
+        if (m_inputManager.IsFirstRelease() || m_timeUntilNextSwipe < -onePointTime)
         {
             bool win = false;
-            if (m_timeUntilNextSwipe < -allowedTimeDifference || m_timeUntilNextSwipe > allowedTimeDifference && m_currentSwipe < m_currentLevel.swipes.Count)
+            if (m_timeUntilNextSwipe < -onePointTime || m_timeUntilNextSwipe > onePointTime && m_currentSwipe < m_currentLevel.swipes.Count)
             {
                 win = false;
             }
@@ -164,7 +188,24 @@ public class GameplayManager : MonoBehaviour
             if (win)
             {
                 m_audioManager.PlayWinSound();
-                numberOfWins++;
+                if(Mathf.Abs(m_timeUntilNextSwipe + ANDROID_MUSIC_DELAY) <= threePointTime)
+                {
+                    m_points += 3;
+                    m_threePointText.gameObject.SetActive(true);
+                    Invoke("HideThreePointText", 0.5f);
+                }
+                else if(Mathf.Abs(m_timeUntilNextSwipe + ANDROID_MUSIC_DELAY) <= twoPointTime)
+                {
+                    m_points += 2;
+                    m_twoPointText.gameObject.SetActive(true);
+                    Invoke("HideTwoPointText", 1.0f);
+                }
+                else
+                {
+                    m_points += 1;
+                    m_onePointText.gameObject.SetActive(true);
+                    Invoke("HideOnePointText", 1.5f);
+                }
             }
             else
             {
@@ -172,35 +213,94 @@ public class GameplayManager : MonoBehaviour
             }
 
             m_currentSwipe++;
-            m_timeUntilNextSwipe = m_currentLevel.GetSwipeTime(m_currentSwipe) - m_audioManager.GetTimePassed();
-            m_swipeManager.SetCurrentSwipeType(m_currentLevel.GetSwipe(m_currentSwipe), GetTimeUntilNextSwipe());
+            if (m_currentSwipe >= m_currentLevel.swipes.Count - 1)
+            {
+                m_accuracy = (m_points / (m_currentSwipe * 3.0f)) * 100.0f;
+                if (m_accuracy > m_previousAccuracy)
+                {
+                    SaveLevelStats();
+                }
+                m_gameManager.ChangeState(GameStates.MainMenu);
+                m_audioManager.StopSong();
+                m_previousAccuracy = -1;
+                return;
+            }
+            UpdateTimeUntilNextSwipe();
+            m_audioManager.ResetSongTimer();
+            m_swipeManager.SetCurrentSwipeType(m_currentLevel.GetSwipe(m_currentSwipe), m_timeUntilNextSwipe);
             m_swipeManager.SetNextSwipeType(m_currentLevel.GetSwipe(m_currentSwipe + 1));
             m_backgroundManager.SetNextBackground(m_currentLevel.GetBackgroundIndex(m_currentSwipe + 1));
         }
     }
 
-    public void SetupGameplay(Level level)
+    void HideOnePointText()
     {
+        m_onePointText.gameObject.SetActive(false);
+    }
+
+    void HideTwoPointText()
+    {
+        m_twoPointText.gameObject.SetActive(false);
+    }
+
+    void HideThreePointText()
+    {
+        m_threePointText.gameObject.SetActive(false);
+    }
+
+    void UpdateTimeUntilNextSwipe()
+    {
+        m_timeUntilNextSwipe = m_currentLevel.GetSwipeTime(m_currentSwipe) - m_audioManager.GetTimePassed() - ANDROID_MUSIC_DELAY;
+    }
+
+    public void Init(Level level)
+    {
+        m_onePointText.gameObject.SetActive(false);
+        m_twoPointText.gameObject.SetActive(false);
+        m_threePointText.gameObject.SetActive(false);
+
+        m_inputManager.Reset();
         m_startTouchPosition = new Vector2();
         m_touchPos = new Vector2();
-        numberOfWins = 0;
+        m_points = 0;
 
         m_currentLevel = level;
 
         m_currentSwipe = 0;
-        m_audioManager.PlaySong(m_currentLevel.musicName);
-        m_timeUntilNextSwipe = m_currentLevel.GetSwipeTime(m_currentSwipe) - m_audioManager.GetTimePassed();
 
-        m_swipeManager.SetCurrentSwipeType(m_currentLevel.GetSwipe(m_currentSwipe), GetTimeUntilNextSwipe());
-        m_swipeManager.SetNextSwipeType(m_currentLevel.GetSwipe(m_currentSwipe + 1));
+        UpdateTimeUntilNextSwipe();
+        m_swipeManager.SetCurrentSwipeType(m_currentLevel.GetSwipe(m_currentSwipe), m_timeUntilNextSwipe);
 
         m_backgroundManager.SetNextBackground(m_currentLevel.GetBackgroundIndex(m_currentSwipe));
         m_backgroundManager.SetNextBackground(m_currentLevel.GetBackgroundIndex(m_currentSwipe + 1));
-
+        m_audioManager.ResumeSong();
     }
 
-    public float GetTimeUntilNextSwipe()
+    public void SetPreviousAccuracy(float accuracy)
     {
-        return m_timeUntilNextSwipe;
+        m_previousAccuracy = accuracy;
+    }
+
+    private void SaveLevelStats()
+    {
+        LevelStats levelStat = new LevelStats();
+        levelStat.levelName = m_currentLevel.levelName;
+        levelStat.accuracy = m_accuracy;
+        
+
+        XmlSerializer xs = new XmlSerializer(typeof(LevelStats));
+
+        string path = Application.persistentDataPath + "/LevelStats/";
+        if (!Directory.Exists(path))
+        {
+            Directory.CreateDirectory(path);
+        }
+
+        path += "LEVEL STAT - " + levelStat.levelName + " - LEVEL STAT.xml";
+
+        using (TextWriter textWriter = new StreamWriter(path))
+        {
+            xs.Serialize(textWriter, levelStat);
+        }
     }
 }

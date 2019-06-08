@@ -92,6 +92,10 @@ public class LevelEditorManager : MonoBehaviour
                     m_detailedEditor.gameObject.SetActive(true);
                     m_detailedEditor.Init(m_newLevel);
                 }
+                else if(m_loadLevel.Quit)
+                {
+                    m_gameManager.ChangeState(GameStates.MainMenu);
+                }
             }
             else if(m_currentState == LevelEditorState.SongSelection) // Song Selection
             {

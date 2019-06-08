@@ -117,14 +117,14 @@ public class GameManager : MonoBehaviour
 
     public void ChangeState(GameStates state)
     {
-        m_gameState = state;
-
         SetAllObjectsUnactive();
 
         if (state == GameStates.Gameplay)
         {
+            m_audioManager.PlaySong(m_nextLevel.musicName);
+            m_audioManager.StopSong();
             m_gameplayObject.SetActive(true);
-            m_gameplayManager.SetupGameplay(m_nextLevel);
+            m_gameplayManager.Init(m_nextLevel);
         }
         else if (state == GameStates.LevelEditor)
         {
@@ -135,7 +135,7 @@ public class GameManager : MonoBehaviour
         {
             m_levelSelectObject.SetActive(true);
             m_levelManager.LoadLevels();
-            m_levelSelectManager.Reset();
+            m_levelSelectManager.Init();
         }
         else if (state == GameStates.Options)
         {
@@ -150,6 +150,7 @@ public class GameManager : MonoBehaviour
         {
             m_tutorialObject.SetActive(true);
         }
+        m_gameState = state;
     }
 
     private void SetAllObjectsUnactive()

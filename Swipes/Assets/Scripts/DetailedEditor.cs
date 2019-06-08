@@ -52,6 +52,8 @@ public class DetailedEditor : MonoBehaviour
 
     private int m_last = 0, m_secondLast = 1, m_current = 5;
 
+    const float ANDROID_MUSIC_DELAY = 0.1f;
+
 
     private int m_currentSwipe;
     private Level m_newLevel;
@@ -150,7 +152,7 @@ public class DetailedEditor : MonoBehaviour
             m_currentSwipe = 0;
             m_audioManager.SetSongTime(0.0f);
         }
-        m_timeUntilNextSwipe = m_newLevel.GetSwipeTime(m_currentSwipe) - m_audioManager.GetTimePassed();
+        UpdateTimeUntilNextSwipe();
         m_backgroundManager.SetNextBackground(m_newLevel.GetBackgroundIndex(m_currentSwipe));
         m_backgroundManager.SetNextBackground(m_newLevel.GetBackgroundIndex(m_currentSwipe + 1));
         m_swipeManager.SetCurrentSwipeType(m_newLevel.GetSwipe(m_currentSwipe), m_timeUntilNextSwipe);
@@ -171,11 +173,16 @@ public class DetailedEditor : MonoBehaviour
             {
                 m_currentSwipe--;
             }
-            m_timeUntilNextSwipe = m_newLevel.GetSwipeTime(m_currentSwipe) - m_audioManager.GetTimePassed();
+            UpdateTimeUntilNextSwipe();
             m_backgroundManager.SetNextBackground(m_newLevel.GetBackgroundIndex(m_currentSwipe));
             m_backgroundManager.SetNextBackground(m_newLevel.GetBackgroundIndex(m_currentSwipe + 1));
             m_swipeManager.SetCurrentSwipeType(m_newLevel.GetSwipe(m_currentSwipe), m_timeUntilNextSwipe);
         }
+    }
+
+    private void UpdateTimeUntilNextSwipe()
+    {
+        m_timeUntilNextSwipe = m_newLevel.GetSwipeTime(m_currentSwipe) - m_audioManager.GetTimePassed() - ANDROID_MUSIC_DELAY;
     }
 
     private void InsertNewSwipeToggle(bool isOn)
@@ -214,7 +221,8 @@ public class DetailedEditor : MonoBehaviour
             {
                 m_audioManager.SetSongTime(m_newLevel.swipeTimes[m_currentSwipe - 1] + 0.01f);
             }
-            m_timeUntilNextSwipe = m_newLevel.GetSwipeTime(m_currentSwipe) - m_audioManager.GetTimePassed();
+            m_audioManager.ResetSongTimer();
+            UpdateTimeUntilNextSwipe();
             m_backgroundManager.SetNextBackground(m_newLevel.GetBackgroundIndex(m_currentSwipe));
             m_backgroundManager.SetNextBackground(m_newLevel.GetBackgroundIndex(m_currentSwipe + 1));
             m_swipeManager.SetCurrentSwipeType(m_newLevel.GetSwipe(m_currentSwipe), m_timeUntilNextSwipe);
@@ -234,7 +242,8 @@ public class DetailedEditor : MonoBehaviour
             {
                 m_audioManager.SetSongTime(m_newLevel.swipeTimes[m_currentSwipe - 1] + 0.01f);
             }
-            m_timeUntilNextSwipe = m_newLevel.GetSwipeTime(m_currentSwipe) - m_audioManager.GetTimePassed();
+            m_audioManager.ResetSongTimer();
+            UpdateTimeUntilNextSwipe();
             m_backgroundManager.SetNextBackground(m_newLevel.GetBackgroundIndex(m_currentSwipe));
             m_backgroundManager.SetNextBackground(m_newLevel.GetBackgroundIndex(m_currentSwipe + 1));
             m_swipeManager.SetCurrentSwipeType(m_newLevel.GetSwipe(m_currentSwipe), m_timeUntilNextSwipe);
@@ -254,7 +263,8 @@ public class DetailedEditor : MonoBehaviour
                 m_audioManager.SetSongTime(m_newLevel.swipeTimes[m_currentSwipe - 1] + 0.01f);
             }
             m_newLevel.swipeTimes[m_currentSwipe] += m_swipeTimeIncrementValue;
-            m_timeUntilNextSwipe = m_newLevel.GetSwipeTime(m_currentSwipe) - m_audioManager.GetTimePassed();
+            m_audioManager.ResetSongTimer();
+            UpdateTimeUntilNextSwipe();
             m_swipeManager.SetCurrentSwipeType(m_newLevel.GetSwipe(m_currentSwipe), m_timeUntilNextSwipe);
         }
     }
@@ -272,7 +282,8 @@ public class DetailedEditor : MonoBehaviour
                 m_audioManager.SetSongTime(m_newLevel.swipeTimes[m_currentSwipe - 1] + 0.01f);
             }
             m_newLevel.swipeTimes[m_currentSwipe] -= m_swipeTimeIncrementValue;
-            m_timeUntilNextSwipe = m_newLevel.GetSwipeTime(m_currentSwipe) - m_audioManager.GetTimePassed();
+            m_audioManager.ResetSongTimer();
+            UpdateTimeUntilNextSwipe();
             m_swipeManager.SetCurrentSwipeType(m_newLevel.GetSwipe(m_currentSwipe), m_timeUntilNextSwipe);
         }
     }
@@ -293,7 +304,8 @@ public class DetailedEditor : MonoBehaviour
                 if (m_newLevel.swipeTimes[swipeTimeIndex] >= newTime)
                 {
                     m_currentSwipe = swipeTimeIndex;
-                    m_timeUntilNextSwipe = m_newLevel.GetSwipeTime(m_currentSwipe) - m_audioManager.GetTimePassed();
+                    m_audioManager.ResetSongTimer();
+                    UpdateTimeUntilNextSwipe();
                     m_backgroundManager.SetNextBackground(m_newLevel.GetBackgroundIndex(m_currentSwipe));
                     m_backgroundManager.SetNextBackground(m_newLevel.GetBackgroundIndex(m_currentSwipe + 1));
                     m_swipeManager.SetCurrentSwipeType(m_newLevel.GetSwipe(m_currentSwipe), m_timeUntilNextSwipe);
@@ -305,7 +317,7 @@ public class DetailedEditor : MonoBehaviour
 
     public void UpdateDetailedEditor()
     {
-        m_timeUntilNextSwipe = m_newLevel.GetSwipeTime(m_currentSwipe) - m_audioManager.GetTimePassed();
+        UpdateTimeUntilNextSwipe(); ;
         m_swipeManager.UpdateSwipeIndicator();
 
         if (m_currentSwipe < m_newLevel.swipes.Count)
@@ -324,7 +336,8 @@ public class DetailedEditor : MonoBehaviour
         if (m_timeUntilNextSwipe <= 0.0f && m_currentSwipe < m_newLevel.swipes.Count)
         {
             m_currentSwipe++;
-            m_timeUntilNextSwipe = m_newLevel.GetSwipeTime(m_currentSwipe) - m_audioManager.GetTimePassed();
+            m_audioManager.ResetSongTimer();
+            UpdateTimeUntilNextSwipe();
             m_swipeManager.SetCurrentSwipeType(m_newLevel.GetSwipe(m_currentSwipe), m_timeUntilNextSwipe);
             m_swipeManager.SetNextSwipeType(m_newLevel.GetSwipe(m_currentSwipe + 1));
             m_backgroundManager.SetNextBackground(m_newLevel.GetBackgroundIndex(m_currentSwipe + 1));

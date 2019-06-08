@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Xml.Serialization;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,68 +13,154 @@ public class LevelSelectManager : MonoBehaviour
     [SerializeField]
     private GameManager m_gameManager;
     [SerializeField]
-    private Button btn1;
-    [SerializeField]
-    private Button btn2;
-    [SerializeField]
-    private Text btn1Text;
-    [SerializeField]
-    private Text btn2Text;
+    private GameplayManager m_gameplayManager;
 
-    Level userLevel, primaryLevel;
 
-    bool init = false;
+    [SerializeField]
+    private Text m_levelNumberText;
+    [SerializeField]
+    private Text m_levelNameText;
+    [SerializeField]
+    private Text m_levelAccuracyText;
+    [SerializeField]
+    private Text m_primaryLevelText;
+    [SerializeField]
+    private Button m_leftButton;
+    [SerializeField]
+    private Button m_rightButton;
+    [SerializeField]
+    private Button m_selectButton;
+
+    private int m_currentLevel;
+    private float m_currentAccuracy;
+
+    private List<Level> m_levels;
+    private List<LevelStats> m_levelStats;
 
     void Start()
     {
-        
+        m_leftButton.onClick.AddListener(Left);
+        m_rightButton.onClick.AddListener(Right);
+        m_selectButton.onClick.AddListener(Select);
+        Init();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if (!init)
+        if(m_gameManager.GetCurrentState() == GameStates.LevelSelect)
         {
-            userLevel = m_levelManager.GetUserLevel();
-            primaryLevel = m_levelManager.GetPrimaryLevel();
-
-            if (userLevel.levelName != "" && userLevel.GetSwipe(0) != Swipes.Invalid)
+            if(Input.GetKeyDown(KeyCode.Escape))
             {
-                btn1Text.text = "UserLevel";
-                btn1.onClick.AddListener(UserLevel);
+                m_gameManager.ChangeState(GameStates.MainMenu);
             }
-            else
-            {
-                btn1Text.text = "Invalid User\nLevel";
-            }
-            if (primaryLevel.levelName != "")
-            {
-                btn2Text.text = "PrimaryLevel";
-                btn2.onClick.AddListener(PrimaryLevel);
-            }
-            else
-            {
-                btn2Text.text = "Invalid Primary\nLevel";
-            }
-            init = true;
         }
     }
 
-    public void Reset()
+    public void Init()
     {
-        init = false;
+        m_currentLevel = 0;
+        m_levelManager.LoadLevels();
+        m_levels = m_levelManager.Levels;
+        m_primaryLevelText.gameObject.SetActive(false);
+        m_currentAccuracy = -1.0f;
+        UpdateText();
+        if (m_levels == null || m_levels.Count == 0)
+        {
+            m_gameManager.ChangeState(GameStates.MainMenu);
+        }
+        m_levelStats = new List<LevelStats>();
+        foreach (var level in m_levels)
+        {
+            string filePath = Application.persistentDataPath + 
+                "/LevelStats/LEVEL STAT - " + level.levelName + " - LEVEL STAT.xml";
+            
+            if(File.Exists(filePath))
+            {
+                XmlSerializer xs = new XmlSerializer(typeof(LevelStats));
+                using (TextReader textReader = new StreamReader(filePath))
+                {
+                    m_levelStats.Add((LevelStats)xs.Deserialize(textReader));
+                }
+            }
+        }
     }
 
-    void UserLevel()
+    private void Left()
     {
-        m_gameManager.SetNextLevel(userLevel);
+        if(m_currentLevel > 0)
+        {
+            m_currentLevel--;
+            UpdateText();
+        }
+    }
+    private void Right()
+    {
+        if(m_currentLevel + 1 < m_levels.Count)
+        {
+            m_currentLevel++;
+            UpdateText();
+        }
+    }
+    
+    private void UpdateText()
+    {
+        m_levelNumberText.text = "Level " + (m_currentLevel + 1).ToString();
+
+        LevelStats levelStat = new LevelStats();
+        bool foundStat = false;
+        if (m_levelStats != null)
+        {
+            foreach (var level in m_levelStats)
+            {
+                if (level.levelName == m_levels[m_currentLevel].levelName)
+                {
+                    levelStat = level;
+                    foundStat = true;
+                    break;
+                }
+            }
+        }
+
+        if(foundStat)
+        {
+            m_currentAccuracy = levelStat.accuracy;
+            m_levelAccuracyText.text = "Accuracy: " + levelStat.accuracy.ToString("0.00") + "%";
+        }
+        else
+        {
+            m_currentAccuracy = -1.0f;
+            m_levelAccuracyText.text = "Accuracy: N/A";
+        }
+
+        if (m_currentLevel < m_levels.Count && m_currentLevel >= 0)
+        {
+            m_levelNameText.text = m_levels[m_currentLevel].levelName;
+            if (m_levels[m_currentLevel].isPrimaryLevel)
+            {
+                m_primaryLevelText.gameObject.SetActive(true);
+            }
+            else
+            {
+                m_primaryLevelText.gameObject.SetActive(false);
+            }
+        }
+    }
+
+    private void Select()
+    {
+        if(m_currentLevel < m_levels.Count && m_currentLevel >= 0)
+        {
+            Invoke("StartGame", 0.05f);
+        }
+    }
+
+    private void StartGame()
+    {
+        m_gameManager.SetNextLevel(m_levels[m_currentLevel]);
+        if(m_currentAccuracy != -1.0f)
+        {
+            m_gameplayManager.SetPreviousAccuracy(m_currentAccuracy);
+        }
         m_gameManager.ChangeState(GameStates.Gameplay);
     }
-
-    void PrimaryLevel()
-    {
-        m_gameManager.SetNextLevel(primaryLevel);
-        m_gameManager.ChangeState(GameStates.Gameplay);
-    }
-
 }

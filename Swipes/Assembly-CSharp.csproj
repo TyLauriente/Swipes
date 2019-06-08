@@ -82,6 +82,7 @@
     <Compile Include="Assets\Scripts\LevelEditorManager.cs" />
     <Compile Include="Assets\Scripts\LevelManager.cs" />
     <Compile Include="Assets\Scripts\LevelSelectManager.cs" />
+    <Compile Include="Assets\Scripts\LevelStats.cs" />
     <Compile Include="Assets\Scripts\LoadLevel.cs" />
     <Compile Include="Assets\Scripts\MainMenuManager.cs" />
     <Compile Include="Assets\Scripts\OptionsManager.cs" />

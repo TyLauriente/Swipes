@@ -2,916 +2,913 @@
 <Level xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <levelName>Level1</levelName>
   <swipeTimes>
-    <float>2.55572557</float>
-    <float>4.07202768</float>
-    <float>5.71790552</float>
-    <float>7.303549</float>
-    <float>8.956074</float>
-    <float>10.5148954</float>
-    <float>12.117547</float>
-    <float>13.7396088</float>
-    <float>14.4990082</float>
-    <float>15.26898</float>
-    <float>16.097168</float>
-    <float>16.8437157</float>
-    <float>18.4731274</float>
-    <float>20.04563</float>
-    <float>20.7895813</float>
-    <float>23.2299423</float>
-    <float>24.006588</float>
-    <float>26.4020729</float>
-    <float>27.2044048</float>
-    <float>28.0342827</float>
-    <float>28.8159275</float>
-    <float>29.6152534</float>
-    <float>32.783165</float>
-    <float>36.0246429</float>
-    <float>37.5791435</float>
-    <float>39.1913834</float>
-    <float>40.75644</float>
-    <float>43.3782349</float>
-    <float>44.48461</float>
-    <float>44.8399353</float>
-    <float>46.14357</float>
-    <float>47.0082664</float>
-    <float>47.8379822</float>
-    <float>48.61045</float>
-    <float>49.1192245</float>
-    <float>50.33582</float>
-    <float>51.2300262</float>
-    <float>52.7095642</float>
-    <float>53.35592</float>
-    <float>54.51057</float>
-    <float>55.50134</float>
-    <float>56.27938</float>
-    <float>57.0691032</float>
-    <float>57.61504</float>
-    <float>58.8256645</float>
-    <float>59.7581749</float>
-    <float>61.2317657</float>
-    <float>61.905262</float>
-    <float>63.09083</float>
-    <float>63.97857</float>
-    <float>64.82183</float>
-    <float>65.61757</float>
-    <float>66.14215</float>
-    <float>67.3146744</float>
-    <float>68.19554</float>
-    <float>69.69666</float>
-    <float>70.34831</float>
-    <float>71.597084</float>
-    <float>72.46474</float>
-    <float>73.2700653</float>
-    <float>74.10065</float>
-    <float>74.6060944</float>
-    <float>75.8182</float>
-    <float>76.7429</float>
-    <float>78.19061</float>
-    <float>78.95063</float>
-    <float>79.77294</float>
-    <float>81.65532</float>
-    <float>82.7561951</float>
-    <float>83.23467</float>
-    <float>84.05507</float>
-    <float>85.9214249</float>
-    <float>86.99977</float>
-    <float>87.461235</float>
-    <float>88.296814</float>
-    <float>90.1452942</float>
-    <float>91.2155151</float>
-    <float>91.71045</float>
-    <float>92.5777</float>
-    <float>94.4467545</float>
-    <float>94.93329</float>
-    <float>95.4514542</float>
-    <float>95.853775</float>
-    <float>97.05811</float>
-    <float>97.93986</float>
-    <float>98.74335</float>
-    <float>99.59797</float>
-    <float>100.120964</float>
-    <float>101.299255</float>
-    <float>102.184372</float>
-    <float>103.67701</float>
-    <float>104.294228</float>
-    <float>105.587326</float>
-    <float>106.421227</float>
-    <float>107.200928</float>
-    <float>108.034271</float>
-    <float>108.549934</float>
-    <float>109.771446</float>
-    <float>110.681526</float>
-    <float>111.354515</float>
-    <float>112.117111</float>
-    <float>112.972237</float>
-    <float>113.73822</float>
-    <float>114.999176</float>
-    <float>115.724205</float>
-    <float>116.308807</float>
-    <float>116.900772</float>
-    <float>117.744476</float>
-    <float>118.990219</float>
-    <float>119.733612</float>
-    <float>120.252052</float>
-    <float>120.985664</float>
-    <float>121.738319</float>
-    <float>122.516518</float>
-    <float>123.459152</float>
-    <float>124.294479</float>
-    <float>125.019035</float>
-    <float>125.593704</float>
-    <float>127.0604</float>
-    <float>127.911446</float>
-    <float>128.774521</float>
-    <float>129.70163</float>
-    <float>131.537216</float>
-    <float>132.643143</float>
-    <float>133.430878</float>
-    <float>134.73439</float>
-    <float>135.779724</float>
-    <float>136.8546</float>
-    <float>137.90155</float>
-    <float>138.463135</float>
-    <float>139.560211</float>
-    <float>140.626617</float>
-    <float>141.6493</float>
-    <float>142.701279</float>
-    <float>143.737289</float>
-    <float>144.241745</float>
-    <float>145.252884</float>
-    <float>145.700241</float>
-    <float>146.143646</float>
-    <float>146.592209</float>
-    <float>146.982376</float>
-    <float>147.809418</float>
-    <float>148.541443</float>
-    <float>149.582016</float>
-    <float>150.668335</float>
-    <float>151.19194</float>
-    <float>151.956985</float>
-    <float>152.751678</float>
-    <float>154.433578</float>
-    <float>154.912857</float>
-    <float>155.458847</float>
-    <float>156.1836</float>
-    <float>156.977921</float>
-    <float>158.661514</float>
-    <float>159.194336</float>
-    <float>159.7225</float>
-    <float>160.543961</float>
-    <float>161.488846</float>
-    <float>163.3688</float>
-    <float>163.8965</float>
-    <float>165.4738</float>
-    <float>166.525085</float>
-    <float>167.65155</float>
-    <float>168.651428</float>
-    <float>169.821365</float>
-    <float>170.862076</float>
-    <float>171.396072</float>
-    <float>172.2737</float>
-    <float>173.523712</float>
-    <float>174.448273</float>
-    <float>175.211227</float>
-    <float>176.014389</float>
-    <float>176.523453</float>
-    <float>177.750641</float>
-    <float>178.701553</float>
-    <float>180.102249</float>
-    <float>180.830109</float>
-    <float>182.032089</float>
-    <float>182.952774</float>
-    <float>185.087936</float>
-    <float>186.25177</float>
-    <float>187.1587</float>
-    <float>187.7955</float>
-    <float>188.364182</float>
-    <float>188.870331</float>
-    <float>189.279327</float>
-    <float>190.4796</float>
-    <float>191.417938</float>
-    <float>192.179153</float>
-    <float>193.0239</float>
-    <float>193.552383</float>
-    <float>194.70636</float>
-    <float>195.6429</float>
-    <float>196.322311</float>
-    <float>197.1144</float>
-    <float>197.755554</float>
-    <float>199.041748</float>
-    <float>199.916992</float>
-    <float>200.753</float>
-    <float>201.551</float>
-    <float>202.049545</float>
-    <float>203.229019</float>
-    <float>203.754852</float>
-    <float>204.1712</float>
-    <float>204.867767</float>
-    <float>205.60405</float>
-    <float>206.42662</float>
-    <float>207.151</float>
-    <float>209.093948</float>
-    <float>210.1961</float>
-    <float>210.677734</float>
-    <float>211.467239</float>
-    <float>213.357651</float>
-    <float>214.393509</float>
-    <float>214.9142</float>
-    <float>215.687637</float>
-    <float>217.59642</float>
-    <float>218.61702</float>
-    <float>219.152069</float>
-    <float>219.935425</float>
-    <float>221.832977</float>
-    <float>222.3844</float>
-    <float>222.906021</float>
-    <float>223.269073</float>
-    <float>223.9359</float>
-    <float>225.017227</float>
-    <float>225.433838</float>
-    <float>226.178192</float>
-    <float>227.01857</float>
-    <float>227.548935</float>
-    <float>228.187866</float>
-    <float>228.753632</float>
-    <float>229.586609</float>
-    <float>231.06752</float>
-    <float>231.758377</float>
-    <float>233.028748</float>
-    <float>233.920059</float>
-    <float>234.7831</float>
-    <float>235.503983</float>
-    <float>236.099152</float>
-    <float>237.275681</float>
-    <float>238.142792</float>
-    <float>238.804367</float>
-    <float>239.864426</float>
-    <float>240.975449</float>
-    <float>242.012558</float>
-    <float>243.093765</float>
-    <float>244.12677</float>
-    <float>245.195862</float>
-    <float>246.269226</float>
-    <float>247.370544</float>
-    <float>248.396515</float>
-    <float>248.87796</float>
-    <float>249.700165</float>
-    <float>250.933014</float>
-    <float>252.098129</float>
-    <float>252.625275</float>
-    <float>253.70578</float>
-    <float>254.757156</float>
-    <float>255.496887</float>
-    <float>256.265</float>
-    <float>256.838379</float>
-    <float>257.258026</float>
-    <float>258.470276</float>
-    <float>259.37207</float>
-    <float>260.1555</float>
-    <float>260.971649</float>
-    <float>261.547455</float>
-    <float>262.772278</float>
-    <float>263.628479</float>
-    <float>265.042358</float>
-    <float>265.793335</float>
-    <float>266.990967</float>
-    <float>267.891083</float>
-    <float>268.68808</float>
-    <float>269.490936</float>
-    <float>270.0275</float>
-    <float>271.239166</float>
-    <float>271.763336</float>
-    <float>272.176117</float>
-    <float>273.6054</float>
-    <float>274.424255</float>
-    <float>275.1382</float>
-    <float>276.3567</float>
-    <float>277.111237</float>
-    <float>277.709045</float>
-    <float>278.3187</float>
-    <float>280.550323</float>
-    <float>281.204346</float>
-    <float>281.690247</float>
-    <float>282.3979</float>
-    <float>283.145782</float>
-    <float>283.904633</float>
-    <float>284.847534</float>
-    <float>285.7496</float>
-    <float>286.483643</float>
-    <float>287.0289</float>
-    <float>287.8134</float>
-    <float>288.926361</float>
-    <float>289.926117</float>
-    <float>290.91394</float>
-    <float>292.097839</float>
+    <float>2.50453329</float>
+    <float>4.06385374</float>
+    <float>5.67277336</float>
+    <float>7.265425</float>
+    <float>8.857867</float>
+    <float>10.483469</float>
+    <float>12.0424509</float>
+    <float>13.6514835</float>
+    <float>14.4976139</float>
+    <float>15.26053</float>
+    <float>16.0898514</float>
+    <float>16.8528118</float>
+    <float>18.4286137</float>
+    <float>20.02094</float>
+    <float>20.8006344</float>
+    <float>23.2232552</float>
+    <float>24.0194054</float>
+    <float>26.4244461</float>
+    <float>27.22072</float>
+    <float>27.9668217</float>
+    <float>28.7964916</float>
+    <float>29.6095562</float>
+    <float>32.7439575</float>
+    <float>35.9285</float>
+    <float>37.52125</float>
+    <float>39.1303444</float>
+    <float>40.72281</float>
+    <float>42.81266</float>
+    <float>43.36012</float>
+    <float>43.90754</float>
+    <float>44.4383736</float>
+    <float>44.836483</float>
+    <float>46.0637779</float>
+    <float>46.9263268</float>
+    <float>47.7727432</float>
+    <float>48.5683975</float>
+    <float>49.0994225</float>
+    <float>50.2768555</float>
+    <float>51.2393227</float>
+    <float>52.66525</float>
+    <float>53.2788048</float>
+    <float>54.5396576</float>
+    <float>55.4519577</float>
+    <float>56.2812729</float>
+    <float>57.0442162</float>
+    <float>57.591713</float>
+    <float>58.85236</float>
+    <float>59.7149</float>
+    <float>61.141407</float>
+    <float>61.82152</float>
+    <float>63.08216</float>
+    <float>63.9116631</float>
+    <float>64.75767</float>
+    <float>65.5207</float>
+    <float>66.10128</float>
+    <float>67.3122253</float>
+    <float>68.208046</float>
+    <float>69.61808</float>
+    <float>70.31445</float>
+    <float>71.55867</float>
+    <float>72.47136</float>
+    <float>73.21769</float>
+    <float>74.0637054</float>
+    <float>74.59468</float>
+    <float>75.7722244</float>
+    <float>76.71786</float>
+    <float>78.17751</float>
+    <float>78.94064</float>
+    <float>79.77054</float>
+    <float>80.9816055</float>
+    <float>82.142334</float>
+    <float>83.20411</float>
+    <float>83.96711</float>
+    <float>85.3275</float>
+    <float>86.3723755</float>
+    <float>87.43405</float>
+    <float>88.24693</float>
+    <float>90.0713</float>
+    <float>91.1317444</float>
+    <float>91.66372</float>
+    <float>92.50983</float>
+    <float>93.7209</float>
+    <float>94.88191</float>
+    <float>95.379715</float>
+    <float>95.79435</float>
+    <float>96.9885</float>
+    <float>97.90136</float>
+    <float>98.71475</float>
+    <float>99.5436859</float>
+    <float>100.107956</float>
+    <float>101.251884</float>
+    <float>102.131348</float>
+    <float>103.624214</float>
+    <float>104.287659</float>
+    <float>105.498634</float>
+    <float>106.427795</float>
+    <float>107.223618</float>
+    <float>108.003632</float>
+    <float>108.551315</float>
+    <float>109.71212</float>
+    <float>110.607887</float>
+    <float>112.1012</float>
+    <float>112.930649</float>
+    <float>113.561134</float>
+    <float>115.020889</float>
+    <float>115.684509</float>
+    <float>116.248611</float>
+    <float>116.7961</float>
+    <float>117.708549</float>
+    <float>118.969833</float>
+    <float>119.782021</float>
+    <float>120.180161</float>
+    <float>120.959862</float>
+    <float>121.722992</float>
+    <float>122.486122</float>
+    <float>123.415527</float>
+    <float>124.178169</float>
+    <float>124.924721</float>
+    <float>125.4887</float>
+    <float>126.33313</float>
+    <float>127.745224</float>
+    <float>128.807526</float>
+    <float>130.94722</float>
+    <float>131.958481</float>
+    <float>133.1202</float>
+    <float>134.0986</float>
+    <float>135.1936</float>
+    <float>136.222</float>
+    <float>137.1509</float>
+    <float>138.348114</float>
+    <float>138.928192</float>
+    <float>139.4424</float>
+    <float>139.856842</float>
+    <float>140.984558</float>
+    <float>142.029938</float>
+    <float>142.660248</float>
+    <float>143.688828</float>
+    <float>144.186462</float>
+    <float>144.999527</float>
+    <float>145.663513</float>
+    <float>146.12709</float>
+    <float>146.906967</float>
+    <float>147.670013</float>
+    <float>148.433533</float>
+    <float>149.544724</float>
+    <float>150.606842</float>
+    <float>151.701523</float>
+    <float>152.6968</float>
+    <float>153.791321</float>
+    <float>154.836365</float>
+    <float>155.881348</float>
+    <float>156.9263</float>
+    <float>158.087418</float>
+    <float>159.132263</float>
+    <float>160.14418</float>
+    <float>161.205627</float>
+    <float>162.283722</float>
+    <float>163.345322</float>
+    <float>164.3572</float>
+    <float>165.451981</float>
+    <float>166.546661</float>
+    <float>167.591675</float>
+    <float>168.685944</float>
+    <float>169.764252</float>
+    <float>170.825745</float>
+    <float>171.306778</float>
+    <float>171.8542</float>
+    <float>172.235672</float>
+    <float>173.4298</float>
+    <float>174.375839</float>
+    <float>175.155457</float>
+    <float>175.984665</float>
+    <float>176.481659</float>
+    <float>177.709152</float>
+    <float>178.671783</float>
+    <float>180.064453</float>
+    <float>180.728027</float>
+    <float>181.922363</float>
+    <float>182.8516</float>
+    <float>184.958145</float>
+    <float>186.169083</float>
+    <float>187.131943</float>
+    <float>187.712189</float>
+    <float>188.325684</float>
+    <float>188.8566</float>
+    <float>189.238388</float>
+    <float>190.466</float>
+    <float>191.345078</float>
+    <float>192.108047</float>
+    <float>192.937408</float>
+    <float>193.418381</float>
+    <float>194.646378</float>
+    <float>195.525482</float>
+    <float>196.968292</float>
+    <float>197.7315</float>
+    <float>198.926025</float>
+    <float>199.821838</float>
+    <float>200.686951</float>
+    <float>201.450058</float>
+    <float>201.931168</float>
+    <float>203.191376</float>
+    <float>203.7386</float>
+    <float>204.07016</float>
+    <float>205.54686</float>
+    <float>206.309784</float>
+    <float>207.172821</float>
+    <float>208.317413</float>
+    <float>209.511673</float>
+    <float>210.623428</float>
+    <float>211.386353</float>
+    <float>212.531021</float>
+    <float>213.775055</float>
+    <float>214.870132</float>
+    <float>215.633118</float>
+    <float>216.926682</float>
+    <float>218.0217</float>
+    <float>219.082779</float>
+    <float>219.896027</float>
+    <float>221.139938</float>
+    <float>222.2017</float>
+    <float>223.214035</float>
+    <float>223.910431</float>
+    <float>224.407867</float>
+    <float>225.403824</float>
+    <float>226.149719</float>
+    <float>226.945862</float>
+    <float>227.493225</float>
+    <float>228.140045</float>
+    <float>228.687744</float>
+    <float>229.616531</float>
+    <float>231.042877</float>
+    <float>231.739334</float>
+    <float>232.916992</float>
+    <float>233.896072</float>
+    <float>234.625244</float>
+    <float>235.388641</float>
+    <float>235.9855</float>
+    <float>237.196182</float>
+    <float>238.058777</float>
+    <float>239.286255</float>
+    <float>240.613419</float>
+    <float>241.044662</float>
+    <float>241.973282</float>
+    <float>243.034943</float>
+    <float>244.0633</float>
+    <float>245.1416</float>
+    <float>246.186615</float>
+    <float>247.24855</float>
+    <float>248.30986</float>
+    <float>248.8578</float>
+    <float>249.653427</float>
+    <float>250.864456</float>
+    <float>252.042221</float>
+    <float>252.573181</float>
+    <float>253.601318</float>
+    <float>254.679489</float>
+    <float>256.2724</float>
+    <float>256.837158</float>
+    <float>257.218</float>
+    <float>258.3958</float>
+    <float>259.358154</float>
+    <float>260.1878</float>
+    <float>260.96814</float>
+    <float>261.4659</float>
+    <float>262.694031</float>
+    <float>263.589539</float>
+    <float>264.9998</float>
+    <float>265.729736</float>
+    <float>266.9239</float>
+    <float>267.836456</float>
+    <float>268.665955</float>
+    <float>269.362671</float>
+    <float>269.8771</float>
+    <float>271.154175</float>
+    <float>271.651672</float>
+    <float>272.016479</float>
+    <float>272.746368</float>
+    <float>273.492981</float>
+    <float>274.3398</float>
+    <float>274.870483</float>
+    <float>276.478729</float>
+    <float>277.0762</float>
+    <float>277.623444</float>
+    <float>278.170837</float>
+    <float>278.618744</float>
+    <float>279.166321</float>
+    <float>280.395172</float>
+    <float>281.124725</float>
+    <float>281.5728</float>
+    <float>282.419281</float>
+    <float>283.09967</float>
+    <float>283.895325</float>
+    <float>284.807526</float>
+    <float>285.637115</float>
+    <float>286.3507</float>
+    <float>286.93158</float>
+    <float>287.811279</float>
+    <float>289.1884</float>
+    <float>290.2493</float>
+    <float>291.39386</float>
+    <float>292.3223</float>
   </swipeTimes>
   <swipes>
-    <Swipes>Down</Swipes>
     <Swipes>Left</Swipes>
+    <Swipes>Down</Swipes>
     <Swipes>Right</Swipes>
-    <Swipes>Left</Swipes>
     <Swipes>Right</Swipes>
-    <Swipes>Up</Swipes>
     <Swipes>Left</Swipes>
+    <Swipes>Down</Swipes>
     <Swipes>Left</Swipes>
     <Swipes>Up</Swipes>
+    <Swipes>Down</Swipes>
     <Swipes>Left</Swipes>
+    <Swipes>Down</Swipes>
     <Swipes>Up</Swipes>
+    <Swipes>Left</Swipes>
     <Swipes>Right</Swipes>
     <Swipes>Right</Swipes>
     <Swipes>Down</Swipes>
     <Swipes>Right</Swipes>
-    <Swipes>Left</Swipes>
     <Swipes>Left</Swipes>
     <Swipes>Down</Swipes>
-    <Swipes>Left</Swipes>
-    <Swipes>Left</Swipes>
     <Swipes>Right</Swipes>
-    <Swipes>Right</Swipes>
     <Swipes>Up</Swipes>
-    <Swipes>Left</Swipes>
-    <Swipes>Down</Swipes>
-    <Swipes>Down</Swipes>
-    <Swipes>Left</Swipes>
     <Swipes>Right</Swipes>
-    <Swipes>Left</Swipes>
+    <Swipes>Right</Swipes>
     <Swipes>Down</Swipes>
     <Swipes>Left</Swipes>
     <Swipes>Left</Swipes>
     <Swipes>Right</Swipes>
     <Swipes>Right</Swipes>
-    <Swipes>Up</Swipes>
     <Swipes>Down</Swipes>
     <Swipes>Left</Swipes>
-    <Swipes>Right</Swipes>
-    <Swipes>Right</Swipes>
-    <Swipes>Right</Swipes>
-    <Swipes>Left</Swipes>
-    <Swipes>Up</Swipes>
     <Swipes>Up</Swipes>
+    <Swipes>Left</Swipes>
     <Swipes>Right</Swipes>
+    <Swipes>Up</Swipes>
     <Swipes>Down</Swipes>
+    <Swipes>Down</Swipes>
     <Swipes>Right</Swipes>
+    <Swipes>Down</Swipes>
     <Swipes>Right</Swipes>
-    <Swipes>Left</Swipes>
+    <Swipes>Up</Swipes>
     <Swipes>Right</Swipes>
     <Swipes>Left</Swipes>
-    <Swipes>Right</Swipes>
     <Swipes>Left</Swipes>
-    <Swipes>Right</Swipes>
     <Swipes>Right</Swipes>
-    <Swipes>Right</Swipes>
-    <Swipes>Up</Swipes>
-    <Swipes>Down</Swipes>
     <Swipes>Up</Swipes>
     <Swipes>Up</Swipes>
-    <Swipes>Left</Swipes>
-    <Swipes>Up</Swipes>
-    <Swipes>Right</Swipes>
-    <Swipes>Right</Swipes>
     <Swipes>Down</Swipes>
     <Swipes>Down</Swipes>
-    <Swipes>Up</Swipes>
-    <Swipes>Right</Swipes>
-    <Swipes>Right</Swipes>
-    <Swipes>Up</Swipes>
-    <Swipes>Right</Swipes>
     <Swipes>Left</Swipes>
+    <Swipes>Down</Swipes>
     <Swipes>Right</Swipes>
     <Swipes>Down</Swipes>
-    <Swipes>Up</Swipes>
+    <Swipes>Down</Swipes>
     <Swipes>Right</Swipes>
-    <Swipes>Left</Swipes>
     <Swipes>Up</Swipes>
-    <Swipes>Left</Swipes>
+    <Swipes>Up</Swipes>
     <Swipes>Right</Swipes>
-    <Swipes>Down</Swipes>
     <Swipes>Left</Swipes>
-    <Swipes>Right</Swipes>
     <Swipes>Right</Swipes>
     <Swipes>Left</Swipes>
     <Swipes>Up</Swipes>
-    <Swipes>Down</Swipes>
     <Swipes>Right</Swipes>
     <Swipes>Down</Swipes>
     <Swipes>Up</Swipes>
+    <Swipes>Right</Swipes>
     <Swipes>Up</Swipes>
     <Swipes>Right</Swipes>
     <Swipes>Up</Swipes>
+    <Swipes>Right</Swipes>
     <Swipes>Down</Swipes>
     <Swipes>Up</Swipes>
     <Swipes>Right</Swipes>
     <Swipes>Right</Swipes>
     <Swipes>Left</Swipes>
+    <Swipes>Left</Swipes>
+    <Swipes>Left</Swipes>
     <Swipes>Up</Swipes>
     <Swipes>Down</Swipes>
-    <Swipes>Up</Swipes>
-    <Swipes>Right</Swipes>
-    <Swipes>Up</Swipes>
     <Swipes>Left</Swipes>
     <Swipes>Down</Swipes>
     <Swipes>Down</Swipes>
-    <Swipes>Right</Swipes>
-    <Swipes>Right</Swipes>
-    <Swipes>Up</Swipes>
     <Swipes>Down</Swipes>
-    <Swipes>Left</Swipes>
-    <Swipes>Left</Swipes>
     <Swipes>Down</Swipes>
-    <Swipes>Left</Swipes>
     <Swipes>Up</Swipes>
     <Swipes>Up</Swipes>
+    <Swipes>Left</Swipes>
+    <Swipes>Left</Swipes>
     <Swipes>Down</Swipes>
     <Swipes>Left</Swipes>
+    <Swipes>Left</Swipes>
+    <Swipes>Left</Swipes>
     <Swipes>Down</Swipes>
-    <Swipes>Up</Swipes>
-    <Swipes>Up</Swipes>
-    <Swipes>Right</Swipes>
     <Swipes>Left</Swipes>
+    <Swipes>Down</Swipes>
+    <Swipes>Down</Swipes>
     <Swipes>Right</Swipes>
     <Swipes>Left</Swipes>
+    <Swipes>Up</Swipes>
     <Swipes>Left</Swipes>
     <Swipes>Down</Swipes>
     <Swipes>Left</Swipes>
+    <Swipes>Up</Swipes>
+    <Swipes>Right</Swipes>
     <Swipes>Right</Swipes>
     <Swipes>Up</Swipes>
+    <Swipes>Down</Swipes>
+    <Swipes>Right</Swipes>
+    <Swipes>Left</Swipes>
     <Swipes>Left</Swipes>
+    <Swipes>Up</Swipes>
     <Swipes>Left</Swipes>
+    <Swipes>Up</Swipes>
+    <Swipes>Up</Swipes>
+    <Swipes>Right</Swipes>
     <Swipes>Down</Swipes>
     <Swipes>Right</Swipes>
+    <Swipes>Up</Swipes>
     <Swipes>Down</Swipes>
+    <Swipes>Up</Swipes>
     <Swipes>Down</Swipes>
+    <Swipes>Left</Swipes>
     <Swipes>Down</Swipes>
-    <Swipes>Right</Swipes>
     <Swipes>Right</Swipes>
-    <Swipes>Down</Swipes>
-    <Swipes>Up</Swipes>
     <Swipes>Left</Swipes>
+    <Swipes>Left</Swipes>
+    <Swipes>Left</Swipes>
+    <Swipes>Left</Swipes>
+    <Swipes>Left</Swipes>
     <Swipes>Down</Swipes>
     <Swipes>Left</Swipes>
     <Swipes>Up</Swipes>
-    <Swipes>Down</Swipes>
-    <Swipes>Down</Swipes>
     <Swipes>Left</Swipes>
+    <Swipes>Up</Swipes>
     <Swipes>Right</Swipes>
+    <Swipes>Up</Swipes>
+    <Swipes>Left</Swipes>
     <Swipes>Right</Swipes>
     <Swipes>Left</Swipes>
-    <Swipes>Down</Swipes>
     <Swipes>Down</Swipes>
-    <Swipes>Down</Swipes>
+    <Swipes>Up</Swipes>
     <Swipes>Right</Swipes>
     <Swipes>Right</Swipes>
     <Swipes>Right</Swipes>
-    <Swipes>Down</Swipes>
-    <Swipes>Left</Swipes>
-    <Swipes>Left</Swipes>
     <Swipes>Up</Swipes>
     <Swipes>Down</Swipes>
     <Swipes>Right</Swipes>
     <Swipes>Down</Swipes>
-    <Swipes>Left</Swipes>
+    <Swipes>Right</Swipes>
     <Swipes>Down</Swipes>
     <Swipes>Right</Swipes>
-    <Swipes>Left</Swipes>
+    <Swipes>Down</Swipes>
     <Swipes>Up</Swipes>
     <Swipes>Down</Swipes>
     <Swipes>Left</Swipes>
     <Swipes>Down</Swipes>
+    <Swipes>Up</Swipes>
+    <Swipes>Left</Swipes>
+    <Swipes>Right</Swipes>
+    <Swipes>Right</Swipes>
+    <Swipes>Up</Swipes>
+    <Swipes>Up</Swipes>
+    <Swipes>Up</Swipes>
+    <Swipes>Left</Swipes>
     <Swipes>Up</Swipes>
     <Swipes>Down</Swipes>
+    <Swipes>Down</Swipes>
     <Swipes>Right</Swipes>
     <Swipes>Left</Swipes>
     <Swipes>Down</Swipes>
     <Swipes>Left</Swipes>
-    <Swipes>Up</Swipes>
     <Swipes>Left</Swipes>
     <Swipes>Right</Swipes>
     <Swipes>Left</Swipes>
     <Swipes>Down</Swipes>
-    <Swipes>Right</Swipes>
-    <Swipes>Left</Swipes>
-    <Swipes>Right</Swipes>
-    <Swipes>Right</Swipes>
     <Swipes>Down</Swipes>
-    <Swipes>Up</Swipes>
     <Swipes>Right</Swipes>
     <Swipes>Right</Swipes>
     <Swipes>Right</Swipes>
     <Swipes>Right</Swipes>
     <Swipes>Down</Swipes>
-    <Swipes>Up</Swipes>
     <Swipes>Down</Swipes>
+    <Swipes>Right</Swipes>
     <Swipes>Up</Swipes>
-    <Swipes>Down</Swipes>
-    <Swipes>Down</Swipes>
     <Swipes>Right</Swipes>
     <Swipes>Right</Swipes>
+    <Swipes>Down</Swipes>
     <Swipes>Right</Swipes>
     <Swipes>Left</Swipes>
     <Swipes>Left</Swipes>
-    <Swipes>Right</Swipes>
-    <Swipes>Down</Swipes>
+    <Swipes>Up</Swipes>
+    <Swipes>Left</Swipes>
     <Swipes>Down</Swipes>
     <Swipes>Down</Swipes>
-    <Swipes>Right</Swipes>
+    <Swipes>Up</Swipes>
     <Swipes>Down</Swipes>
     <Swipes>Up</Swipes>
+    <Swipes>Left</Swipes>
     <Swipes>Left</Swipes>
     <Swipes>Left</Swipes>
     <Swipes>Down</Swipes>
     <Swipes>Right</Swipes>
-    <Swipes>Up</Swipes>
-    <Swipes>Down</Swipes>
-    <Swipes>Up</Swipes>
+    <Swipes>Left</Swipes>
+    <Swipes>Right</Swipes>
+    <Swipes>Right</Swipes>
+    <Swipes>Left</Swipes>
     <Swipes>Up</Swipes>
     <Swipes>Up</Swipes>
+    <Swipes>Left</Swipes>
     <Swipes>Down</Swipes>
+    <Swipes>Right</Swipes>
     <Swipes>Up</Swipes>
+    <Swipes>Left</Swipes>
     <Swipes>Up</Swipes>
     <Swipes>Right</Swipes>
-    <Swipes>Right</Swipes>
-    <Swipes>Down</Swipes>
     <Swipes>Up</Swipes>
+    <Swipes>Left</Swipes>
+    <Swipes>Right</Swipes>
+    <Swipes>Left</Swipes>
     <Swipes>Up</Swipes>
+    <Swipes>Down</Swipes>
     <Swipes>Up</Swipes>
+    <Swipes>Right</Swipes>
     <Swipes>Left</Swipes>
     <Swipes>Up</Swipes>
+    <Swipes>Right</Swipes>
     <Swipes>Left</Swipes>
+    <Swipes>Right</Swipes>
     <Swipes>Down</Swipes>
+    <Swipes>Down</Swipes>
     <Swipes>Left</Swipes>
     <Swipes>Right</Swipes>
-    <Swipes>Down</Swipes>
-    <Swipes>Up</Swipes>
-    <Swipes>Up</Swipes>
     <Swipes>Down</Swipes>
     <Swipes>Down</Swipes>
     <Swipes>Right</Swipes>
+    <Swipes>Down</Swipes>
+    <Swipes>Down</Swipes>
+    <Swipes>Up</Swipes>
     <Swipes>Right</Swipes>
     <Swipes>Right</Swipes>
     <Swipes>Up</Swipes>
-    <Swipes>Left</Swipes>
+    <Swipes>Down</Swipes>
     <Swipes>Left</Swipes>
-    <Swipes>Up</Swipes>
-    <Swipes>Right</Swipes>
     <Swipes>Down</Swipes>
     <Swipes>Right</Swipes>
+    <Swipes>Down</Swipes>
+    <Swipes>Up</Swipes>
+    <Swipes>Up</Swipes>
     <Swipes>Right</Swipes>
     <Swipes>Down</Swipes>
     <Swipes>Up</Swipes>
-    <Swipes>Left</Swipes>
     <Swipes>Up</Swipes>
+    <Swipes>Left</Swipes>
+    <Swipes>Right</Swipes>
+    <Swipes>Left</Swipes>
     <Swipes>Down</Swipes>
     <Swipes>Right</Swipes>
     <Swipes>Right</Swipes>
-    <Swipes>Up</Swipes>
-    <Swipes>Up</Swipes>
+    <Swipes>Down</Swipes>
     <Swipes>Up</Swipes>
-    <Swipes>Left</Swipes>
     <Swipes>Right</Swipes>
+    <Swipes>Right</Swipes>
+    <Swipes>Left</Swipes>
     <Swipes>Right</Swipes>
     <Swipes>Down</Swipes>
     <Swipes>Right</Swipes>
-    <Swipes>Up</Swipes>
+    <Swipes>Right</Swipes>
     <Swipes>Right</Swipes>
+    <Swipes>Left</Swipes>
+    <Swipes>Up</Swipes>
     <Swipes>Down</Swipes>
     <Swipes>Left</Swipes>
+    <Swipes>Up</Swipes>
     <Swipes>Left</Swipes>
     <Swipes>Left</Swipes>
     <Swipes>Down</Swipes>
     <Swipes>Down</Swipes>
-    <Swipes>Up</Swipes>
     <Swipes>Down</Swipes>
-    <Swipes>Up</Swipes>
-    <Swipes>Left</Swipes>
-    <Swipes>Up</Swipes>
-    <Swipes>Left</Swipes>
-    <Swipes>Right</Swipes>
-    <Swipes>Up</Swipes>
+    <Swipes>Down</Swipes>
     <Swipes>Left</Swipes>
     <Swipes>Left</Swipes>
     <Swipes>Left</Swipes>
     <Swipes>Down</Swipes>
-    <Swipes>Right</Swipes>
-    <Swipes>Up</Swipes>
-    <Swipes>Right</Swipes>
-    <Swipes>Up</Swipes>
+    <Swipes>Down</Swipes>
     <Swipes>Right</Swipes>
+    <Swipes>Down</Swipes>
+    <Swipes>Left</Swipes>
+    <Swipes>Down</Swipes>
     <Swipes>Right</Swipes>
     <Swipes>Left</Swipes>
+    <Swipes>Right</Swipes>
     <Swipes>Down</Swipes>
-    <Swipes>Up</Swipes>
     <Swipes>Down</Swipes>
-    <Swipes>Up</Swipes>
+    <Swipes>Right</Swipes>
     <Swipes>Left</Swipes>
-    <Swipes>Down</Swipes>
-    <Swipes>Up</Swipes>
     <Swipes>Right</Swipes>
     <Swipes>Left</Swipes>
     <Swipes>Left</Swipes>
+    <Swipes>Left</Swipes>
+    <Swipes>Down</Swipes>
+    <Swipes>Up</Swipes>
+    <Swipes>Down</Swipes>
   </swipes>
   <backgroundIndexes>
-    <int>2</int>
-    <int>0</int>
-    <int>4</int>
-    <int>2</int>
-    <int>3</int>
-    <int>5</int>
-    <int>4</int>
-    <int>0</int>
     <int>3</int>
     <int>2</int>
     <int>5</int>
-    <int>1</int>
-    <int>2</int>
-    <int>5</int>
-    <int>3</int>
-    <int>2</int>
-    <int>1</int>
-    <int>5</int>
-    <int>4</int>
-    <int>2</int>
-    <int>0</int>
-    <int>5</int>
     <int>2</int>
     <int>3</int>
-    <int>5</int>
-    <int>2</int>
-    <int>0</int>
     <int>3</int>
     <int>5</int>
-    <int>1</int>
-    <int>2</int>
-    <int>5</int>
-    <int>0</int>
-    <int>4</int>
-    <int>2</int>
-    <int>0</int>
-    <int>3</int>
-    <int>2</int>
-    <int>1</int>
-    <int>4</int>
-    <int>5</int>
-    <int>1</int>
-    <int>2</int>
-    <int>4</int>
-    <int>3</int>
-    <int>1</int>
     <int>5</int>
     <int>2</int>
-    <int>1</int>
-    <int>5</int>
-    <int>0</int>
     <int>4</int>
-    <int>1</int>
-    <int>0</int>
     <int>4</int>
     <int>2</int>
-    <int>1</int>
-    <int>3</int>
+    <int>2</int>
+    <int>2</int>
+    <int>5</int>
     <int>5</int>
     <int>2</int>
     <int>4</int>
     <int>5</int>
     <int>3</int>
-    <int>2</int>
-    <int>1</int>
+    <int>5</int>
+    <int>3</int>
+    <int>5</int>
     <int>3</int>
     <int>4</int>
     <int>5</int>
-    <int>1</int>
     <int>2</int>
-    <int>0</int>
-    <int>3</int>
-    <int>5</int>
-    <int>2</int>
-    <int>1</int>
-    <int>3</int>
-    <int>4</int>
-    <int>1</int>
-    <int>5</int>
-    <int>0</int>
-    <int>1</int>
-    <int>3</int>
-    <int>5</int>
-    <int>1</int>
-    <int>2</int>
-    <int>3</int>
-    <int>4</int>
-    <int>0</int>
-    <int>2</int>
-    <int>3</int>
-    <int>5</int>
-    <int>0</int>
-    <int>2</int>
-    <int>3</int>
-    <int>0</int>
-    <int>5</int>
-    <int>1</int>
-    <int>2</int>
-    <int>5</int>
-    <int>0</int>
     <int>4</int>
     <int>3</int>
-    <int>0</int>
-    <int>4</int>
+    <int>3</int>
     <int>2</int>
-    <int>1</int>
-    <int>0</int>
+    <int>5</int>
+    <int>2</int>
+    <int>4</int>
     <int>4</int>
     <int>3</int>
-    <int>0</int>
+    <int>3</int>
+    <int>2</int>
+    <int>2</int>
+    <int>3</int>
+    <int>3</int>
+    <int>2</int>
+    <int>2</int>
+    <int>4</int>
+    <int>3</int>
+    <int>4</int>
+    <int>4</int>
+    <int>4</int>
+    <int>4</int>
+    <int>2</int>
+    <int>3</int>
+    <int>3</int>
+    <int>5</int>
+    <int>4</int>
     <int>2</int>
     <int>5</int>
     <int>3</int>
     <int>2</int>
-    <int>4</int>
-    <int>0</int>
-    <int>3</int>
-    <int>1</int>
-    <int>4</int>
-    <int>0</int>
     <int>2</int>
-    <int>5</int>
     <int>4</int>
     <int>3</int>
-    <int>1</int>
-    <int>4</int>
-    <int>0</int>
     <int>3</int>
-    <int>4</int>
-    <int>0</int>
-    <int>3</int>
-    <int>5</int>
-    <int>0</int>
-    <int>2</int>
-    <int>1</int>
-    <int>4</int>
-    <int>0</int>
-    <int>5</int>
-    <int>3</int>
-    <int>1</int>
-    <int>2</int>
-    <int>0</int>
-    <int>1</int>
-    <int>3</int>
-    <int>5</int>
-    <int>2</int>
-    <int>3</int>
-    <int>1</int>
-    <int>2</int>
-    <int>0</int>
-    <int>1</int>
-    <int>3</int>
-    <int>5</int>
-    <int>2</int>
-    <int>3</int>
-    <int>5</int>
-    <int>4</int>
-    <int>0</int>
-    <int>1</int>
-    <int>4</int>
-    <int>3</int>
-    <int>0</int>
-    <int>1</int>
-    <int>4</int>
-    <int>0</int>
-    <int>5</int>
-    <int>4</int>
-    <int>1</int>
-    <int>3</int>
-    <int>5</int>
-    <int>0</int>
-    <int>1</int>
-    <int>5</int>
-    <int>0</int>
-    <int>3</int>
-    <int>5</int>
-    <int>2</int>
-    <int>1</int>
-    <int>5</int>
-    <int>0</int>
-    <int>4</int>
-    <int>3</int>
-    <int>0</int>
-    <int>1</int>
     <int>3</int>
     <int>2</int>
-    <int>1</int>
-    <int>0</int>
-    <int>4</int>
+    <int>2</int>
+    <int>5</int>
+    <int>2</int>
+    <int>5</int>
+    <int>2</int>
+    <int>5</int>
+    <int>2</int>
     <int>5</int>
     <int>3</int>
     <int>2</int>
-    <int>5</int>
-    <int>1</int>
-    <int>2</int>
-    <int>4</int>
-    <int>5</int>
-    <int>0</int>
-    <int>2</int>
-    <int>4</int>
-    <int>0</int>
     <int>3</int>
+    <int>3</int>
+    <int>5</int>
+    <int>2</int>
+    <int>2</int>
+    <int>5</int>
+    <int>5</int>
+    <int>4</int>
     <int>5</int>
     <int>4</int>
     <int>2</int>
-    <int>0</int>
-    <int>4</int>
-    <int>3</int>
-    <int>5</int>
-    <int>4</int>
-    <int>3</int>
-    <int>5</int>
-    <int>1</int>
-    <int>0</int>
-    <int>5</int>
-    <int>3</int>
-    <int>1</int>
     <int>2</int>
-    <int>3</int>
-    <int>0</int>
-    <int>4</int>
     <int>2</int>
-    <int>3</int>
-    <int>5</int>
-    <int>0</int>
-    <int>4</int>
     <int>2</int>
-    <int>1</int>
-    <int>4</int>
-    <int>5</int>
     <int>2</int>
-    <int>3</int>
-    <int>0</int>
+    <int>2</int>
+    <int>2</int>
     <int>5</int>
     <int>4</int>
-    <int>0</int>
-    <int>5</int>
-    <int>3</int>
-    <int>1</int>
     <int>2</int>
     <int>4</int>
     <int>5</int>
     <int>2</int>
     <int>3</int>
-    <int>5</int>
-    <int>1</int>
-    <int>2</int>
-    <int>5</int>
-    <int>4</int>
     <int>3</int>
     <int>2</int>
-    <int>4</int>
     <int>3</int>
-    <int>5</int>
-    <int>1</int>
-    <int>3</int>
-    <int>2</int>
-    <int>5</int>
-    <int>1</int>
     <int>3</int>
     <int>4</int>
-    <int>5</int>
-    <int>0</int>
-    <int>2</int>
     <int>4</int>
     <int>5</int>
-    <int>2</int>
-    <int>1</int>
-    <int>4</int>
-    <int>3</int>
-    <int>2</int>
-    <int>5</int>
-    <int>0</int>
-    <int>4</int>
-    <int>2</int>
-    <int>3</int>
-    <int>0</int>
-    <int>5</int>
-    <int>1</int>
     <int>2</int>
     <int>4</int>
     <int>5</int>
     <int>3</int>
-    <int>1</int>
-    <int>4</int>
+    <int>2</int>
+    <int>3</int>
+    <int>5</int>
     <int>5</int>
     <int>2</int>
-    <int>0</int>
-    <int>5</int>
-    <int>4</int>
-    <int>0</int>
-    <int>1</int>
+    <int>2</int>
     <int>3</int>
     <int>5</int>
-    <int>0</int>
-    <int>1</int>
+    <int>4</int>
+    <int>3</int>
+    <int>3</int>
+    <int>2</int>
+    <int>3</int>
+    <int>5</int>
+    <int>4</int>
+    <int>2</int>
+    <int>5</int>
+    <int>3</int>
+    <int>4</int>
+    <int>4</int>
+    <int>3</int>
+    <int>3</int>
+    <int>3</int>
+    <int>3</int>
+    <int>4</int>
+    <int>2</int>
+    <int>2</int>
+    <int>3</int>
+    <int>2</int>
+    <int>2</int>
     <int>3</int>
     <int>2</int>
     <int>4</int>
     <int>3</int>
+    <int>2</int>
     <int>5</int>
-    <int>0</int>
+    <int>4</int>
+    <int>2</int>
+    <int>5</int>
+    <int>3</int>
+    <int>2</int>
+    <int>2</int>
+    <int>5</int>
+    <int>2</int>
+    <int>3</int>
+    <int>3</int>
+    <int>3</int>
+    <int>5</int>
+    <int>5</int>
+    <int>4</int>
+    <int>3</int>
+    <int>3</int>
+    <int>5</int>
+    <int>5</int>
+    <int>3</int>
+    <int>3</int>
+    <int>5</int>
+    <int>4</int>
+    <int>4</int>
+    <int>3</int>
+    <int>3</int>
+    <int>3</int>
+    <int>5</int>
+    <int>5</int>
+    <int>2</int>
+    <int>4</int>
+    <int>3</int>
+    <int>2</int>
+    <int>2</int>
+    <int>3</int>
+    <int>5</int>
+    <int>5</int>
+    <int>2</int>
+    <int>2</int>
+    <int>3</int>
+    <int>4</int>
+    <int>4</int>
+    <int>2</int>
+    <int>5</int>
+    <int>4</int>
+    <int>3</int>
+    <int>5</int>
+    <int>4</int>
+    <int>3</int>
+    <int>3</int>
+    <int>4</int>
+    <int>2</int>
+    <int>5</int>
+    <int>5</int>
+    <int>2</int>
+    <int>2</int>
+    <int>3</int>
+    <int>5</int>
+    <int>4</int>
+    <int>5</int>
+    <int>5</int>
+    <int>2</int>
+    <int>2</int>
+    <int>3</int>
+    <int>3</int>
+    <int>4</int>
+    <int>3</int>
+    <int>4</int>
+    <int>5</int>
+    <int>4</int>
+    <int>2</int>
+    <int>3</int>
+    <int>5</int>
+    <int>3</int>
+    <int>2</int>
+    <int>3</int>
+    <int>2</int>
+    <int>2</int>
+    <int>4</int>
+    <int>3</int>
+    <int>4</int>
+    <int>3</int>
+    <int>5</int>
+    <int>2</int>
+    <int>5</int>
+    <int>5</int>
+    <int>3</int>
+    <int>5</int>
+    <int>3</int>
+    <int>2</int>
+    <int>2</int>
+    <int>4</int>
+    <int>5</int>
+    <int>3</int>
+    <int>3</int>
+    <int>2</int>
+    <int>5</int>
+    <int>2</int>
+    <int>4</int>
+    <int>3</int>
+    <int>5</int>
+    <int>2</int>
+    <int>5</int>
+    <int>4</int>
+    <int>5</int>
+    <int>5</int>
+    <int>4</int>
+    <int>3</int>
+    <int>2</int>
+    <int>3</int>
+    <int>5</int>
+    <int>5</int>
+    <int>5</int>
+    <int>5</int>
+    <int>3</int>
+    <int>2</int>
+    <int>2</int>
+    <int>2</int>
+    <int>3</int>
+    <int>4</int>
+    <int>2</int>
+    <int>5</int>
+    <int>3</int>
+    <int>4</int>
+    <int>3</int>
+    <int>3</int>
+    <int>2</int>
+    <int>4</int>
+    <int>5</int>
+    <int>5</int>
+    <int>2</int>
+    <int>2</int>
+    <int>4</int>
+    <int>4</int>
+    <int>4</int>
+    <int>3</int>
+    <int>4</int>
+    <int>5</int>
+    <int>4</int>
+    <int>5</int>
+    <int>3</int>
+    <int>5</int>
+    <int>2</int>
+    <int>3</int>
+    <int>3</int>
+    <int>5</int>
+    <int>5</int>
+    <int>3</int>
+    <int>5</int>
+    <int>5</int>
+    <int>3</int>
+    <int>3</int>
+    <int>4</int>
+    <int>4</int>
+    <int>4</int>
+    <int>4</int>
+    <int>3</int>
   </backgroundIndexes>
   <musicName>East - Lydian Collective</musicName>
   <isPrimaryLevel>true</isPrimaryLevel>

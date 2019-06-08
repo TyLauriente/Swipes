@@ -86,31 +86,31 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9674}
     - Class: 114
-      Script: {instanceID: 9846}
+      Script: {instanceID: 9702}
     - Class: 114
-      Script: {instanceID: 9996}
+      Script: {instanceID: 9848}
     - Class: 114
-      Script: {instanceID: 10016}
+      Script: {instanceID: 9998}
     - Class: 114
-      Script: {instanceID: 10194}
+      Script: {instanceID: 10018}
     - Class: 114
-      Script: {instanceID: 10228}
+      Script: {instanceID: 10196}
     - Class: 114
-      Script: {instanceID: 10456}
+      Script: {instanceID: 10210}
     - Class: 114
-      Script: {instanceID: 10504}
+      Script: {instanceID: 10232}
     - Class: 114
-      Script: {instanceID: 10556}
+      Script: {instanceID: 10460}
     - Class: 114
-      Script: {instanceID: 10576}
+      Script: {instanceID: 10508}
     - Class: 114
-      Script: {instanceID: 10620}
+      Script: {instanceID: 10560}
     - Class: 114
-      Script: {instanceID: 10638}
+      Script: {instanceID: 10580}
     - Class: 114
-      Script: {instanceID: 14718}
+      Script: {instanceID: 10624}
     - Class: 114
-      Script: {instanceID: 18854}
+      Script: {instanceID: 10642}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -604,6 +604,12 @@ ScriptsOnlyBuild:
     className: LevelManager
   - hash:
       serializedVersion: 2
+      Hash: cca714720ca7461aff202d23bee01e99
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: LoadLevel
+  - hash:
+      serializedVersion: 2
       Hash: 303ad70ce203ad874efe2965d0fbcff9
     assemblyName: Unity.Analytics.Tracker.dll
     namespaceName: UnityEngine.Analytics
@@ -760,10 +766,16 @@ ScriptsOnlyBuild:
     className: TimelineAsset
   - hash:
       serializedVersion: 2
-      Hash: 96a9e6eec7a5bf85704a746643fa20a8
+      Hash: 353311d3650666c636e8dcdcad6e829b
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameplayManager
+  - hash:
+      serializedVersion: 2
+      Hash: 5b93c7fbdfff73cb9c28778c28ae1f55
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: CreateOrLoad
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -832,7 +844,7 @@ ScriptsOnlyBuild:
     className: TextMeshPro
   - hash:
       serializedVersion: 2
-      Hash: 334434001f1f0bf3babaa2e7f9f885a9
+      Hash: 989f0e22801c954b63378ecd7df47333
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: LevelSelectManager
@@ -884,18 +896,6 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManager
-  - hash:
-      serializedVersion: 2
-      Hash: 5b93c7fbdfff73cb9c28778c28ae1f55
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: CreateOrLoad
-  - hash:
-      serializedVersion: 2
-      Hash: 63c061c72001186c055c55079a725deb
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: LoadLevel
   platform: 13
   scenePathNames:
   - Assets/Scenes/Gameplay.unity

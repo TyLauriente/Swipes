@@ -48,12 +48,13 @@ public class AudioManager : MonoBehaviour
 
     private string m_userSongPath;
 
-    const float editorTimerOffset = 0.18f;
+    private const float resetTimerWait = 10.0f;
+    private float m_resetTimer;
 
     // Initialize Android Native audio with sound effects
     void Start()
     {
-        m_isAndroid = (bool)(Application.platform == RuntimePlatform.Android);
+        m_isAndroid = (Application.platform == RuntimePlatform.Android);
 
 
         AndroidNativeAudio.makePool(2);
@@ -62,6 +63,7 @@ public class AudioManager : MonoBehaviour
         m_winStreamId = -1;
         m_loseStreamId = -1;
         m_songTimer = 0.0f;
+        m_resetTimer = 0.0f;
     }
 
     public void LoadUserSongs()
@@ -105,8 +107,23 @@ public class AudioManager : MonoBehaviour
     {
         if (m_currentSong.isPlaying)
         {
+            //if (m_resetTimer >= resetTimerWait)
+            //{
+            //    m_resetTimer = 0.0f;
+            //    m_songTimer = m_currentSong.time;
+            //}
+            //else
+            //{
+            //    m_songTimer += Time.deltaTime;
+            //    m_resetTimer += Time.deltaTime;
+            //}
             m_songTimer += Time.deltaTime;
         }
+    }
+
+    public void ResetSongTimer()
+    {
+        m_songTimer = m_currentSong.time;
     }
 
     public bool PlaySong(string songName)
@@ -130,14 +147,8 @@ public class AudioManager : MonoBehaviour
         {
             m_currentSong.clip = foundClip;
             m_currentSong.Play();
-            if (m_isAndroid)
-            {
-                m_songTimer = 0.0f;
-            }
-            else
-            {
-                m_songTimer = editorTimerOffset;
-            }
+            m_songTimer = 0.0f;
+            m_resetTimer = 0.0f;
             return true;
         }
         return false;
@@ -154,6 +165,7 @@ public class AudioManager : MonoBehaviour
         {
             m_currentSong.time = time;
             m_songTimer = time;
+            m_resetTimer = 0.0f;
         }
     }
 
@@ -167,6 +179,8 @@ public class AudioManager : MonoBehaviour
     public void ResumeSong()
     {
         m_currentSong.Play();
+        m_songTimer = m_currentSong.time;
+        m_resetTimer = 0.0f;
     }
 
     public void StopSong()

@@ -55,6 +55,7 @@ public class TapToTheBeat : MonoBehaviour
             m_current = Random.Range(0, 6);
         } while (m_current == m_last || m_current == m_secondLast);
 
+        m_audioManager.ResetSongTimer();
         m_newLevel.AddSwipe(m_audioManager.GetTimePassed(), (Swipes)Random.Range(1, 5), m_current);
         m_swipeNumberText.text = "Swipe " + m_newLevel.swipes.Count.ToString();
     }
