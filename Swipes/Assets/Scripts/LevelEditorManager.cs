@@ -41,11 +41,9 @@ public class LevelEditorManager : MonoBehaviour
     {
         m_currentState = LevelEditorState.CreateOrLoad;
 
-        m_songSelection.Init();
         m_tapToTheBeat.Init();
         m_createOrLoad.Init();
         m_loadLevel.Init();
-        m_songSelection.LoadMusicNames(m_audioManager.GetAllSongNames());
         m_createOrLoad.gameObject.SetActive(true);
         m_songSelection.gameObject.SetActive(false);
         m_loadLevel.gameObject.SetActive(false);
@@ -58,7 +56,8 @@ public class LevelEditorManager : MonoBehaviour
     {
         if (m_gameManager.GetCurrentState() == GameStates.LevelEditor)
         {
-            if(Input.GetKey(KeyCode.Escape) && m_currentState != LevelEditorState.DetailedEditor)
+            if(Input.GetKey(KeyCode.Escape) && m_currentState != LevelEditorState.DetailedEditor
+                && m_currentState != LevelEditorState.TapToTheBeat)
             {
                 m_audioManager.StopSong();
                 m_gameManager.ChangeState(GameStates.MainMenu);
@@ -68,6 +67,8 @@ public class LevelEditorManager : MonoBehaviour
             {
                 if(m_createOrLoad.CreateLevel)
                 {
+                    m_songSelection.Init();
+                    m_songSelection.LoadMusicNames(m_audioManager.GetAllSongNames());
                     m_currentState = LevelEditorState.SongSelection;
                     m_createOrLoad.gameObject.SetActive(false);
                     m_songSelection.gameObject.SetActive(true);
@@ -77,6 +78,11 @@ public class LevelEditorManager : MonoBehaviour
                     m_currentState = LevelEditorState.LoadLevel;
                     m_createOrLoad.gameObject.SetActive(false);
                     m_loadLevel.gameObject.SetActive(true);
+                }
+                else if(m_createOrLoad.Quit)
+                {
+                    m_gameManager.ChangeState(GameStates.MainMenu);
+                    m_audioManager.StopSong();
                 }
             }
             else if(m_currentState == LevelEditorState.LoadLevel)
@@ -99,11 +105,12 @@ public class LevelEditorManager : MonoBehaviour
             }
             else if(m_currentState == LevelEditorState.SongSelection) // Song Selection
             {
-                if(m_songSelection.quit)
+                if(m_songSelection.Quit)
                 {
                     m_gameManager.ChangeState(GameStates.MainMenu);
+                    m_audioManager.StopSong();
                 }
-                else if(m_songSelection.songSelected)
+                else if(m_songSelection.SongSelected)
                 {
                     m_songSelection.gameObject.SetActive(false);
                     m_selectedSongName = m_songSelection.GetSelectedSongName();
@@ -130,6 +137,11 @@ public class LevelEditorManager : MonoBehaviour
                     m_tapToTheBeat.gameObject.SetActive(false);
                     m_currentState = LevelEditorState.DetailedEditor;
                 }
+                else if(m_tapToTheBeat.Quit)
+                {
+                    m_gameManager.ChangeState(GameStates.MainMenu);
+                    m_audioManager.StopSong();
+                }
             }
             else if(m_currentState == LevelEditorState.DetailedEditor) // Detailed Selection
             {
@@ -137,6 +149,10 @@ public class LevelEditorManager : MonoBehaviour
                 if(m_detailedEditor.Save)
                 {
                     SaveLevel(m_detailedEditor.GetNewLevel());
+                    m_gameManager.ChangeState(GameStates.MainMenu);
+                }
+                else if(m_detailedEditor.Quit)
+                {
                     m_gameManager.ChangeState(GameStates.MainMenu);
                 }
             }

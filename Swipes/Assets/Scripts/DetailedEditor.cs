@@ -47,6 +47,12 @@ public class DetailedEditor : MonoBehaviour
     private Button m_swipeTimeDecrementButton;
     [SerializeField]
     private Toggle m_insertNewSwipeToggle;
+    [SerializeField]
+    private Button m_quitButton;
+    [SerializeField]
+    private GameObject m_quitImage;
+    [SerializeField]
+    private GameObject m_areYouSureImage;
 
     private float m_swipeTimeIncrementValue;
 
@@ -87,6 +93,7 @@ public class DetailedEditor : MonoBehaviour
         m_swipeTimeIncrementButton.onClick.AddListener(IncrementSwipeTime);
         m_swipeTimeDecrementButton.onClick.AddListener(DecrementSwipeTime);
         m_insertNewSwipeToggle.onValueChanged.AddListener(InsertNewSwipeToggle);
+        m_quitButton.onClick.AddListener(QuitLevel);
         m_swipeTimeIncrementValue = 0.05f;
     }
 
@@ -103,6 +110,8 @@ public class DetailedEditor : MonoBehaviour
         m_swipeManager.SetCurrentSwipeType(m_newLevel.GetSwipe(m_currentSwipe), m_timeUntilNextSwipe);
         m_levelNameInputField.text = m_newLevel.levelName;
         m_insertNewSwipeToggle.isOn = false;
+        m_quitImage.SetActive(true);
+        m_areYouSureImage.SetActive(false);
         m_insertNewSwipe = m_insertNewSwipeToggle.isOn;
     }
 
@@ -198,6 +207,11 @@ public class DetailedEditor : MonoBehaviour
         else
         {
             m_audioManager.ResumeSong();
+            m_audioManager.ResetSongTimer();
+            UpdateTimeUntilNextSwipe();
+            m_swipeManager.SetCurrentSwipeType(m_newLevel.GetSwipe(m_currentSwipe), m_timeUntilNextSwipe);
+            m_swipeManager.SetNextSwipeType(m_newLevel.GetSwipe(m_currentSwipe + 1));
+            m_backgroundManager.SetNextBackground(m_newLevel.GetBackgroundIndex(m_currentSwipe + 1));
         }
     }
     private void SaveLevel()
@@ -206,6 +220,26 @@ public class DetailedEditor : MonoBehaviour
         {
             m_save = true;
         }
+    }
+
+    private void QuitLevel()
+    {
+        if(m_quitImage.activeSelf)
+        {
+            m_quitImage.SetActive(false);
+            m_areYouSureImage.SetActive(true);
+            Invoke("ResetQuitImages", 2.5f);
+        }
+        else
+        {
+            m_quit = true;
+        }
+    }
+
+    private void ResetQuitImages()
+    {
+        m_quitImage.SetActive(true);
+        m_areYouSureImage.SetActive(false);
     }
 
     private void IncrementSwipe()

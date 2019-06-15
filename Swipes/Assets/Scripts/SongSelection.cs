@@ -5,9 +5,10 @@ using UnityEngine.UI;
 
 public class SongSelection : MonoBehaviour
 {
-
     [SerializeField]
-    private Text m_pickASongText;
+    private AudioManager m_audioManager;
+
+
     [SerializeField]
     private Text m_songNumberText;
     [SerializeField]
@@ -18,6 +19,8 @@ public class SongSelection : MonoBehaviour
     private Button m_rightButton;
     [SerializeField]
     private Button m_selectButton;
+    [SerializeField]
+    private Button m_quitButton;
 
     private int m_currentSongIndex = 0;
 
@@ -26,21 +29,25 @@ public class SongSelection : MonoBehaviour
     private bool m_delayOver;
     private const float DELAY_DURATION = 0.05f;
 
-    public bool songSelected;
-    public bool quit;
+    private bool m_songSelected;
+    private bool m_quit;
+
+    public bool SongSelected { get => m_songSelected; }
+    public bool Quit { get => m_quit; }
 
     void Start()
     {
         m_leftButton.onClick.AddListener(Left);
         m_rightButton.onClick.AddListener(Right);
         m_selectButton.onClick.AddListener(Select);
+        m_quitButton.onClick.AddListener(QuitSongSelection);
         Init();
     }
 
     public void Init()
     {
-        songSelected = false;
-        quit = false;
+        m_songSelected = false;
+        m_quit = false;
         m_delayOver = true;
     }
 
@@ -50,6 +57,7 @@ public class SongSelection : MonoBehaviour
         {
             m_songNameText.text = m_songNames[m_currentSongIndex];
             m_songNumberText.text = "Song " + ((int)(m_currentSongIndex + 1)).ToString();
+            m_audioManager.PlaySong(m_songNames[m_currentSongIndex]);
         }
     }
 
@@ -83,7 +91,7 @@ public class SongSelection : MonoBehaviour
     {
         if (m_delayOver)
         {
-            songSelected = true;
+            m_songSelected = true;
             if (m_currentSongIndex < m_songNames.Count)
             {
                 m_selectedSongName = m_songNames[m_currentSongIndex];
@@ -92,6 +100,12 @@ public class SongSelection : MonoBehaviour
             Invoke("EnableDelayOver", DELAY_DURATION);
         }
     }
+
+    private void QuitSongSelection()
+    {
+        m_quit = true;
+    }
+
     public void LoadMusicNames(List<string> names)
     {
         names.Sort();
@@ -99,7 +113,7 @@ public class SongSelection : MonoBehaviour
         m_songNames = names;
         if(names.Count < 1)
         {
-            quit = true;
+            m_quit = true;
         }
         else
         {

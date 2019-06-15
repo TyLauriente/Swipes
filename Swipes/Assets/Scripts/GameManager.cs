@@ -34,6 +34,8 @@ public enum Swipes
     Right,
 }
 
+
+
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
@@ -61,8 +63,10 @@ public class GameManager : MonoBehaviour
     private GameObject m_mainMenuObject;
     [SerializeField]
     private GameObject m_tutorialObject;
-    
 
+    public const float A_ACCURACY = 95.0f;
+    public const float B_ACCURACY = 85.0f;
+    public const float C_ACCURACY = 75.0f;
 
     private float m_screenWidth;
     private float m_screenHeight;

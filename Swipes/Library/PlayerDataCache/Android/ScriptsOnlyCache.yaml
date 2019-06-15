@@ -604,7 +604,7 @@ ScriptsOnlyBuild:
     className: LevelManager
   - hash:
       serializedVersion: 2
-      Hash: cca714720ca7461aff202d23bee01e99
+      Hash: 9320af139e22d9693d35f8fc38fd6073
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: LoadLevel
@@ -688,7 +688,7 @@ ScriptsOnlyBuild:
     className: ANAMusicBackgroundPause
   - hash:
       serializedVersion: 2
-      Hash: 128f270ef35e5a9c1686d37122aff358
+      Hash: b1ee7e41c39555576578e7318a091369
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: DetailedEditor
@@ -772,7 +772,7 @@ ScriptsOnlyBuild:
     className: GameplayManager
   - hash:
       serializedVersion: 2
-      Hash: 5b93c7fbdfff73cb9c28778c28ae1f55
+      Hash: 3aac817c20b4aebab4387b5aa31a6b1b
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: CreateOrLoad
@@ -832,7 +832,7 @@ ScriptsOnlyBuild:
     className: TMP_StyleSheet
   - hash:
       serializedVersion: 2
-      Hash: 368410482344a563f269e15a7ff9e195
+      Hash: 38c70c5c367cf47a8976711d1892f45c
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: TapToTheBeat
@@ -844,7 +844,7 @@ ScriptsOnlyBuild:
     className: TextMeshPro
   - hash:
       serializedVersion: 2
-      Hash: 989f0e22801c954b63378ecd7df47333
+      Hash: 6571edc1f2623928b011146d1544464b
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: LevelSelectManager
@@ -862,7 +862,7 @@ ScriptsOnlyBuild:
     className: ANAMusicExample
   - hash:
       serializedVersion: 2
-      Hash: 6769f2592e84044b8118096573261df7
+      Hash: 16407295dde890f6d76d55dce3606d8a
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: SongSelection

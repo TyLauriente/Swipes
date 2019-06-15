@@ -22,9 +22,11 @@ public class LoadLevel : MonoBehaviour
     [SerializeField]
     private Button m_deleteButton;
     [SerializeField]
-    private Text m_deleteText;
+    private GameObject m_deleteImage;
     [SerializeField]
-    private Text m_areYouSureText;
+    private GameObject m_areYouSureImage;
+    [SerializeField]
+    private Button m_quitButton;
 
     private Level m_oldLevel;
     private int m_currentLevelIndex;
@@ -45,6 +47,7 @@ public class LoadLevel : MonoBehaviour
         m_rightButton.onClick.AddListener(RightButtonPress);
         m_selectButton.onClick.AddListener(SelectButtonPress);
         m_deleteButton.onClick.AddListener(DeleteButtonPress);
+        m_quitButton.onClick.AddListener(QuitLoadLevel);
     }
 
     public void Init()
@@ -52,8 +55,8 @@ public class LoadLevel : MonoBehaviour
         m_levelSelected = false;
         m_pressedDelete = false;
         m_quit = false;
-        m_deleteText.gameObject.SetActive(true);
-        m_areYouSureText.gameObject.SetActive(false);
+        m_deleteImage.gameObject.SetActive(true);
+        m_areYouSureImage.gameObject.SetActive(false);
         m_currentLevelIndex = 0;
         m_levelManager.LoadLevels();
         m_userLevels = m_levelManager.GetUserLevels();
@@ -97,25 +100,38 @@ public class LoadLevel : MonoBehaviour
         m_levelSelected = true;
     }
 
+    private void QuitLoadLevel()
+    {
+        m_quit = true;
+    }
+
     private void DeleteButtonPress()
     {
         if(!m_pressedDelete)
         {
             m_pressedDelete = true;
-            m_deleteText.gameObject.SetActive(false);
-            m_areYouSureText.gameObject.SetActive(true);
+            m_deleteImage.gameObject.SetActive(false);
+            m_areYouSureImage.gameObject.SetActive(true);
+            Invoke("ResetDeleteButton", 2.5f);
         }
         else
         {
             DeleteLevel();
-            m_deleteText.gameObject.SetActive(true);
-            m_areYouSureText.gameObject.SetActive(false);
+            m_deleteImage.gameObject.SetActive(true);
+            m_areYouSureImage.gameObject.SetActive(false);
             if (m_userLevels.Count == 0)
             {
                 m_quit = true;
             }
             Init();
         }
+    }
+
+    private void ResetDeleteButton()
+    {
+        m_pressedDelete = false;
+        m_deleteImage.gameObject.SetActive(true);
+        m_areYouSureImage.gameObject.SetActive(false);
     }
 
     private void DeleteLevel()

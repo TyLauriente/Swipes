@@ -30,6 +30,16 @@ public class LevelSelectManager : MonoBehaviour
     private Button m_rightButton;
     [SerializeField]
     private Button m_selectButton;
+    [SerializeField]
+    private Button m_quitButton;
+    [SerializeField]
+    private GameObject m_aGrade;
+    [SerializeField]
+    private GameObject m_bGrade;
+    [SerializeField]
+    private GameObject m_cGrade;
+    [SerializeField]
+    private GameObject m_fGrade;
 
     private int m_currentLevel;
     private float m_currentAccuracy;
@@ -42,6 +52,7 @@ public class LevelSelectManager : MonoBehaviour
         m_leftButton.onClick.AddListener(Left);
         m_rightButton.onClick.AddListener(Right);
         m_selectButton.onClick.AddListener(Select);
+        m_quitButton.onClick.AddListener(QuitLevelSelect);
         Init();
     }
 
@@ -64,6 +75,8 @@ public class LevelSelectManager : MonoBehaviour
         m_primaryLevelText.gameObject.SetActive(false);
         m_currentAccuracy = -1.0f;
         UpdateText();
+        DisableGrades();
+        m_fGrade.SetActive(true);
         if (m_levels == null || m_levels.Count == 0)
         {
             m_gameManager.ChangeState(GameStates.MainMenu);
@@ -123,8 +136,25 @@ public class LevelSelectManager : MonoBehaviour
 
         if(foundStat)
         {
+            DisableGrades();
             m_currentAccuracy = levelStat.accuracy;
-            m_levelAccuracyText.text = "Accuracy: " + levelStat.accuracy.ToString("0.00") + "%";
+            if(m_currentAccuracy >= GameManager.A_ACCURACY)
+            {
+                m_aGrade.SetActive(true);
+            }
+            else if(m_currentAccuracy >= GameManager.B_ACCURACY)
+            {
+                m_bGrade.SetActive(true);
+            }
+            else if(m_currentAccuracy >= GameManager.C_ACCURACY)
+            {
+                m_cGrade.SetActive(true);
+            }
+            else
+            {
+                m_fGrade.SetActive(true);
+            }
+            m_levelAccuracyText.text = "Accuracy\n" + levelStat.accuracy.ToString("0.00") + "%";
         }
         else
         {
@@ -146,12 +176,25 @@ public class LevelSelectManager : MonoBehaviour
         }
     }
 
+    private void DisableGrades()
+    {
+        m_aGrade.SetActive(false);
+        m_bGrade.SetActive(false);
+        m_cGrade.SetActive(false);
+        m_fGrade.SetActive(false);
+    }
+
     private void Select()
     {
         if(m_currentLevel < m_levels.Count && m_currentLevel >= 0)
         {
             Invoke("StartGame", 0.05f);
         }
+    }
+
+    private void QuitLevelSelect()
+    {
+        m_gameManager.ChangeState(GameStates.MainMenu);
     }
 
     private void StartGame()
