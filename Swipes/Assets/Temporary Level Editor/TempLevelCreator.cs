@@ -16,9 +16,9 @@ public class TempLevelCreator : MonoBehaviour
     {
         m_levelManager.LoadLevels();
         level = m_levelManager.Levels[0];
-        for (int index = 0; index < level.swipes.Count; ++index)
+        for (int index = 0; index < level.Swipes.Count; ++index)
         {
-            level.swipeTimes[index] += 0.18f;
+            level.SwipeTimes[index] += 0.18f;
         }
         SaveLevel();
     }

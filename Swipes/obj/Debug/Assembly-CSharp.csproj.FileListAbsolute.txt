@@ -689,10 +689,6 @@ C:\Users\tlaur\Desktop\Swipes Working Folder\swipes\Swipes\Temp\bin\Debug\UnityE
 C:\Users\tlaur\Desktop\Swipes Working Folder\swipes\Swipes\Temp\bin\Debug\UnityEngine.TestRunner.xml
 C:\Users\tlaur\Desktop\Swipes Working Folder\swipes\Swipes\Temp\bin\Debug\UnityEngine.ClusterInputModule.xml
 C:\Users\tlaur\Desktop\Swipes Working Folder\swipes\Swipes\Temp\bin\Debug\UnityEngine.ClusterRendererModule.xml
-C:\Users\tlaur\Desktop\Swipes Working Folder\New\swipes\Swipes\obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache
-C:\Users\tlaur\Desktop\Swipes Working Folder\New\swipes\Swipes\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache
-C:\Users\tlaur\Desktop\Swipes Working Folder\New\swipes\Swipes\obj\Debug\Assembly-CSharp.dll
-C:\Users\tlaur\Desktop\Swipes Working Folder\New\swipes\Swipes\obj\Debug\Assembly-CSharp.pdb
 C:\Users\tlaur\Desktop\Swipes Working Folder\New\swipes\Swipes\Temp\bin\Debug\Assembly-CSharp.dll
 C:\Users\tlaur\Desktop\Swipes Working Folder\New\swipes\Swipes\Temp\bin\Debug\Assembly-CSharp.pdb
 C:\Users\tlaur\Desktop\Swipes Working Folder\New\swipes\Swipes\Temp\bin\Debug\Microsoft.Win32.Primitives.dll
@@ -959,4 +955,8 @@ C:\Users\tlaur\Desktop\Swipes Working Folder\New\swipes\Swipes\Temp\bin\Debug\Un
 C:\Users\tlaur\Desktop\Swipes Working Folder\New\swipes\Swipes\Temp\bin\Debug\nunit.framework.xml
 C:\Users\tlaur\Desktop\Swipes Working Folder\New\swipes\Swipes\Temp\bin\Debug\UnityEngine.ClusterInputModule.xml
 C:\Users\tlaur\Desktop\Swipes Working Folder\New\swipes\Swipes\Temp\bin\Debug\UnityEngine.ClusterRendererModule.xml
+C:\Users\tlaur\Desktop\Swipes Working Folder\New\swipes\Swipes\obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache
+C:\Users\tlaur\Desktop\Swipes Working Folder\New\swipes\Swipes\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache
 C:\Users\tlaur\Desktop\Swipes Working Folder\New\swipes\Swipes\obj\Debug\Assembly-CSharp.csproj.CopyComplete
+C:\Users\tlaur\Desktop\Swipes Working Folder\New\swipes\Swipes\obj\Debug\Assembly-CSharp.dll
+C:\Users\tlaur\Desktop\Swipes Working Folder\New\swipes\Swipes\obj\Debug\Assembly-CSharp.pdb

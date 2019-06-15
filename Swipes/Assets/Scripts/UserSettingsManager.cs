@@ -27,7 +27,7 @@ public class UserSettingsManager : MonoBehaviour
         string path = Application.persistentDataPath;
 
 
-        path += "UserSettings.xml";
+        path += "/UserSettings.xml";
 
         if(!File.Exists(path))
         {
@@ -50,7 +50,7 @@ public class UserSettingsManager : MonoBehaviour
             string path = Application.persistentDataPath;
            
 
-            path += "UserSettings.xml";
+            path += "/UserSettings.xml";
 
             using (TextWriter textWriter = new StreamWriter(path))
             {

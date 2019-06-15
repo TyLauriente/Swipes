@@ -17,9 +17,9 @@ public class TapToTheBeat : MonoBehaviour
     [SerializeField]
     private Button m_quitButton;
     [SerializeField]
-    private GameObject m_quitImage;
+    private Image m_quitImage;
     [SerializeField]
-    private GameObject m_areYouSureImage;
+    private Image m_areYouSureImage;
 
     private Level m_newLevel;
 
@@ -47,10 +47,10 @@ public class TapToTheBeat : MonoBehaviour
         m_skip = false;
         m_quit = false;
         m_newLevel = new Level();
-        m_newLevel.levelName = "";
+        m_newLevel.LevelName = "";
         m_swipeNumberText.text = "Swipe 0";
-        m_quitImage.SetActive(true);
-        m_areYouSureImage.SetActive(false);
+        m_quitImage.gameObject.SetActive(true);
+        m_areYouSureImage.gameObject.SetActive(false);
     }
 
     public void CheckSongOver()
@@ -70,32 +70,35 @@ public class TapToTheBeat : MonoBehaviour
 
         m_audioManager.ResetSongTimer();
         m_newLevel.AddSwipe(m_audioManager.GetTimePassed(), (Swipes)Random.Range(1, 5), m_current);
-        m_swipeNumberText.text = "Swipe " + m_newLevel.swipes.Count.ToString();
+        m_swipeNumberText.text = "Swipe " + m_newLevel.Swipes.Count.ToString();
     }
 
     private void SkipTapToTheBeat()
     {
+        m_audioManager.PlaySuccessfulMenuNavigationSound();
         m_skip = true;
     }
 
     private void QuitTapToTheBeat()
     {
-        if (m_quitImage.activeSelf)
+        if (m_quitImage.IsActive())
         {
-            m_quitImage.SetActive(false);
-            m_areYouSureImage.SetActive(true);
+            m_audioManager.PlaySuccessfulMenuNavigationSound();
+            m_quitImage.gameObject.SetActive(false);
+            m_areYouSureImage.gameObject.SetActive(true);
             Invoke("ResetQuitImages", 2.5f);
         }
         else
         {
+            m_audioManager.PlayStuckSound();
             m_quit = true;
         }
     }
 
     private void ResetQuitImages()
     {
-        m_quitImage.SetActive(true);
-        m_areYouSureImage.SetActive(false);
+        m_quitImage.gameObject.SetActive(true);
+        m_areYouSureImage.gameObject.SetActive(false);
     }
 
     public Level GetNewLevel()

@@ -7,6 +7,8 @@ public class ResultsScreen : MonoBehaviour
 {
     [SerializeField]
     private GameManager m_gameManager;
+    [SerializeField]
+    private AudioManager m_audioManager;
 
     [SerializeField]
     private Text m_winLoseText;
@@ -18,13 +20,13 @@ public class ResultsScreen : MonoBehaviour
     private Button m_quitButton;
 
     [SerializeField]
-    private GameObject m_aGrade;
+    private Image m_aGradeImage;
     [SerializeField]
-    private GameObject m_bGrade;
+    private Image m_bGradeImage;
     [SerializeField]
-    private GameObject m_cGrade;
+    private Image m_cGradeImage;
     [SerializeField]
-    private GameObject m_fGrade;
+    private Image m_fGradeImage;
 
     const string WIN_MESSAGE = "You Win!";
     const string LOSE_MESSAGE = "You Lose";
@@ -45,37 +47,52 @@ public class ResultsScreen : MonoBehaviour
         {
             m_winLoseText.text = LOSE_MESSAGE;
         }
+
         m_levelNameText.text = levelName;
         m_accuracyText.text = "Accuacy\n" + accuracy.ToString("0.00") + "%";
         DisableGrades();
+
         if (accuracy >= GameManager.A_ACCURACY)
         {
-            m_aGrade.SetActive(true);
+            m_aGradeImage.gameObject.SetActive(true);
         }
         else if (accuracy >= GameManager.B_ACCURACY)
         {
-            m_bGrade.SetActive(true);
+            m_bGradeImage.gameObject.SetActive(true);
         }
         else if (accuracy >= GameManager.C_ACCURACY)
         {
-            m_cGrade.SetActive(true);
+            m_cGradeImage.gameObject.SetActive(true);
         }
         else
         {
-            m_fGrade.SetActive(true);
+            m_fGradeImage.gameObject.SetActive(true);
         }
     }
 
     private void DisableGrades()
     {
-        m_aGrade.SetActive(false);
-        m_bGrade.SetActive(false);
-        m_cGrade.SetActive(false);
-        m_fGrade.SetActive(false);
+        if (m_aGradeImage.IsActive())
+        {
+            m_aGradeImage.gameObject.SetActive(false);
+        }
+        if (m_bGradeImage.IsActive())
+        {
+            m_bGradeImage.gameObject.SetActive(false);
+        }
+        if (m_cGradeImage.IsActive())
+        {
+            m_cGradeImage.gameObject.SetActive(false);
+        }
+        if (m_fGradeImage.IsActive())
+        {
+            m_fGradeImage.gameObject.SetActive(false);
+        }
     }
 
     private void QuitResultsScreen()
     {
+        m_audioManager.PlayStuckSound();
         m_gameManager.ChangeState(GameStates.MainMenu);
     }
 }

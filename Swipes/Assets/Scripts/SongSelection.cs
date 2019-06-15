@@ -67,8 +67,13 @@ public class SongSelection : MonoBehaviour
         {
             if (m_currentSongIndex != 0)
             {
+                m_audioManager.PlaySuccessfulMenuNavigationSound();
                 m_currentSongIndex--;
                 UpdateText();
+            }
+            else
+            {
+                m_audioManager.PlayStuckSound();
             }
             m_delayOver = false;
             Invoke("EnableDelayOver", DELAY_DURATION);
@@ -80,21 +85,35 @@ public class SongSelection : MonoBehaviour
         {
             if (m_currentSongIndex + 1 < m_songNames.Count)
             {
+                m_audioManager.PlaySuccessfulMenuNavigationSound();
                 m_currentSongIndex++;
                 UpdateText();
             }
+            else
+            {
+                m_audioManager.PlayStuckSound();
+            }
             m_delayOver = false;
             Invoke("EnableDelayOver", DELAY_DURATION);
+        }
+        else
+        {
+            m_audioManager.PlayStuckSound();
         }
     }
     private void Select()
     {
         if (m_delayOver)
         {
-            m_songSelected = true;
             if (m_currentSongIndex < m_songNames.Count)
             {
+                m_songSelected = true;
+                m_audioManager.PlaySuccessfulMenuNavigationSound();
                 m_selectedSongName = m_songNames[m_currentSongIndex];
+            }
+            else
+            {
+                m_audioManager.PlayStuckSound();
             }
             m_delayOver = false;
             Invoke("EnableDelayOver", DELAY_DURATION);
@@ -103,6 +122,7 @@ public class SongSelection : MonoBehaviour
 
     private void QuitSongSelection()
     {
+        m_audioManager.PlayStuckSound();
         m_quit = true;
     }
 

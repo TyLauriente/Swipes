@@ -35,13 +35,13 @@ public class LevelSelectManager : MonoBehaviour
     [SerializeField]
     private Button m_quitButton;
     [SerializeField]
-    private GameObject m_aGrade;
+    private Image m_aGradeImage;
     [SerializeField]
-    private GameObject m_bGrade;
+    private Image m_bGradeImage;
     [SerializeField]
-    private GameObject m_cGrade;
+    private Image m_cGradeImage;
     [SerializeField]
-    private GameObject m_fGrade;
+    private Image m_fGradeImage;
 
     private int m_currentLevel;
     private float m_currentAccuracy;
@@ -63,7 +63,9 @@ public class LevelSelectManager : MonoBehaviour
         {
             if(Input.GetKeyDown(KeyCode.Escape))
             {
+                m_audioManager.PlayStuckSound();
                 m_gameManager.ChangeState(GameStates.MainMenu);
+                m_audioManager.StopSong();
             }
         }
     }
@@ -75,9 +77,8 @@ public class LevelSelectManager : MonoBehaviour
         m_levels = m_levelManager.Levels;
         m_primaryLevelText.gameObject.SetActive(false);
         m_currentAccuracy = -1.0f;
-        UpdateText();
         DisableGrades();
-        m_fGrade.SetActive(true);
+        m_fGradeImage.gameObject.SetActive(true);
         if (m_levels == null || m_levels.Count == 0)
         {
             m_gameManager.ChangeState(GameStates.MainMenu);
@@ -86,7 +87,7 @@ public class LevelSelectManager : MonoBehaviour
         foreach (var level in m_levels)
         {
             string filePath = Application.persistentDataPath + 
-                "/LevelStats/LEVEL STAT - " + level.levelName + " - LEVEL STAT.xml";
+                "/LevelStats/LEVEL STAT - " + level.LevelName + " - LEVEL STAT.xml";
             
             if(File.Exists(filePath))
             {
@@ -97,22 +98,33 @@ public class LevelSelectManager : MonoBehaviour
                 }
             }
         }
+        UpdateText();
     }
 
     private void Left()
     {
         if(m_currentLevel > 0)
         {
+            m_audioManager.PlaySuccessfulMenuNavigationSound();
             m_currentLevel--;
             UpdateText();
+        }
+        else
+        {
+            m_audioManager.PlayStuckSound();
         }
     }
     private void Right()
     {
         if(m_currentLevel + 1 < m_levels.Count)
         {
+            m_audioManager.PlaySuccessfulMenuNavigationSound();
             m_currentLevel++;
             UpdateText();
+        }
+        else
+        {
+            m_audioManager.PlayStuckSound();
         }
     }
     
@@ -122,11 +134,11 @@ public class LevelSelectManager : MonoBehaviour
 
         LevelStats levelStat = new LevelStats();
         bool foundStat = false;
-        if (m_levelStats != null)
+        if (m_currentLevel < m_levels.Count && m_currentLevel >= 0)
         {
             foreach (var level in m_levelStats)
             {
-                if (level.levelName == m_levels[m_currentLevel].levelName)
+                if (level.LevelName == m_levels[m_currentLevel].LevelName)
                 {
                     levelStat = level;
                     foundStat = true;
@@ -134,28 +146,24 @@ public class LevelSelectManager : MonoBehaviour
                 }
             }
         }
-
-        if(foundStat)
+        
+        if (foundStat)
         {
             DisableGrades();
-            m_currentAccuracy = levelStat.accuracy;
+            m_currentAccuracy = levelStat.Accuracy;
             if(m_currentAccuracy >= GameManager.A_ACCURACY)
             {
-                m_aGrade.SetActive(true);
+                m_aGradeImage.gameObject.SetActive(true);
             }
             else if(m_currentAccuracy >= GameManager.B_ACCURACY)
             {
-                m_bGrade.SetActive(true);
+                m_bGradeImage.gameObject.SetActive(true);
             }
             else if(m_currentAccuracy >= GameManager.C_ACCURACY)
             {
-                m_cGrade.SetActive(true);
+                m_cGradeImage.gameObject.SetActive(true);
             }
-            else
-            {
-                m_fGrade.SetActive(true);
-            }
-            m_levelAccuracyText.text = "Accuracy\n" + levelStat.accuracy.ToString("0.00") + "%";
+            m_levelAccuracyText.text = "Accuracy\n" + levelStat.Accuracy.ToString("0.00") + "%";
         }
         else
         {
@@ -165,11 +173,11 @@ public class LevelSelectManager : MonoBehaviour
 
         if (m_currentLevel < m_levels.Count && m_currentLevel >= 0)
         {
-            m_levelNameText.text = m_levels[m_currentLevel].levelName;
-            m_audioManager.PlaySong(m_levels[m_currentLevel].musicName);
+            m_levelNameText.text = m_levels[m_currentLevel].LevelName;
+            m_audioManager.PlaySong(m_levels[m_currentLevel].MusicName);
 
 
-            if (m_levels[m_currentLevel].isPrimaryLevel)
+            if (m_levels[m_currentLevel].IsPrimaryLevel)
             {
                 m_primaryLevelText.gameObject.SetActive(true);
             }
@@ -182,23 +190,38 @@ public class LevelSelectManager : MonoBehaviour
 
     private void DisableGrades()
     {
-        m_aGrade.SetActive(false);
-        m_bGrade.SetActive(false);
-        m_cGrade.SetActive(false);
-        m_fGrade.SetActive(false);
+        if (m_aGradeImage.IsActive())
+        {
+            m_aGradeImage.gameObject.SetActive(false);
+        }
+        if (m_bGradeImage.IsActive())
+        {
+            m_bGradeImage.gameObject.SetActive(false);
+        }
+        if (m_cGradeImage.IsActive())
+        {
+            m_cGradeImage.gameObject.SetActive(false);
+        }
+        if (m_fGradeImage.IsActive())
+        {
+            m_fGradeImage.gameObject.SetActive(false);
+        }
     }
 
     private void Select()
     {
         if(m_currentLevel < m_levels.Count && m_currentLevel >= 0)
         {
+            m_audioManager.PlaySuccessfulMenuNavigationSound();
             Invoke("StartGame", 0.05f);
         }
     }
 
     private void QuitLevelSelect()
     {
+        m_audioManager.PlayStuckSound();
         m_gameManager.ChangeState(GameStates.MainMenu);
+        m_audioManager.StopSong();
     }
 
     private void StartGame()

@@ -7,6 +7,8 @@ public class CreateOrLoad : MonoBehaviour
 {
     [SerializeField]
     private LevelManager m_levelManager;
+    [SerializeField]
+    private AudioManager m_audioManager;
 
 
     [SerializeField]
@@ -40,6 +42,7 @@ public class CreateOrLoad : MonoBehaviour
 
     private void CreateNewLevel()
     {
+        m_audioManager.PlaySuccessfulMenuNavigationSound();
         m_createLevel = true;
     }
 
@@ -47,12 +50,18 @@ public class CreateOrLoad : MonoBehaviour
     {
         if(m_levelManager.Levels.Count > 0)
         {
+            m_audioManager.PlaySuccessfulMenuNavigationSound();
             m_loadLevel = true;
+        }
+        else
+        {
+            m_audioManager.PlayStuckSound();
         }
     }
 
     private void QuitCreateOrLoad()
     {
+        m_audioManager.PlayStuckSound();
         m_quit = true;
     }
 }

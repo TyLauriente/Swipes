@@ -23,8 +23,6 @@ public class GameplayManager : MonoBehaviour
     [SerializeField]
     private GameManager m_gameManager;
     [SerializeField]
-    private LevelManager m_levelManager;
-    [SerializeField]
     private SwipeManager m_swipeManager;
     [SerializeField]
     private InputManager m_inputManager;
@@ -34,7 +32,7 @@ public class GameplayManager : MonoBehaviour
     private BackgroundManager m_backgroundManager;
 
     private const float ONE_POINT_TIME = 1.0f;
-    private const float TWO_POINT_TIME = 0.1f;
+    private const float TWO_POINT_TIME = 0.5f;
     private const float THREE_POINT_TIME = 0.05f;
 
 
@@ -126,12 +124,6 @@ public class GameplayManager : MonoBehaviour
 
             m_accuracyText.text = "Accuracy\n" + m_accuracy.ToString("0.0") + "%";
 
-            if(Input.GetKeyDown(KeyCode.Escape))
-            {
-                m_gameManager.ChangeState(GameStates.MainMenu);
-                m_audioManager.StopSong();
-            }
-
             UpdatePositions();
 
             CheckIsDragging();
@@ -180,7 +172,7 @@ public class GameplayManager : MonoBehaviour
         if (m_inputManager.IsFirstRelease() || m_timeUntilNextSwipe < -ONE_POINT_TIME)
         {
             bool win = false;
-            if (m_timeUntilNextSwipe < -ONE_POINT_TIME || m_timeUntilNextSwipe > ONE_POINT_TIME && m_currentSwipe < m_currentLevel.swipes.Count)
+            if (m_timeUntilNextSwipe < -ONE_POINT_TIME || m_timeUntilNextSwipe > ONE_POINT_TIME && m_currentSwipe < m_currentLevel.Swipes.Count)
             {
                 win = false;
             }
@@ -219,13 +211,13 @@ public class GameplayManager : MonoBehaviour
             {
                 m_audioManager.PlayWinSound();
                 float percent = m_swipeManager.GetPercentage();
-                if (percent > 0.95f  && percent < 1.15f)
+                if (percent > 0.95f && percent < 1.15f)
                 {
                     m_points += 3;
                     m_threePointText.gameObject.SetActive(true);
                     Invoke("HideThreePointText", 0.5f);
                 }
-                else if(percent > 0.90f && percent < 1.1f)
+                else if (percent > 0.90f && percent < 1.1f)
                 {
                     m_points += 2;
                     m_twoPointText.gameObject.SetActive(true);
@@ -244,28 +236,28 @@ public class GameplayManager : MonoBehaviour
                 m_audioManager.PlayLoseSound();
             }
 
+            m_currentSwipe++;
+
             UpdateAccuracy();
             if (m_accuracy < GameManager.C_ACCURACY && m_losses >= GameManager.ALLOWED_LOSSES)
             {
                 showResults = true;
             }
 
-            m_currentSwipe++;
-            if (m_currentSwipe >= m_currentLevel.swipes.Count - 1)
+            if (m_currentSwipe >= m_currentLevel.Swipes.Count - 1)
             {
                 if (m_accuracy > m_previousAccuracy && m_accuracy >= GameManager.C_ACCURACY)
                 {
                     SaveLevelStats();
                 }
-                if(m_accuracy >= GameManager.C_ACCURACY)
+                if (m_accuracy >= GameManager.C_ACCURACY)
                 {
                     m_win = true;
                 }
                 showResults = true;
                 m_previousAccuracy = -1;
-                return;
             }
-            if(showResults)
+            if (showResults)
             {
                 ShowResults();
                 return;
@@ -280,8 +272,19 @@ public class GameplayManager : MonoBehaviour
 
     private void ShowResults()
     {
-        m_gameManager.InitializeResults(m_win, m_currentLevel.levelName, m_accuracy);
+        if(m_win)
+        {
+            m_audioManager.PlayWinLevelSound();
+        }
+        else
+        {
+            m_audioManager.PlayLoseLevelSound();
+        }
         m_gameManager.ChangeState(GameStates.ResultScreen);
+        if (m_currentLevel != null)
+        {
+            m_gameManager.InitializeResults(m_win, m_currentLevel.LevelName, m_accuracy);
+        }
         m_audioManager.StopSong();
     }
 
@@ -318,8 +321,8 @@ public class GameplayManager : MonoBehaviour
     private void SaveLevelStats()
     {
         LevelStats levelStat = new LevelStats();
-        levelStat.levelName = m_currentLevel.levelName;
-        levelStat.accuracy = m_accuracy;
+        levelStat.LevelName = m_currentLevel.LevelName;
+        levelStat.Accuracy = m_accuracy;
         
 
         XmlSerializer xs = new XmlSerializer(typeof(LevelStats));
@@ -330,7 +333,7 @@ public class GameplayManager : MonoBehaviour
             Directory.CreateDirectory(path);
         }
 
-        path += "LEVEL STAT - " + levelStat.levelName + " - LEVEL STAT.xml";
+        path += "LEVEL STAT - " + levelStat.LevelName + " - LEVEL STAT.xml";
 
         using (TextWriter textWriter = new StreamWriter(path))
         {

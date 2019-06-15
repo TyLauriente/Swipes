@@ -6,9 +6,6 @@ using System.IO;
 public class BackgroundManager : MonoBehaviour
 {
     [SerializeField]
-    private SwipeManager m_swipeManager;
-
-    [SerializeField]
     private List<Sprite> m_sr_backgroundImages;
 
     [SerializeField]

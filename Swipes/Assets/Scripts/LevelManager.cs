@@ -37,6 +37,11 @@ public class LevelManager : MonoBehaviour
         m_primaryLevelPath = "Levels/";
         m_userLevelPath = Application.persistentDataPath + "/Levels/";
 
+        if(!Directory.Exists(m_userLevelPath))
+        {
+            Directory.CreateDirectory(m_userLevelPath);
+        }
+
         // Load all primary levels
 
         var xs = new XmlSerializer(typeof(Level));
@@ -61,7 +66,7 @@ public class LevelManager : MonoBehaviour
             using (TextReader reader = new StreamReader(levelPath))
             {
                 Level tempLevel = (Level)xs.Deserialize(reader);
-                tempLevel.isPrimaryLevel = false;
+                tempLevel.IsPrimaryLevel = false;
                 Levels.Add(tempLevel);
             }
         }
@@ -72,7 +77,7 @@ public class LevelManager : MonoBehaviour
         List<Level> userLevels = new List<Level>();
         foreach (var level in Levels)
         {
-            if (!level.isPrimaryLevel)
+            if (!level.IsPrimaryLevel)
             {
                 userLevels.Add(level);
             }
@@ -84,7 +89,7 @@ public class LevelManager : MonoBehaviour
     {
         foreach (var level in Levels)
         {
-            if(!level.isPrimaryLevel)
+            if(!level.IsPrimaryLevel)
             {
                 return level;
             }
@@ -96,7 +101,7 @@ public class LevelManager : MonoBehaviour
     {
         foreach (var level in Levels)
         {
-            if (level.isPrimaryLevel)
+            if (level.IsPrimaryLevel)
             {
                 return level;
             }

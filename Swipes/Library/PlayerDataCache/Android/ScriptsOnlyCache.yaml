@@ -19,6 +19,7 @@ ScriptsOnlyBuild:
     - SwipeManager
     - TapToTheBeat
     - TutorialManager
+    - UserSettingsManager
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.TestListCacheData
     UnityEngine.UI.dll:
@@ -89,31 +90,33 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9702}
     - Class: 114
-      Script: {instanceID: 9850}
+      Script: {instanceID: 9736}
     - Class: 114
-      Script: {instanceID: 10000}
+      Script: {instanceID: 9854}
     - Class: 114
-      Script: {instanceID: 10020}
+      Script: {instanceID: 10004}
     - Class: 114
-      Script: {instanceID: 10198}
+      Script: {instanceID: 10024}
     - Class: 114
-      Script: {instanceID: 10212}
+      Script: {instanceID: 10202}
     - Class: 114
-      Script: {instanceID: 10234}
+      Script: {instanceID: 10216}
     - Class: 114
-      Script: {instanceID: 10462}
+      Script: {instanceID: 10238}
     - Class: 114
-      Script: {instanceID: 10510}
+      Script: {instanceID: 10466}
     - Class: 114
-      Script: {instanceID: 10562}
+      Script: {instanceID: 10514}
     - Class: 114
-      Script: {instanceID: 10582}
+      Script: {instanceID: 10566}
     - Class: 114
-      Script: {instanceID: 10626}
+      Script: {instanceID: 10586}
     - Class: 114
-      Script: {instanceID: 10644}
+      Script: {instanceID: 10588}
     - Class: 114
-      Script: {instanceID: 16088}
+      Script: {instanceID: 10632}
+    - Class: 114
+      Script: {instanceID: 10650}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -577,7 +580,7 @@ ScriptsOnlyBuild:
     className: SignalAsset
   - hash:
       serializedVersion: 2
-      Hash: 7616b544f13a21d141ecfad6db654020
+      Hash: c81497704d65bc362f925ea6e3cc1f99
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MainMenuManager
@@ -607,7 +610,7 @@ ScriptsOnlyBuild:
     className: LevelManager
   - hash:
       serializedVersion: 2
-      Hash: 9320af139e22d9693d35f8fc38fd6073
+      Hash: 371e18d7a343afea00a1cbcd5846463f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: LoadLevel
@@ -623,6 +626,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Analytics.Tracker.dll
     namespaceName: UnityEngine.Analytics
     className: AnalyticsTracker
+  - hash:
+      serializedVersion: 2
+      Hash: f79edfd035f53b02f1bd66d841f79558
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ResultsScreen
   - hash:
       serializedVersion: 2
       Hash: 0fb27be807aa299702f28ad0bcad1f46
@@ -691,13 +700,13 @@ ScriptsOnlyBuild:
     className: ANAMusicBackgroundPause
   - hash:
       serializedVersion: 2
-      Hash: b1ee7e41c39555576578e7318a091369
+      Hash: 4eb972c174235f4e5f8be6d9f8ff03b3
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: DetailedEditor
   - hash:
       serializedVersion: 2
-      Hash: 1f7fa03da7151a1e285c6625eb94adef
+      Hash: d665af531750ed032e81f8fdd7cfce87
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: AudioManager
@@ -769,13 +778,13 @@ ScriptsOnlyBuild:
     className: TimelineAsset
   - hash:
       serializedVersion: 2
-      Hash: 353311d3650666c636e8dcdcad6e829b
+      Hash: 577b8166a55561e9fe338ae27788da80
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameplayManager
   - hash:
       serializedVersion: 2
-      Hash: 3aac817c20b4aebab4387b5aa31a6b1b
+      Hash: 250e0a86f0e9ef6a0b30e8045077bb49
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: CreateOrLoad
@@ -835,7 +844,7 @@ ScriptsOnlyBuild:
     className: TMP_StyleSheet
   - hash:
       serializedVersion: 2
-      Hash: 38c70c5c367cf47a8976711d1892f45c
+      Hash: 24f0c15debe207d76e26959ab84f6c58
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: TapToTheBeat
@@ -847,7 +856,7 @@ ScriptsOnlyBuild:
     className: TextMeshPro
   - hash:
       serializedVersion: 2
-      Hash: 6571edc1f2623928b011146d1544464b
+      Hash: 85a054f031c58b3c94593bb5d888ad00
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: LevelSelectManager
@@ -871,6 +880,12 @@ ScriptsOnlyBuild:
     className: SongSelection
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: UserSettingsManager
+  - hash:
+      serializedVersion: 2
       Hash: 8649814970b42d345b89944b862453cc
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
@@ -883,7 +898,7 @@ ScriptsOnlyBuild:
     className: SignalEmitter
   - hash:
       serializedVersion: 2
-      Hash: 647411cdd8eb391f19713c301fd37417
+      Hash: d7f0356d3dd257cbedfa6c9dd4816c49
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: BackgroundManager
@@ -895,16 +910,10 @@ ScriptsOnlyBuild:
     className: PlayableTrack
   - hash:
       serializedVersion: 2
-      Hash: e5319c9f1b4c7638b7af3d918d911e42
+      Hash: 6b0884df01c1e9bff5c274f43b7318ea
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManager
-  - hash:
-      serializedVersion: 2
-      Hash: cfe3ad5f60138a131fe2d7a81d88e5cc
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: ResultsScreen
   platform: 13
   scenePathNames:
   - Assets/Scenes/Gameplay.unity

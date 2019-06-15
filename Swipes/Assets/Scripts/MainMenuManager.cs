@@ -5,6 +5,8 @@ using UnityEngine;
 public class MainMenuManager : MonoBehaviour
 {
     [SerializeField]
+    private AudioManager m_audioManager;
+    [SerializeField]
     private GameManager m_gameManager;
     [SerializeField]
     private InputManager m_inputManager;
@@ -82,6 +84,7 @@ public class MainMenuManager : MonoBehaviour
     {
         if (m_inputManager.IsFirstRelease())
         {
+            m_audioManager.PlaySuccessfulMenuNavigationSound();
             if (m_touchPos.y > m_startTouchPosition.y) // Up - Level Select
             {
                 m_gameManager.ChangeState(GameStates.LevelSelect);

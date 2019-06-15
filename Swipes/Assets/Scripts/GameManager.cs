@@ -99,6 +99,7 @@ public class GameManager : MonoBehaviour
 
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 100;
+        Screen.orientation = ScreenOrientation.Portrait;
         m_levelManager.LoadLevels();
         m_audioManager.LoadUserSongs();
         m_userSettingsManager.Init();
@@ -142,9 +143,11 @@ public class GameManager : MonoBehaviour
     {
         SetAllObjectsUnactive();
 
+        m_gameState = state;
+
         if (state == GameStates.Gameplay)
         {
-            m_audioManager.PlaySong(m_nextLevel.musicName);
+            m_audioManager.PlaySong(m_nextLevel.MusicName);
             m_audioManager.StopSong();
             m_gameplayObject.SetActive(true);
             m_gameplayManager.Init(m_nextLevel);
@@ -177,7 +180,6 @@ public class GameManager : MonoBehaviour
         {
             m_resultsScreenObject.SetActive(true);
         }
-        m_gameState = state;
     }
 
     private void SetAllObjectsUnactive()

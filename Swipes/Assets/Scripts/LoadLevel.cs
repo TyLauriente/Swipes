@@ -8,6 +8,8 @@ public class LoadLevel : MonoBehaviour
 {
     [SerializeField]
     private LevelManager m_levelManager;
+    [SerializeField]
+    private AudioManager m_audioManager;
 
     [SerializeField]
     private Text m_levelNumberText;
@@ -68,7 +70,7 @@ public class LoadLevel : MonoBehaviour
         if(m_userLevels.Count != 0)
         {
             m_levelNumberText.text = "Level " + (m_currentLevelIndex + 1).ToString();
-            m_levelNameText.text = m_userLevels[m_currentLevelIndex].levelName;
+            m_levelNameText.text = m_userLevels[m_currentLevelIndex].LevelName;
         }
         else
         {
@@ -80,8 +82,13 @@ public class LoadLevel : MonoBehaviour
     {
         if(m_currentLevelIndex > 0)
         {
+            m_audioManager.PlaySuccessfulMenuNavigationSound();
             m_currentLevelIndex--;
             UpdateText();
+        }
+        else
+        {
+            m_audioManager.PlayStuckSound();
         }
     }
 
@@ -89,25 +96,33 @@ public class LoadLevel : MonoBehaviour
     {
         if (m_currentLevelIndex < m_userLevels.Count - 1)
         {
+            m_audioManager.PlaySuccessfulMenuNavigationSound();
             m_currentLevelIndex++;
             UpdateText();
+        }
+        else
+        {
+            m_audioManager.PlayStuckSound();
         }
     }
 
     private void SelectButtonPress()
     {
+        m_audioManager.PlaySuccessfulMenuNavigationSound();
         m_oldLevel = m_userLevels[m_currentLevelIndex];
         m_levelSelected = true;
     }
 
     private void QuitLoadLevel()
     {
+        m_audioManager.PlayStuckSound();
         m_quit = true;
     }
 
     private void DeleteButtonPress()
     {
-        if(!m_pressedDelete)
+        m_audioManager.PlaySuccessfulMenuNavigationSound();
+        if (!m_pressedDelete)
         {
             m_pressedDelete = true;
             m_deleteImage.gameObject.SetActive(false);
@@ -139,8 +154,8 @@ public class LoadLevel : MonoBehaviour
         Level leveltoDelete = m_userLevels[m_currentLevelIndex];
         m_userLevels.Remove(m_userLevels[m_currentLevelIndex]);
 
-        string levelPath = Application.persistentDataPath + "/Levels/" + leveltoDelete.levelName + ".xml";
-        string levelStatPath = Application.persistentDataPath + "/LevelStats/LEVEL STAT - " + leveltoDelete.levelName + " - LEVEL STAT.xml";
+        string levelPath = Application.persistentDataPath + "/Levels/" + leveltoDelete.LevelName + ".xml";
+        string levelStatPath = Application.persistentDataPath + "/LevelStats/LEVEL STAT - " + leveltoDelete.LevelName + " - LEVEL STAT.xml";
 
         if(File.Exists(levelPath))
         {

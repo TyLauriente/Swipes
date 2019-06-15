@@ -30,13 +30,26 @@ public class AudioManager : MonoBehaviour
     private List<AudioClip> m_clipList;
 
     [SerializeField]
+    private AudioSource m_currentSong;
+
+    [SerializeField]
     private AudioSource m_winSound;
 
     [SerializeField]
     private AudioSource m_loseSound;
 
     [SerializeField]
-    private AudioSource m_currentSong;
+    private AudioSource m_navigateSound;
+
+    [SerializeField]
+    private AudioSource m_stuckSound;
+
+    [SerializeField]
+    private AudioSource m_beatLevelSound;
+
+    [SerializeField]
+    private AudioSource m_loseLevelSound;
+
 
     // Android Native Audio variables
     private int m_winSoundId;
@@ -44,6 +57,18 @@ public class AudioManager : MonoBehaviour
 
     private int m_loseSoundId;
     private int m_loseStreamId;
+
+    private int m_navigateSoundId;
+    private int m_navigateStreamId;
+
+    private int m_stuckSoundId;
+    private int m_stuckStreamId;
+
+    private int m_winLevelSoundId;
+    private int m_winLevelStreamId;
+
+    private int m_loseLevelSoundId;
+    private int m_loseLevelStreamId;
 
     private bool m_isAndroid = false;
 
@@ -63,8 +88,14 @@ public class AudioManager : MonoBehaviour
         AndroidNativeAudio.makePool(2);
         m_winSoundId = AndroidNativeAudio.load("WinSound.wav");
         m_loseSoundId = AndroidNativeAudio.load("LoseSound.wav");
+        m_navigateSoundId = AndroidNativeAudio.load("SuccessfulMenuNavigation.wav");
+        m_stuckSoundId = AndroidNativeAudio.load("StuckMenuSound.wav");
         m_winStreamId = -1;
         m_loseStreamId = -1;
+        m_navigateStreamId = -1;
+        m_stuckStreamId = -1;
+        m_winLevelStreamId = -1;
+        m_loseLevelStreamId = -1;
         m_songTimer = 0.0f;
         m_resetTimer = 0.0f;
     }
@@ -209,6 +240,38 @@ public class AudioManager : MonoBehaviour
         {
             m_loseSound.PlayOneShot(m_loseSound.clip, m_userSettingsManager.UserSettings.SoundEffectVolume);
         }
+    }
+
+    public void PlaySuccessfulMenuNavigationSound()
+    {
+        if (m_isAndroid)
+        {
+            m_navigateStreamId = AndroidNativeAudio.play(m_navigateSoundId, m_userSettingsManager.UserSettings.SoundEffectVolume);
+        }
+        else
+        {
+            m_navigateSound.PlayOneShot(m_navigateSound.clip, m_userSettingsManager.UserSettings.SoundEffectVolume);
+        }
+    }
+    public void PlayStuckSound()
+    {
+        if (m_isAndroid)
+        {
+            m_stuckStreamId = AndroidNativeAudio.play(m_stuckSoundId, m_userSettingsManager.UserSettings.SoundEffectVolume);
+        }
+        else
+        {
+            m_stuckSound.PlayOneShot(m_stuckSound.clip, m_userSettingsManager.UserSettings.SoundEffectVolume);
+        }
+    }
+    public void PlayWinLevelSound()
+    {
+        m_beatLevelSound.PlayOneShot(m_beatLevelSound.clip, m_userSettingsManager.UserSettings.SoundEffectVolume);
+    }
+
+    public void PlayLoseLevelSound()
+    {
+        m_loseLevelSound.PlayOneShot(m_loseLevelSound.clip, m_userSettingsManager.UserSettings.SoundEffectVolume);
     }
 
     public float GetTimePassed()

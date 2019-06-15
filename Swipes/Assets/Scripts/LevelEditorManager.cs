@@ -60,6 +60,7 @@ public class LevelEditorManager : MonoBehaviour
                 && m_currentState != LevelEditorState.TapToTheBeat)
             {
                 m_audioManager.StopSong();
+                m_audioManager.PlayStuckSound();
                 m_gameManager.ChangeState(GameStates.MainMenu);
             }
 
@@ -91,7 +92,7 @@ public class LevelEditorManager : MonoBehaviour
                 {
                     m_currentState = LevelEditorState.DetailedEditor;
                     m_newLevel = m_loadLevel.GetOldLevel();
-                    m_selectedSongName = m_newLevel.musicName;
+                    m_selectedSongName = m_newLevel.MusicName;
                     m_audioManager.PlaySong(m_selectedSongName);
                     m_audioManager.StopSong();
                     m_loadLevel.gameObject.SetActive(false);
@@ -162,8 +163,8 @@ public class LevelEditorManager : MonoBehaviour
 
     private void SaveLevel(Level level)
     {
-        level.isPrimaryLevel = false;
-        level.musicName = m_selectedSongName;
+        level.IsPrimaryLevel = false;
+        level.MusicName = m_selectedSongName;
 
 
         XmlSerializer xs = new XmlSerializer(typeof(Level));
@@ -174,7 +175,7 @@ public class LevelEditorManager : MonoBehaviour
             Directory.CreateDirectory(path);
         }
 
-        path += level.levelName + ".xml";
+        path += level.LevelName + ".xml";
 
         using (TextWriter textWriter = new StreamWriter(path))
         {

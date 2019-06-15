@@ -50,9 +50,9 @@ public class DetailedEditor : MonoBehaviour
     [SerializeField]
     private Button m_quitButton;
     [SerializeField]
-    private GameObject m_quitImage;
+    private Image m_quitImage;
     [SerializeField]
-    private GameObject m_areYouSureImage;
+    private Image m_areYouSureImage;
 
     private int m_last = 0, m_secondLast = 1, m_current = 5;
 
@@ -105,30 +105,34 @@ public class DetailedEditor : MonoBehaviour
         m_backgroundManager.SetNextBackground(m_newLevel.GetBackgroundIndex(m_currentSwipe));
         m_backgroundManager.SetNextBackground(m_newLevel.GetBackgroundIndex(m_currentSwipe + 1));
         m_swipeManager.SetCurrentSwipeType(m_newLevel.GetSwipe(m_currentSwipe), m_timeUntilNextSwipe);
-        m_levelNameInputField.text = m_newLevel.levelName;
+        m_levelNameInputField.text = m_newLevel.LevelName;
         m_insertNewSwipeToggle.isOn = false;
-        m_quitImage.SetActive(true);
-        m_areYouSureImage.SetActive(false);
+        m_quitImage.gameObject.SetActive(true);
+        m_areYouSureImage.gameObject.SetActive(false);
         m_insertNewSwipe = m_insertNewSwipeToggle.isOn;
     }
 
     private void Up()
     {
+        m_audioManager.PlaySuccessfulMenuNavigationSound();
         SetSwipe(Swipes.Up);
     }
 
     private void Down()
     {
+        m_audioManager.PlaySuccessfulMenuNavigationSound();
         SetSwipe(Swipes.Down);
     }
 
     private void Left()
     {
+        m_audioManager.PlaySuccessfulMenuNavigationSound();
         SetSwipe(Swipes.Left);
     }
 
     private void Right()
     {
+        m_audioManager.PlaySuccessfulMenuNavigationSound();
         SetSwipe(Swipes.Right);
     }
 
@@ -136,22 +140,22 @@ public class DetailedEditor : MonoBehaviour
     {
         if (m_insertNewSwipe)
         {
-            m_newLevel.swipes.Insert(m_currentSwipe, swipe);
-            m_newLevel.swipeTimes.Insert(m_currentSwipe, m_audioManager.GetTimePassed());
+            m_newLevel.Swipes.Insert(m_currentSwipe, swipe);
+            m_newLevel.SwipeTimes.Insert(m_currentSwipe, m_audioManager.GetTimePassed());
             do
             {
                 m_current = Random.Range(0, 6);
             } while (m_current == m_last || m_current == m_secondLast);
-            m_newLevel.backgroundIndexes.Insert(m_currentSwipe, m_current);
+            m_newLevel.BackgroundIndexes.Insert(m_currentSwipe, m_current);
         }
         else
         {
-            m_newLevel.swipes[m_currentSwipe] = swipe;
+            m_newLevel.Swipes[m_currentSwipe] = swipe;
         }
         if (m_currentSwipe - 1 > 0)
         {
             m_currentSwipe--;
-            m_audioManager.SetSongTime(m_newLevel.swipeTimes[m_currentSwipe - 1] + 0.01f);
+            m_audioManager.SetSongTime(m_newLevel.SwipeTimes[m_currentSwipe - 1] + 0.01f);
         }
         else
         {
@@ -166,15 +170,12 @@ public class DetailedEditor : MonoBehaviour
 
     private void Remove()
     {
-        if (m_currentSwipe < m_newLevel.swipes.Count)
+        if (m_currentSwipe < m_newLevel.Swipes.Count)
         {
-            m_newLevel.swipes.Remove(m_newLevel.swipes[m_currentSwipe]);
-            m_newLevel.swipeTimes.Remove(m_newLevel.swipeTimes[m_currentSwipe]);
-            m_newLevel.backgroundIndexes.Remove(m_newLevel.backgroundIndexes[m_currentSwipe]);
-            if(m_newLevel.swipes.Count == 0)
-            {
-                m_quit = true;
-            }
+            m_audioManager.PlaySuccessfulMenuNavigationSound();
+            m_newLevel.Swipes.Remove(m_newLevel.Swipes[m_currentSwipe]);
+            m_newLevel.SwipeTimes.Remove(m_newLevel.SwipeTimes[m_currentSwipe]);
+            m_newLevel.BackgroundIndexes.Remove(m_newLevel.BackgroundIndexes[m_currentSwipe]);
             if(m_currentSwipe > 0)
             {
                 m_currentSwipe--;
@@ -183,6 +184,10 @@ public class DetailedEditor : MonoBehaviour
             m_backgroundManager.SetNextBackground(m_newLevel.GetBackgroundIndex(m_currentSwipe));
             m_backgroundManager.SetNextBackground(m_newLevel.GetBackgroundIndex(m_currentSwipe + 1));
             m_swipeManager.SetCurrentSwipeType(m_newLevel.GetSwipe(m_currentSwipe), m_timeUntilNextSwipe);
+        }
+        else
+        {
+            m_audioManager.PlayStuckSound();
         }
     }
 
@@ -193,11 +198,13 @@ public class DetailedEditor : MonoBehaviour
 
     private void InsertNewSwipeToggle(bool isOn)
     {
+        m_audioManager.PlaySuccessfulMenuNavigationSound();
         m_insertNewSwipe = isOn;
     }
     private void PlayPauseToggle()
     {
-        if(m_audioManager.IsSongPlaying())
+        m_audioManager.PlaySuccessfulMenuNavigationSound();
+        if (m_audioManager.IsSongPlaying())
         {
             m_audioManager.PauseSong();
         }
@@ -213,36 +220,44 @@ public class DetailedEditor : MonoBehaviour
     }
     private void SaveLevel()
     {
-        if (m_newLevel.levelName.Length > 3)
+        if (m_newLevel.LevelName.Length > 3)
         {
+            m_audioManager.PlaySuccessfulMenuNavigationSound();
             m_save = true;
+        }
+        else
+        {
+            m_audioManager.PlayStuckSound();
         }
     }
 
     private void QuitLevel()
     {
-        if(m_quitImage.activeSelf)
+        if (m_quitImage.IsActive())
         {
-            m_quitImage.SetActive(false);
-            m_areYouSureImage.SetActive(true);
+            m_audioManager.PlaySuccessfulMenuNavigationSound();
+            m_quitImage.gameObject.SetActive(false);
+            m_areYouSureImage.gameObject.SetActive(true);
             Invoke("ResetQuitImages", 2.5f);
         }
         else
         {
+            m_audioManager.PlayStuckSound();
             m_quit = true;
         }
     }
 
     private void ResetQuitImages()
     {
-        m_quitImage.SetActive(true);
-        m_areYouSureImage.SetActive(false);
+        m_quitImage.gameObject.SetActive(true);
+        m_areYouSureImage.gameObject.SetActive(false);
     }
 
     private void IncrementSwipe()
     {
-        if(m_currentSwipe + 1 < m_newLevel.swipes.Count)
+        if(m_currentSwipe + 1 < m_newLevel.Swipes.Count)
         {
+            m_audioManager.PlaySuccessfulMenuNavigationSound();
             m_currentSwipe++;
             if (m_currentSwipe == 0)
             {
@@ -250,13 +265,17 @@ public class DetailedEditor : MonoBehaviour
             }
             else
             {
-                m_audioManager.SetSongTime(m_newLevel.swipeTimes[m_currentSwipe - 1] + 0.01f);
+                m_audioManager.SetSongTime(m_newLevel.SwipeTimes[m_currentSwipe - 1] + 0.01f);
             }
             m_audioManager.ResetSongTimer();
             UpdateTimeUntilNextSwipe();
             m_backgroundManager.SetNextBackground(m_newLevel.GetBackgroundIndex(m_currentSwipe));
             m_backgroundManager.SetNextBackground(m_newLevel.GetBackgroundIndex(m_currentSwipe + 1));
             m_swipeManager.SetCurrentSwipeType(m_newLevel.GetSwipe(m_currentSwipe), m_timeUntilNextSwipe);
+        }
+        else
+        {
+            m_audioManager.PlayStuckSound();
         }
     }
 
@@ -264,6 +283,7 @@ public class DetailedEditor : MonoBehaviour
     {
         if (m_currentSwipe - 1 >= 0)
         {
+            m_audioManager.PlaySuccessfulMenuNavigationSound();
             m_currentSwipe--;
             if (m_currentSwipe == 0)
             {
@@ -271,7 +291,7 @@ public class DetailedEditor : MonoBehaviour
             }
             else
             {
-                m_audioManager.SetSongTime(m_newLevel.swipeTimes[m_currentSwipe - 1] + 0.01f);
+                m_audioManager.SetSongTime(m_newLevel.SwipeTimes[m_currentSwipe - 1] + 0.01f);
             }
             m_audioManager.ResetSongTimer();
             UpdateTimeUntilNextSwipe();
@@ -279,49 +299,63 @@ public class DetailedEditor : MonoBehaviour
             m_backgroundManager.SetNextBackground(m_newLevel.GetBackgroundIndex(m_currentSwipe + 1));
             m_swipeManager.SetCurrentSwipeType(m_newLevel.GetSwipe(m_currentSwipe), m_timeUntilNextSwipe);
         }
+        else
+        {
+            m_audioManager.PlayStuckSound();
+        }
     }
 
     private void IncrementSwipeTime()
     {
-        if(m_newLevel.swipeTimes[m_currentSwipe] + GameManager.DEFAULT_EDITOR_SWIPE_TIME_INCREMENT < m_audioManager.GetTotatlTime())
+        if(m_newLevel.SwipeTimes[m_currentSwipe] + GameManager.DEFAULT_EDITOR_SWIPE_TIME_INCREMENT < m_audioManager.GetTotatlTime())
         {
+            m_audioManager.PlaySuccessfulMenuNavigationSound();
             if (m_currentSwipe == 0)
             {
                 m_audioManager.SetSongTime(0.0f);
             }
             else
             {
-                m_audioManager.SetSongTime(m_newLevel.swipeTimes[m_currentSwipe - 1] + 0.01f);
+                m_audioManager.SetSongTime(m_newLevel.SwipeTimes[m_currentSwipe - 1] + 0.01f);
             }
-            m_newLevel.swipeTimes[m_currentSwipe] += GameManager.DEFAULT_EDITOR_SWIPE_TIME_INCREMENT;
+            m_newLevel.SwipeTimes[m_currentSwipe] += GameManager.DEFAULT_EDITOR_SWIPE_TIME_INCREMENT;
             m_audioManager.ResetSongTimer();
             UpdateTimeUntilNextSwipe();
             m_swipeManager.SetCurrentSwipeType(m_newLevel.GetSwipe(m_currentSwipe), m_timeUntilNextSwipe);
+        }
+        else
+        {
+            m_audioManager.PlayStuckSound();
         }
     }
 
     private void DecrementSwipeTime()
     {
-        if (m_newLevel.swipeTimes[m_currentSwipe] - GameManager.DEFAULT_EDITOR_SWIPE_TIME_INCREMENT >= 0.0f)
+        if (m_newLevel.SwipeTimes[m_currentSwipe] - GameManager.DEFAULT_EDITOR_SWIPE_TIME_INCREMENT >= 0.0f)
         {
+            m_audioManager.PlaySuccessfulMenuNavigationSound();
             if (m_currentSwipe == 0)
             {
                 m_audioManager.SetSongTime(0.0f);
             }
             else
             {
-                m_audioManager.SetSongTime(m_newLevel.swipeTimes[m_currentSwipe - 1] + 0.01f);
+                m_audioManager.SetSongTime(m_newLevel.SwipeTimes[m_currentSwipe - 1] + 0.01f);
             }
-            m_newLevel.swipeTimes[m_currentSwipe] -= GameManager.DEFAULT_EDITOR_SWIPE_TIME_INCREMENT;
+            m_newLevel.SwipeTimes[m_currentSwipe] -= GameManager.DEFAULT_EDITOR_SWIPE_TIME_INCREMENT;
             m_audioManager.ResetSongTimer();
             UpdateTimeUntilNextSwipe();
             m_swipeManager.SetCurrentSwipeType(m_newLevel.GetSwipe(m_currentSwipe), m_timeUntilNextSwipe);
+        }
+        else
+        {
+            m_audioManager.PlayStuckSound();
         }
     }
 
     private void LevelNameOnInputEndEdit(string levelName)
     {
-        m_newLevel.levelName = levelName;
+        m_newLevel.LevelName = levelName;
     }
 
     private void MusicSlider(float value)
@@ -330,9 +364,9 @@ public class DetailedEditor : MonoBehaviour
         {
             float newTime = m_audioManager.GetTotatlTime() * value;
             m_audioManager.SetSongTime(newTime);
-            for (int swipeTimeIndex = 0; swipeTimeIndex < m_newLevel.swipeTimes.Count; ++swipeTimeIndex)
+            for (int swipeTimeIndex = 0; swipeTimeIndex < m_newLevel.SwipeTimes.Count; ++swipeTimeIndex)
             {
-                if (m_newLevel.swipeTimes[swipeTimeIndex] >= newTime)
+                if (m_newLevel.SwipeTimes[swipeTimeIndex] >= newTime)
                 {
                     m_currentSwipe = swipeTimeIndex;
                     m_audioManager.ResetSongTimer();
@@ -351,9 +385,9 @@ public class DetailedEditor : MonoBehaviour
         UpdateTimeUntilNextSwipe(); ;
         m_swipeManager.UpdateSwipeIndicator();
 
-        if (m_currentSwipe < m_newLevel.swipes.Count)
+        if (m_currentSwipe < m_newLevel.Swipes.Count)
         {
-            m_swipeTimeText.text = "Swipe Time: " + m_newLevel.swipeTimes[m_currentSwipe].ToString("0.00") + " s";
+            m_swipeTimeText.text = "Swipe Time: " + m_newLevel.SwipeTimes[m_currentSwipe].ToString("0.00") + " s";
         }
 
 
@@ -364,7 +398,7 @@ public class DetailedEditor : MonoBehaviour
         m_canAffectMusic = false;
         m_musicSlider.value = (m_audioManager.GetTimePassed() / m_audioManager.GetTotatlTime());
         m_canAffectMusic = true;
-        if (m_timeUntilNextSwipe <= 0.0f && m_currentSwipe < m_newLevel.swipes.Count)
+        if (m_timeUntilNextSwipe <= 0.0f && m_currentSwipe < m_newLevel.Swipes.Count)
         {
             m_currentSwipe++;
             m_audioManager.ResetSongTimer();
