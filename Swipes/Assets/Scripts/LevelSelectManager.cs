@@ -146,7 +146,7 @@ public class LevelSelectManager : MonoBehaviour
                 }
             }
         }
-        
+        DisableGrades();
         if (foundStat)
         {
             DisableGrades();
@@ -163,10 +163,15 @@ public class LevelSelectManager : MonoBehaviour
             {
                 m_cGradeImage.gameObject.SetActive(true);
             }
+            else
+            {
+                m_fGradeImage.gameObject.SetActive(true);
+            }
             m_levelAccuracyText.text = "Accuracy\n" + levelStat.Accuracy.ToString("0.00") + "%";
         }
         else
         {
+            m_fGradeImage.gameObject.SetActive(true);
             m_currentAccuracy = -1.0f;
             m_levelAccuracyText.text = "Accuracy: N/A";
         }
