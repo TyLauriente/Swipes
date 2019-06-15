@@ -54,8 +54,6 @@ public class DetailedEditor : MonoBehaviour
     [SerializeField]
     private GameObject m_areYouSureImage;
 
-    private float m_swipeTimeIncrementValue;
-
     private int m_last = 0, m_secondLast = 1, m_current = 5;
 
     const float ANDROID_MUSIC_DELAY = 0.1f;
@@ -94,7 +92,6 @@ public class DetailedEditor : MonoBehaviour
         m_swipeTimeDecrementButton.onClick.AddListener(DecrementSwipeTime);
         m_insertNewSwipeToggle.onValueChanged.AddListener(InsertNewSwipeToggle);
         m_quitButton.onClick.AddListener(QuitLevel);
-        m_swipeTimeIncrementValue = 0.05f;
     }
 
     public void Init(Level level)
@@ -286,7 +283,7 @@ public class DetailedEditor : MonoBehaviour
 
     private void IncrementSwipeTime()
     {
-        if(m_newLevel.swipeTimes[m_currentSwipe] + m_swipeTimeIncrementValue < m_audioManager.GetTotatlTime())
+        if(m_newLevel.swipeTimes[m_currentSwipe] + GameManager.DEFAULT_EDITOR_SWIPE_TIME_INCREMENT < m_audioManager.GetTotatlTime())
         {
             if (m_currentSwipe == 0)
             {
@@ -296,7 +293,7 @@ public class DetailedEditor : MonoBehaviour
             {
                 m_audioManager.SetSongTime(m_newLevel.swipeTimes[m_currentSwipe - 1] + 0.01f);
             }
-            m_newLevel.swipeTimes[m_currentSwipe] += m_swipeTimeIncrementValue;
+            m_newLevel.swipeTimes[m_currentSwipe] += GameManager.DEFAULT_EDITOR_SWIPE_TIME_INCREMENT;
             m_audioManager.ResetSongTimer();
             UpdateTimeUntilNextSwipe();
             m_swipeManager.SetCurrentSwipeType(m_newLevel.GetSwipe(m_currentSwipe), m_timeUntilNextSwipe);
@@ -305,7 +302,7 @@ public class DetailedEditor : MonoBehaviour
 
     private void DecrementSwipeTime()
     {
-        if (m_newLevel.swipeTimes[m_currentSwipe] - m_swipeTimeIncrementValue >= 0.0f)
+        if (m_newLevel.swipeTimes[m_currentSwipe] - GameManager.DEFAULT_EDITOR_SWIPE_TIME_INCREMENT >= 0.0f)
         {
             if (m_currentSwipe == 0)
             {
@@ -315,7 +312,7 @@ public class DetailedEditor : MonoBehaviour
             {
                 m_audioManager.SetSongTime(m_newLevel.swipeTimes[m_currentSwipe - 1] + 0.01f);
             }
-            m_newLevel.swipeTimes[m_currentSwipe] -= m_swipeTimeIncrementValue;
+            m_newLevel.swipeTimes[m_currentSwipe] -= GameManager.DEFAULT_EDITOR_SWIPE_TIME_INCREMENT;
             m_audioManager.ResetSongTimer();
             UpdateTimeUntilNextSwipe();
             m_swipeManager.SetCurrentSwipeType(m_newLevel.GetSwipe(m_currentSwipe), m_timeUntilNextSwipe);

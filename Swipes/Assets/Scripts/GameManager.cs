@@ -22,7 +22,8 @@ public enum GameStates
     LevelSelect,
     LevelEditor,
     Gameplay,
-    Tutorial
+    Tutorial,
+    ResultScreen
 }
 
 public enum Swipes
@@ -50,6 +51,12 @@ public class GameManager : MonoBehaviour
     private LevelEditorManager m_levelEditorManager;
     [SerializeField]
     private LevelSelectManager m_levelSelectManager;
+    [SerializeField]
+    private ResultsScreen m_resultsScreenManager;
+
+    [SerializeField]
+    private UserSettingsManager m_userSettingsManager;
+
 
     [SerializeField]
     private GameObject m_gameplayObject;
@@ -63,10 +70,16 @@ public class GameManager : MonoBehaviour
     private GameObject m_mainMenuObject;
     [SerializeField]
     private GameObject m_tutorialObject;
+    [SerializeField]
+    private GameObject m_resultsScreenObject;
 
+    public const int ALLOWED_LOSSES = 5;
     public const float A_ACCURACY = 95.0f;
     public const float B_ACCURACY = 85.0f;
     public const float C_ACCURACY = 75.0f;
+    public const float DEFAULT_EDITOR_SWIPE_TIME_INCREMENT = 0.05f;
+    public const float DEFAULT_SONG_VOLUME = 0.4f;
+    public const float DEFAULT_EFFECT_VOLUME = 1f;
 
     private float m_screenWidth;
     private float m_screenHeight;
@@ -88,6 +101,7 @@ public class GameManager : MonoBehaviour
         Application.targetFrameRate = 100;
         m_levelManager.LoadLevels();
         m_audioManager.LoadUserSongs();
+        m_userSettingsManager.Init();
     }
 
     private void Update()
@@ -102,6 +116,11 @@ public class GameManager : MonoBehaviour
     public void SetNextLevel(Level level)
     {
         m_nextLevel = level;
+    }
+
+    public void InitializeResults(bool win, string levelName, float accuracy)
+    {
+        m_resultsScreenManager.Init(win, levelName, accuracy);
     }
 
     public float GetScreenWidth()
@@ -154,6 +173,10 @@ public class GameManager : MonoBehaviour
         {
             m_tutorialObject.SetActive(true);
         }
+        else if(state == GameStates.ResultScreen)
+        {
+            m_resultsScreenObject.SetActive(true);
+        }
         m_gameState = state;
     }
 
@@ -165,5 +188,6 @@ public class GameManager : MonoBehaviour
         m_optionsObject.SetActive(false);
         m_mainMenuObject.SetActive(false);
         m_tutorialObject.SetActive(false);
+        m_resultsScreenObject.SetActive(false);
     }
 }

@@ -19,6 +19,9 @@ using System.Xml.Serialization;
 
 public class AudioManager : MonoBehaviour
 {
+    [SerializeField]
+    private UserSettingsManager m_userSettingsManager;
+
     // Normal audio variables
 
     public List<string> audioNames;
@@ -107,16 +110,6 @@ public class AudioManager : MonoBehaviour
     {
         if (m_currentSong.isPlaying)
         {
-            //if (m_resetTimer >= resetTimerWait)
-            //{
-            //    m_resetTimer = 0.0f;
-            //    m_songTimer = m_currentSong.time;
-            //}
-            //else
-            //{
-            //    m_songTimer += Time.deltaTime;
-            //    m_resetTimer += Time.deltaTime;
-            //}
             m_songTimer += Time.deltaTime;
         }
     }
@@ -128,7 +121,6 @@ public class AudioManager : MonoBehaviour
 
     public bool PlaySong(string songName)
     {
-        //m_currentSong.time = m_currentSong.clip.length * percentage;
         if (m_currentSong.isPlaying)
         {
             m_currentSong.Stop();
@@ -146,6 +138,7 @@ public class AudioManager : MonoBehaviour
         if (foundClip != null)
         {
             m_currentSong.clip = foundClip;
+            m_currentSong.volume = m_userSettingsManager.UserSettings.SongVolume;
             m_currentSong.Play();
             m_songTimer = 0.0f;
             m_resetTimer = 0.0f;
@@ -198,11 +191,11 @@ public class AudioManager : MonoBehaviour
     {
         if (m_isAndroid)
         {
-            m_winStreamId = AndroidNativeAudio.play(m_winSoundId);
+            m_winStreamId = AndroidNativeAudio.play(m_winSoundId, m_userSettingsManager.UserSettings.SoundEffectVolume);
         }
         else
         {
-            m_winSound.PlayOneShot(m_winSound.clip);
+            m_winSound.PlayOneShot(m_winSound.clip, m_userSettingsManager.UserSettings.SoundEffectVolume);
         }
     }
 
@@ -210,11 +203,11 @@ public class AudioManager : MonoBehaviour
     {
         if (m_isAndroid)
         {
-            m_loseStreamId = AndroidNativeAudio.play(m_loseSoundId);
+            m_loseStreamId = AndroidNativeAudio.play(m_loseSoundId, m_userSettingsManager.UserSettings.SoundEffectVolume);
         }
         else
         {
-            m_loseSound.PlayOneShot(m_loseSound.clip);
+            m_loseSound.PlayOneShot(m_loseSound.clip, m_userSettingsManager.UserSettings.SoundEffectVolume);
         }
     }
 

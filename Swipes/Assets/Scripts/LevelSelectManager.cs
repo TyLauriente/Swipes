@@ -14,6 +14,8 @@ public class LevelSelectManager : MonoBehaviour
     private GameManager m_gameManager;
     [SerializeField]
     private GameplayManager m_gameplayManager;
+    [SerializeField]
+    private AudioManager m_audioManager;
 
 
     [SerializeField]
@@ -53,7 +55,6 @@ public class LevelSelectManager : MonoBehaviour
         m_rightButton.onClick.AddListener(Right);
         m_selectButton.onClick.AddListener(Select);
         m_quitButton.onClick.AddListener(QuitLevelSelect);
-        Init();
     }
 
     private void Update()
@@ -165,6 +166,9 @@ public class LevelSelectManager : MonoBehaviour
         if (m_currentLevel < m_levels.Count && m_currentLevel >= 0)
         {
             m_levelNameText.text = m_levels[m_currentLevel].levelName;
+            m_audioManager.PlaySong(m_levels[m_currentLevel].musicName);
+
+
             if (m_levels[m_currentLevel].isPrimaryLevel)
             {
                 m_primaryLevelText.gameObject.SetActive(true);

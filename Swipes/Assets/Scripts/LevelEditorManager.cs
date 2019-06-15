@@ -154,6 +154,7 @@ public class LevelEditorManager : MonoBehaviour
                 else if(m_detailedEditor.Quit)
                 {
                     m_gameManager.ChangeState(GameStates.MainMenu);
+                    m_audioManager.StopSong();
                 }
             }
         }

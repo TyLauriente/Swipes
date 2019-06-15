@@ -87,10 +87,13 @@
     <Compile Include="Assets\Scripts\MainMenuManager.cs" />
     <Compile Include="Assets\Scripts\OptionsManager.cs" />
     <Compile Include="Assets\Scripts\PrototypeGameManager.cs" />
+    <Compile Include="Assets\Scripts\ResultsScreen.cs" />
     <Compile Include="Assets\Scripts\SongSelection.cs" />
     <Compile Include="Assets\Scripts\SwipeManager.cs" />
     <Compile Include="Assets\Scripts\TapToTheBeat.cs" />
     <Compile Include="Assets\Scripts\TutorialManager.cs" />
+    <Compile Include="Assets\Scripts\UserSettings.cs" />
+    <Compile Include="Assets\Scripts\UserSettingsManager.cs" />
     <Compile Include="Assets\Temporary Level Editor\TempLevelCreator.cs" />
     <None Include="Assets\Android Native Audio\Credits.txt" />
     <None Include="Assets\Android Native Audio\Changelog.txt" />

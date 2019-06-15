@@ -99,7 +99,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_gameManager: {fileID: 0}
   m_audioManager: {fileID: 0}
-  m_btn: {fileID: 0}
+  m_createOrLoad: {fileID: 0}
+  m_songSelection: {fileID: 0}
+  m_loadLevel: {fileID: 0}
+  m_tapToTheBeat: {fileID: 0}
+  m_detailedEditor: {fileID: 0}
 --- !u!1 &674714482645394567
 GameObject:
   m_ObjectHideFlags: 0
@@ -145,10 +149,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_levelManager: {fileID: 1525693325807511788}
   m_gameManager: {fileID: 1525693327619084049}
-  btn1: {fileID: 0}
-  btn2: {fileID: 0}
-  btn1Text: {fileID: 0}
-  btn2Text: {fileID: 0}
+  m_gameplayManager: {fileID: 1525693327234380739}
+  m_audioManager: {fileID: 1525693326468515138}
+  m_levelNumberText: {fileID: 0}
+  m_levelNameText: {fileID: 0}
+  m_levelAccuracyText: {fileID: 0}
+  m_primaryLevelText: {fileID: 0}
+  m_leftButton: {fileID: 0}
+  m_rightButton: {fileID: 0}
+  m_selectButton: {fileID: 0}
+  m_quitButton: {fileID: 0}
+  m_aGrade: {fileID: 0}
+  m_bGrade: {fileID: 0}
+  m_cGrade: {fileID: 0}
+  m_fGrade: {fileID: 0}
 --- !u!1 &1525693325807511791
 GameObject:
   m_ObjectHideFlags: 0
@@ -235,6 +249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbd3f98907efc28439e65c6c285adde9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_userSettingsManager: {fileID: 7886890756013509621}
   audioNames: []
   m_clipList:
   - {fileID: 8300000, guid: 04fbacfe0117b6a4e9e9cfbb667bc82f, type: 3}
@@ -289,7 +304,6 @@ MonoBehaviour:
   m_SR_currentSwipeIndicator: {fileID: 0}
   m_SR_nextSwipe: {fileID: 0}
   m_audioManager: {fileID: 1525693326468515138}
-  m_gameplayManager: {fileID: 1525693327234380739}
 --- !u!1 &1525693326772374443
 GameObject:
   m_ObjectHideFlags: 0
@@ -382,6 +396,9 @@ MonoBehaviour:
   m_inputManager: {fileID: 1525693326772374440}
   m_audioManager: {fileID: 1525693326468515138}
   m_backgroundManager: {fileID: 7688691253854442243}
+  m_onePointText: {fileID: 0}
+  m_twoPointText: {fileID: 0}
+  m_threePointText: {fileID: 0}
   accuracyText: {fileID: 0}
 --- !u!1 &1525693327619084048
 GameObject:
@@ -432,12 +449,58 @@ MonoBehaviour:
   m_mainMenuManager: {fileID: 4511062049600915210}
   m_levelEditorManager: {fileID: 1670317928822336810}
   m_levelSelectManager: {fileID: 3058944508451507321}
+  m_resultsScreenManager: {fileID: 0}
+  m_userSettingsManager: {fileID: 0}
   m_gameplayObject: {fileID: 0}
   m_levelEditorObject: {fileID: 0}
   m_levelSelectObject: {fileID: 0}
   m_optionsObject: {fileID: 0}
   m_mainMenuObject: {fileID: 0}
   m_tutorialObject: {fileID: 0}
+  m_resultsScreenObject: {fileID: 0}
+--- !u!1 &3006889490071941476
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3707838860010430763}
+  - component: {fileID: 7886890756013509621}
+  m_Layer: 0
+  m_Name: UserSettingsManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3707838860010430763
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3006889490071941476}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2934592887919907906}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7886890756013509621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3006889490071941476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 671367ce98763634293395d5b47679c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4792821034202042477
 GameObject:
   m_ObjectHideFlags: 0
@@ -609,6 +672,7 @@ Transform:
   - {fileID: 1525693325807511789}
   - {fileID: 1525693326653942873}
   - {fileID: 4364649506216527863}
+  - {fileID: 3707838860010430763}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -14,6 +14,7 @@ ScriptsOnlyBuild:
     - LoadLevel
     - MainMenuManager
     - OptionsManager
+    - ResultsScreen
     - SongSelection
     - SwipeManager
     - TapToTheBeat
@@ -111,6 +112,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 10626}
     - Class: 114
       Script: {instanceID: 10644}
+    - Class: 114
+      Script: {instanceID: 16088}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -892,10 +895,16 @@ ScriptsOnlyBuild:
     className: PlayableTrack
   - hash:
       serializedVersion: 2
-      Hash: b72c7e67bae8a92822e07f16dc74508c
+      Hash: e5319c9f1b4c7638b7af3d918d911e42
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManager
+  - hash:
+      serializedVersion: 2
+      Hash: cfe3ad5f60138a131fe2d7a81d88e5cc
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ResultsScreen
   platform: 13
   scenePathNames:
   - Assets/Scenes/Gameplay.unity
