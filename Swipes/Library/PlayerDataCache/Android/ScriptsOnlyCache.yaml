@@ -20,8 +20,6 @@ ScriptsOnlyBuild:
     - TapToTheBeat
     - TutorialManager
     - UserSettingsManager
-    UnityEditor.TestRunner.dll:
-    - UnityEditor.TestTools.TestRunner.TestListCacheData
     UnityEngine.UI.dll:
     - UnityEngine.EventSystems.EventSystem
     - UnityEngine.EventSystems.StandaloneInputModule
@@ -60,19 +58,17 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 9326}
-    - Class: 114
       Script: {instanceID: 9328}
     - Class: 114
-      Script: {instanceID: 9334}
+      Script: {instanceID: 9330}
     - Class: 114
-      Script: {instanceID: 9340}
+      Script: {instanceID: 9336}
     - Class: 114
-      Script: {instanceID: 9348}
+      Script: {instanceID: 9342}
     - Class: 114
       Script: {instanceID: 9350}
     - Class: 114
-      Script: {instanceID: 9382}
+      Script: {instanceID: 9352}
     - Class: 114
       Script: {instanceID: 9384}
     - Class: 114
@@ -80,43 +76,45 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9388}
     - Class: 114
-      Script: {instanceID: 9402}
+      Script: {instanceID: 9390}
     - Class: 114
-      Script: {instanceID: 9526}
+      Script: {instanceID: 9404}
     - Class: 114
-      Script: {instanceID: 9558}
+      Script: {instanceID: 9528}
     - Class: 114
-      Script: {instanceID: 9674}
+      Script: {instanceID: 9560}
     - Class: 114
-      Script: {instanceID: 9702}
+      Script: {instanceID: 9676}
     - Class: 114
-      Script: {instanceID: 9736}
+      Script: {instanceID: 9704}
     - Class: 114
-      Script: {instanceID: 9854}
+      Script: {instanceID: 9738}
     - Class: 114
-      Script: {instanceID: 10004}
+      Script: {instanceID: 9856}
     - Class: 114
-      Script: {instanceID: 10024}
+      Script: {instanceID: 10006}
     - Class: 114
-      Script: {instanceID: 10202}
+      Script: {instanceID: 10026}
     - Class: 114
-      Script: {instanceID: 10216}
+      Script: {instanceID: 10204}
     - Class: 114
-      Script: {instanceID: 10238}
+      Script: {instanceID: 10218}
     - Class: 114
-      Script: {instanceID: 10466}
+      Script: {instanceID: 10240}
     - Class: 114
-      Script: {instanceID: 10514}
+      Script: {instanceID: 10468}
     - Class: 114
-      Script: {instanceID: 10566}
+      Script: {instanceID: 10516}
     - Class: 114
-      Script: {instanceID: 10586}
+      Script: {instanceID: 10568}
     - Class: 114
       Script: {instanceID: 10588}
     - Class: 114
-      Script: {instanceID: 10632}
+      Script: {instanceID: 10590}
     - Class: 114
-      Script: {instanceID: 10650}
+      Script: {instanceID: 10634}
+    - Class: 114
+      Script: {instanceID: 10652}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
