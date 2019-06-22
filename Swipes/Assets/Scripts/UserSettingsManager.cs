@@ -7,8 +7,10 @@ using UnityEngine;
 public class UserSettingsManager : MonoBehaviour
 {
     UserSettings m_userSettings;
+    bool m_isFirstLaunch;
 
     public UserSettings UserSettings { get => m_userSettings; set => m_userSettings = value; }
+    public bool IsFirstLaunch { get => m_isFirstLaunch; }
 
     private void Start()
     {
@@ -17,6 +19,7 @@ public class UserSettingsManager : MonoBehaviour
 
     public void Init()
     {
+        m_isFirstLaunch = true;
         LoadUserSettings();
     }
 
@@ -33,6 +36,10 @@ public class UserSettingsManager : MonoBehaviour
         {
             UserSettings = new UserSettings();
             SaveUserSettings();
+        }
+        else
+        {
+            m_isFirstLaunch = false;
         }
 
         using (TextReader textReader = new StreamReader(path))

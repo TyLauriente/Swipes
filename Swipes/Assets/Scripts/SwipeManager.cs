@@ -28,7 +28,7 @@ public class SwipeManager : MonoBehaviour
     private AudioManager m_audioManager;
 
     // Distance to offset the small arrow
-    private const float offset = 1.425f;
+    private const float offset = 1.383f;
 
     // Used to offset the small arrow
     private Swipes m_swipeType;

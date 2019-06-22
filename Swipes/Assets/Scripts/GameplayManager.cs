@@ -35,6 +35,11 @@ public class GameplayManager : MonoBehaviour
     private const float TWO_POINT_TIME = 0.5f;
     private const float THREE_POINT_TIME = 0.05f;
 
+    private const float ONE_POINT_UI_TIME = 0.5f;
+    private const float TWO_POINT_UI_TIME = 1.0f;
+    private const float THREE_POINT_UI_TIME = 1.5f;
+    private const float MISS_UI_TIME = 0.5f;
+
 
     [SerializeField]
     private GameObject m_onePointText;
@@ -42,6 +47,10 @@ public class GameplayManager : MonoBehaviour
     private GameObject m_twoPointText;
     [SerializeField]
     private GameObject m_threePointText;
+    [SerializeField]
+    private Text m_missText;
+
+    private float m_onePointTimer, m_twoPointTimer, m_threePointTimer, m_missTimer;
 
     [SerializeField]
     public Text m_accuracyText;
@@ -84,6 +93,11 @@ public class GameplayManager : MonoBehaviour
         m_onePointText.gameObject.SetActive(false);
         m_twoPointText.gameObject.SetActive(false);
         m_threePointText.gameObject.SetActive(false);
+        m_missText.gameObject.SetActive(false);
+        m_onePointTimer = 0.0f;
+        m_twoPointTimer = 0.0f;
+        m_threePointTimer = 0.0f;
+        m_missTimer = 0.0f;
         m_win = false;
         m_losses = 0;
         m_previousAccuracy = -1;
@@ -111,6 +125,7 @@ public class GameplayManager : MonoBehaviour
         if (m_gameManager.GetCurrentState() == GameStates.Gameplay)
         {
             UpdateTimeUntilNextSwipe();
+            UpdatePointUI();
             UpdateAccuracy();
 
             if (m_currentSwipe != 0)
@@ -125,9 +140,10 @@ public class GameplayManager : MonoBehaviour
             m_accuracyText.text = "Accuracy\n" + m_accuracy.ToString("0.0") + "%";
 
             UpdatePositions();
-
-            CheckIsDragging();
-
+            if (Input.touches.Length < 2)
+            {
+                CheckIsDragging();
+            }
             CheckWinOrLose();
         }
     }
@@ -146,6 +162,46 @@ public class GameplayManager : MonoBehaviour
         if (m_inputManager.IsFirstTouch())
         {
             m_startTouchPosition = m_touchPos;
+        }
+    }
+
+    private void UpdatePointUI()
+    {
+        if(m_onePointText.activeSelf)
+        {
+            m_onePointTimer += Time.deltaTime;
+            if(m_onePointTimer >= ONE_POINT_UI_TIME)
+            {
+                m_onePointTimer = 0.0f;
+                m_onePointText.SetActive(false);
+            }
+        }
+        if (m_twoPointText.activeSelf)
+        {
+            m_twoPointTimer += Time.deltaTime;
+            if (m_twoPointTimer >= TWO_POINT_UI_TIME)
+            {
+                m_twoPointTimer = 0.0f;
+                m_twoPointText.SetActive(false);
+            }
+        }
+        if (m_threePointText.activeSelf)
+        {
+            m_threePointTimer += Time.deltaTime;
+            if (m_threePointTimer >= THREE_POINT_UI_TIME)
+            {
+                m_threePointTimer = 0.0f;
+                m_threePointText.SetActive(false);
+            }
+        }
+        if(m_missText.gameObject.activeSelf)
+        {
+            m_missTimer += Time.deltaTime;
+            if(m_missTimer >= MISS_UI_TIME)
+            {
+                m_missTimer = 0.0f;
+                m_missText.gameObject.SetActive(false);
+            }
         }
     }
 
@@ -211,27 +267,29 @@ public class GameplayManager : MonoBehaviour
             {
                 m_audioManager.PlayWinSound();
                 float percent = m_swipeManager.GetPercentage();
-                if (percent > 0.95f && percent < 1.15f)
+                if (percent >= 0.85f && percent <= 1.15f)
                 {
                     m_points += 3;
                     m_threePointText.gameObject.SetActive(true);
-                    Invoke("HideThreePointText", 0.5f);
+                    m_threePointTimer = 0.0f;
                 }
-                else if (percent > 0.90f && percent < 1.1f)
+                else if (percent > 0.5f && percent < 1.5f)
                 {
                     m_points += 2;
                     m_twoPointText.gameObject.SetActive(true);
-                    Invoke("HideTwoPointText", 1.0f);
+                    m_twoPointTimer = 0.0f;
+
                 }
                 else
                 {
                     m_points += 1;
                     m_onePointText.gameObject.SetActive(true);
-                    Invoke("HideOnePointText", 1.5f);
+                    m_onePointTimer = 0.0f;
                 }
             }
             else
             {
+                m_missText.gameObject.SetActive(true);
                 m_losses++;
                 m_audioManager.PlayLoseSound();
             }

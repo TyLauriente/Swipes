@@ -43,7 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68aa9b7f81ac3da4ab380af02817a91f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_swipeManager: {fileID: 1525693326653942870}
   m_sr_backgroundImages:
   - {fileID: 21300000, guid: cb3d716e67728264f88970a0031eff14, type: 3}
   - {fileID: 21300000, guid: ff19b38bc3fe45e4d95fc0fe8f24c973, type: 3}
@@ -159,10 +158,10 @@ MonoBehaviour:
   m_rightButton: {fileID: 0}
   m_selectButton: {fileID: 0}
   m_quitButton: {fileID: 0}
-  m_aGrade: {fileID: 0}
-  m_bGrade: {fileID: 0}
-  m_cGrade: {fileID: 0}
-  m_fGrade: {fileID: 0}
+  m_aGradeImage: {fileID: 0}
+  m_bGradeImage: {fileID: 0}
+  m_cGradeImage: {fileID: 0}
+  m_fGradeImage: {fileID: 0}
 --- !u!1 &1525693325807511791
 GameObject:
   m_ObjectHideFlags: 0
@@ -192,7 +191,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2934592887919907906}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1525693325807511788
 MonoBehaviour:
@@ -254,9 +253,13 @@ MonoBehaviour:
   m_clipList:
   - {fileID: 8300000, guid: 04fbacfe0117b6a4e9e9cfbb667bc82f, type: 3}
   - {fileID: 8300000, guid: 2349fb1a7132e4442b2f014f8503fec2, type: 3}
+  m_currentSong: {fileID: 0}
   m_winSound: {fileID: 0}
   m_loseSound: {fileID: 0}
-  m_currentSong: {fileID: 0}
+  m_navigateSound: {fileID: 0}
+  m_stuckSound: {fileID: 0}
+  m_beatLevelSound: {fileID: 0}
+  m_loseLevelSound: {fileID: 0}
 --- !u!1 &1525693326653942872
 GameObject:
   m_ObjectHideFlags: 0
@@ -286,7 +289,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2934592887919907906}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1525693326653942870
 MonoBehaviour:
@@ -391,7 +394,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_gameManager: {fileID: 1525693327619084049}
-  m_levelManager: {fileID: 1525693325807511788}
   m_swipeManager: {fileID: 1525693326653942870}
   m_inputManager: {fileID: 1525693326772374440}
   m_audioManager: {fileID: 1525693326468515138}
@@ -450,7 +452,9 @@ MonoBehaviour:
   m_levelEditorManager: {fileID: 1670317928822336810}
   m_levelSelectManager: {fileID: 3058944508451507321}
   m_resultsScreenManager: {fileID: 0}
+  m_tutorialManager: {fileID: 0}
   m_userSettingsManager: {fileID: 0}
+  m_optionsManager: {fileID: 0}
   m_gameplayObject: {fileID: 0}
   m_levelEditorObject: {fileID: 0}
   m_levelSelectObject: {fileID: 0}
@@ -487,7 +491,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2934592887919907906}
-  m_RootOrder: 12
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7886890756013509621
 MonoBehaviour:
@@ -499,49 +503,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 671367ce98763634293395d5b47679c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &4792821034202042477
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 261922118854211286}
-  - component: {fileID: 3184536438296418326}
-  m_Layer: 0
-  m_Name: OptionsManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &261922118854211286
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4792821034202042477}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2934592887919907906}
-  m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3184536438296418326
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4792821034202042477}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0381de7d104ce04448427b15d0885c4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5914385428283377018
@@ -587,52 +548,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cb951b225836394698b4529261550c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_audioManager: {fileID: 0}
   m_gameManager: {fileID: 0}
   m_inputManager: {fileID: 0}
   m_sr_menuImage: {fileID: 0}
---- !u!1 &7376178165820091858
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4364649506216527863}
-  - component: {fileID: 7866307721613086290}
-  m_Layer: 0
-  m_Name: TutorialManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4364649506216527863
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7376178165820091858}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2934592887919907906}
-  m_RootOrder: 11
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7866307721613086290
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7376178165820091858}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 756909cbab465834398884460d7f0e82, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7675837474892266752
 GameObject:
   m_ObjectHideFlags: 0
@@ -668,10 +587,8 @@ Transform:
   - {fileID: 3195466434521173560}
   - {fileID: 5550142171301637409}
   - {fileID: 1123270443419155632}
-  - {fileID: 261922118854211286}
   - {fileID: 1525693325807511789}
   - {fileID: 1525693326653942873}
-  - {fileID: 4364649506216527863}
   - {fileID: 3707838860010430763}
   m_Father: {fileID: 0}
   m_RootOrder: 0

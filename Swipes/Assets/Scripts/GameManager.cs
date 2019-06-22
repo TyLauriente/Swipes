@@ -53,9 +53,12 @@ public class GameManager : MonoBehaviour
     private LevelSelectManager m_levelSelectManager;
     [SerializeField]
     private ResultsScreen m_resultsScreenManager;
-
+    [SerializeField]
+    private TutorialManager m_tutorialManager;
     [SerializeField]
     private UserSettingsManager m_userSettingsManager;
+    [SerializeField]
+    private OptionsManager m_optionsManager;
 
 
     [SerializeField]
@@ -109,7 +112,14 @@ public class GameManager : MonoBehaviour
     {
         if(!init)
         {
-            ChangeState(GameStates.MainMenu);
+            if(m_userSettingsManager.IsFirstLaunch)
+            {
+                ChangeState(GameStates.Tutorial);
+            }
+            else
+            {
+                ChangeState(GameStates.MainMenu);
+            }
             init = true;
         }
     }
@@ -166,6 +176,7 @@ public class GameManager : MonoBehaviour
         else if (state == GameStates.Options)
         {
             m_optionsObject.SetActive(true);
+            m_optionsManager.Init();
         }
         else if(state == GameStates.MainMenu)
         {
@@ -175,6 +186,7 @@ public class GameManager : MonoBehaviour
         else if(state == GameStates.Tutorial)
         {
             m_tutorialObject.SetActive(true);
+            m_tutorialManager.Init();
         }
         else if(state == GameStates.ResultScreen)
         {

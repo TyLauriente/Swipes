@@ -12,6 +12,8 @@ public class DetailedEditor : MonoBehaviour
     private BackgroundManager m_backgroundManager;
     [SerializeField]
     private SwipeManager m_swipeManager;
+    [SerializeField]
+    private UserSettingsManager m_userSettingsManager;
 
     [SerializeField]
     private Text m_swipeNumberText;
@@ -307,7 +309,7 @@ public class DetailedEditor : MonoBehaviour
 
     private void IncrementSwipeTime()
     {
-        if(m_newLevel.SwipeTimes[m_currentSwipe] + GameManager.DEFAULT_EDITOR_SWIPE_TIME_INCREMENT < m_audioManager.GetTotatlTime())
+        if(m_newLevel.SwipeTimes[m_currentSwipe] + m_userSettingsManager.UserSettings.EditorSwipeTimeIncrement < m_audioManager.GetTotatlTime())
         {
             m_audioManager.PlaySuccessfulMenuNavigationSound();
             if (m_currentSwipe == 0)
@@ -318,7 +320,7 @@ public class DetailedEditor : MonoBehaviour
             {
                 m_audioManager.SetSongTime(m_newLevel.SwipeTimes[m_currentSwipe - 1] + 0.01f);
             }
-            m_newLevel.SwipeTimes[m_currentSwipe] += GameManager.DEFAULT_EDITOR_SWIPE_TIME_INCREMENT;
+            m_newLevel.SwipeTimes[m_currentSwipe] += m_userSettingsManager.UserSettings.EditorSwipeTimeIncrement;
             m_audioManager.ResetSongTimer();
             UpdateTimeUntilNextSwipe();
             m_swipeManager.SetCurrentSwipeType(m_newLevel.GetSwipe(m_currentSwipe), m_timeUntilNextSwipe);
@@ -331,7 +333,7 @@ public class DetailedEditor : MonoBehaviour
 
     private void DecrementSwipeTime()
     {
-        if (m_newLevel.SwipeTimes[m_currentSwipe] - GameManager.DEFAULT_EDITOR_SWIPE_TIME_INCREMENT >= 0.0f)
+        if (m_newLevel.SwipeTimes[m_currentSwipe] - m_userSettingsManager.UserSettings.EditorSwipeTimeIncrement >= 0.0f)
         {
             m_audioManager.PlaySuccessfulMenuNavigationSound();
             if (m_currentSwipe == 0)
@@ -342,7 +344,7 @@ public class DetailedEditor : MonoBehaviour
             {
                 m_audioManager.SetSongTime(m_newLevel.SwipeTimes[m_currentSwipe - 1] + 0.01f);
             }
-            m_newLevel.SwipeTimes[m_currentSwipe] -= GameManager.DEFAULT_EDITOR_SWIPE_TIME_INCREMENT;
+            m_newLevel.SwipeTimes[m_currentSwipe] -= m_userSettingsManager.UserSettings.EditorSwipeTimeIncrement;
             m_audioManager.ResetSongTimer();
             UpdateTimeUntilNextSwipe();
             m_swipeManager.SetCurrentSwipeType(m_newLevel.GetSwipe(m_currentSwipe), m_timeUntilNextSwipe);

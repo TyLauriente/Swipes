@@ -68,12 +68,11 @@ public class MainMenuManager : MonoBehaviour
         {
             m_touchPos -= m_startTouchPosition;
 
-            if (m_touchPos.x < 0.0f || m_touchPos.x > 0.0f)
+            if (Mathf.Abs(m_touchPos.x - m_startTouchPosition.x) > Mathf.Abs(m_touchPos.y - m_startTouchPosition.y))
             {
                 m_sr_menuImage.transform.position = new Vector3(m_touchPos.x, 0.0f, m_sr_menuImage.transform.position.z);
             }
-
-            if (m_touchPos.y > 0.0f || m_touchPos.y < 0.0f)
+            else if (m_touchPos.y > 0.0f || m_touchPos.y < 0.0f)
             {
                 m_sr_menuImage.transform.position = new Vector3(0.0f, m_touchPos.y, m_sr_menuImage.transform.position.z);
             }
@@ -84,22 +83,26 @@ public class MainMenuManager : MonoBehaviour
     {
         if (m_inputManager.IsFirstRelease())
         {
-            m_audioManager.PlaySuccessfulMenuNavigationSound();
-            if (m_touchPos.y > m_startTouchPosition.y) // Up - Level Select
+            float deadZone = 0.05f;
+            if (m_sr_menuImage.transform.position.y > deadZone) // Up - Level Select
             {
                 m_gameManager.ChangeState(GameStates.LevelSelect);
+                m_audioManager.PlaySuccessfulMenuNavigationSound();
             }
-            else if (m_touchPos.y < m_startTouchPosition.y) // Down - Level Editor
+            else if (m_sr_menuImage.transform.position.y < -deadZone) // Down - Level Editor
             {
                 m_gameManager.ChangeState(GameStates.LevelEditor);
+                m_audioManager.PlaySuccessfulMenuNavigationSound();
             }
-            else if (m_touchPos.x < m_startTouchPosition.x) // Right -  Tutorial
+            else if (m_sr_menuImage.transform.position.x > deadZone) // Right -  Tutorial
             {
                 m_gameManager.ChangeState(GameStates.Tutorial);
+                m_audioManager.PlaySuccessfulMenuNavigationSound();
             }
-            else                                            // Left - Options
+            else if (m_sr_menuImage.transform.position.x < -deadZone) // Left - Options
             {
                 m_gameManager.ChangeState(GameStates.Options);
+                m_audioManager.PlaySuccessfulMenuNavigationSound();
             }
             m_touchPos = new Vector2();
             m_startTouchPosition = new Vector2();
